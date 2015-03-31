@@ -10,21 +10,11 @@ Consider the fact that more than 6,600 benign websites are getting hacked every 
 
 The purpose of my research is to develop a Firefox browser plugin for Metamorphic JavaScript malware detection. In this research, we will use the Transcriptase metamorphic JavaScript malware, which is designed to infect other JavaScript files in the same folder. During the Add-on development, we consider a variety of static detection techniques and quantify the effectiveness of each. 
 
-This paper is organized as follows. In Chapter 2, we provide background information on metamorphic malware and with an emphasis on Transcriptase metamorphic JavaScript malware that forms the basis for the research. Also in this chapter, we cover the Rhino Javascript engine. Chapter 3 outlines the details of firefox Add-on development. Then in Chapter 4, we discuss two different static metamorphic detection techniques that we apply to detect the metamorphic JavaScript malware. In Chapter 5, we present the accuracy and performance details of Firefox Add-on using the two detection techniques. Our
-experimental results for the original metamorphic JavaScript appear. Chapter 6 contains the conclusion and consideration for future work.
+This paper is organized as follows. In Chapter 2, we provide background information on metamorphic malware and with an emphasis on Transcriptase metamorphic JavaScript malware that forms the basis for the research. Also in this chapter, we cover the Rhino Javascript engine. Chapter 3 outlines the details of firefox Add-on development. Then in Chapter 4, we discuss two different static metamorphic detection techniques that we apply to detect the metamorphic JavaScript malware. In Chapter 5, we present the accuracy and performance details of Firefox Add-on using opcode similarity detection technique. Our experimental results for the original metamorphic JavaScript appear. Chapter 6 contains the conclusion and consideration for future work.
 
 \section{Problem} 
 
-To typeset text, you type whatever you want. Multiple spaces are
-ignored                           when typesetting, and
-the end of a line is treated as another space.
-Consequently, when you are typing, you can break lines anywhere, like here
-or here,
-since the lines are formatted automatically when you typeset the document.
-You start a new paragraph by leaving a blank line.
-
-See how easy it is to start a new paragraph? A blank line does the trick.
-
+Malware is a malicious software, specifically designed to gain access to the data or to damage the resources without the knowledge of victim. Researchers developed various techniques for malware detection like signature based detection and heuristic analysis. To overcome the malware detection techniques, malware writers came up with different types of Malwares among which Metamorphic Malware is an advanced version. Metamorphic malware is capable of changing its internal structure without altering its functionality from infection to infection. Due to the metamorphic nature, such malware is very difficult to detect.
 
 \section{Proposed Solution}
 
