@@ -6,7 +6,7 @@ Internet users often share the sensitive information like bank account details o
 
 In late 2013, one of the bank’s internal computers that are used by employees to process daily transfers and conduct bookkeeping, had been infected by malware that allowed cybercriminals to record their every move. The malicious software continuously monitored the banks activities for months, sending back video feeds and images to cyber criminals about the bank's daily routines. Then the group impersonated bank officers, not only turning on various cash machines, but also transferring millions of dollars from banks into dummy accounts set up in other countries.
 
-Consider the fact that more than 6,600 benign websites are getting hacked every single day. These legitimate websites are turned into distributors of malware by malicious hackers. Malicious code can be injected into legitimate Javascript of a benign web page. When a user visits such a compromised website, this malicious JavaScript will be executed in the victim's web browser. Execution of such malicious JavaScript can infect victim's personal computer. Most of the times, malicious JavaScript redirects the victim's web browser to load more malicious code from a remote server. This can be achieved through several means, such as adding an HTML iframe element to a page [19]. Always cybercriminals tries to obfuscate the malicious content from detection. HTML provides very few ways to obfuscate the code such as adding an HTML iframe element to a page but the huge number of methods in JavaScript makes it easy to heavily obfuscate the malicious code into Javascript.
+Consider the fact that more than 6,600 benign websites are getting hacked every single day. These legitimate websites are turned into distributors of malware by malicious hackers. Malicious code can be injected into legitimate Javascript of a benign web page. When a user visits such a compromised website, this malicious JavaScript will be executed in the victim's web browser. Execution of such malicious JavaScript can infect victim's personal computer. Most of the times, malicious JavaScript redirects the victim's web browser to load more malicious code from a remote server. This can be achieved through several means, such as adding an HTML iframe element to a page. Always cybercriminals tries to obfuscate the malicious content from detection. HTML provides very few ways to obfuscate the code such as adding an HTML iframe element to a page but the huge number of methods in JavaScript makes it easy to heavily obfuscate the malicious code into Javascript.
 
 The purpose of my research is to develop a Firefox browser plugin for Metamorphic JavaScript malware detection. In this research, we will use the Transcriptase metamorphic JavaScript malware, which is designed to infect other JavaScript files in the same folder. During the Add-on development, we consider a variety of static detection techniques and quantify the effectiveness of each. 
 
@@ -14,44 +14,35 @@ This paper is organized as follows. In Chapter 2, we provide background informat
 
 \section{Problem} 
 
-Malware is a malicious software, specifically designed to gain access to the data or to damage the resources without the knowledge of victim. Researchers developed various techniques for malware detection like signature based detection and heuristic analysis. To overcome the malware detection techniques, malware writers came up with different types of Malwares among which Metamorphic Malware is an advanced version. Metamorphic malware is capable of changing its internal structure without altering its functionality from infection to infection. Due to the metamorphic nature, such malware is very difficult to detect.
+Malware is a malicious software, specifically designed to gain access to the data or to damage the resources without the knowledge of victim. Researchers developed various techniques for malware detection like signature based detection and heuristic analysis. To overcome the malware detection techniques, malware writers came up with different types of Malwares among which Metamorphic Malware is an advanced version. Metamorphic malware is capable of changing its internal structure without altering its functionality from infection to infection. Due to the metamorphic nature, such malware is very difficult to detect. With a huge set of functions, JavaScript makes it possible for virus writers to develop malicious JavaScript code with metamorphic feature. Transcriptase is such a case.
 
 \section{Proposed Solution}
 
-Typesetting text is generally pretty easy. However, there are some special
-characters that will not be typeset as you might expect. In the remainder of this
-section we consider some of the most common of these
-special characters. 
+In spite of the fact that malware can change their internal structure the priority order of the important commands cannot be changed. Case in point, consider a sample JavaScript code below,
 
-The backslash ``\verb+\+'' is used 
-as the ``escape'' character, meaning that
-whatever follows a backslash is interpreted as a macro.
-For example, when \verb+\LaTeX+ is typeset, it looks like \LaTeX, which 
-is a lot different from LaTeX.
+\begin{lstlisting}
+//sample.js
+<script>
+    var x = 5;
+    var y = 6;
+    var z = x + y;
+</script>
+\end{lstlisting}
 
-To get double quotes, use two single quotes. That is, the left double quote is ``, while the right double
-quote is ''. When you do it correctly, quoted text looks ``like this.''
-If you use the double quote key, you will always get right-quotes, which looks "like this," and is
-almost certainly not what you want.
+The above code can be morphed as,
+\begin{lstlisting}
+//sample_morphed.js
+<script>
+    var y_renamed = 6;
+    var x_renamed = 5;
+    var z_renamed = x_renamed + y_renamed;
+</script>
+\end{lstlisting}
 
-A tilde ``\verb+~+'' is used as a ``tie,'' that is, a space is inserted, but no line break can occur.
-For example, you might type Dr.~Stamp just to be sure that the line of text
-does not break between Dr. and Stamp, as it otherwise might.
+From the above example, it is clear that even though the variable names are changed and the order of declaration of x and y  (or x\_renamed and y\_renamed) are changed, the arithmetic operation always follows the declaration of those two variables else the code may give syntactical errors or wrong result.
 
-The percent sign is used for comments---everything following a percent sign 
-on a given line is ignored when you \LaTeX\ your file. % Like this stuff here
-If you want a percent sign to appear in your document, use \verb+\%+, 
-which will give you this \%.
-
-The dollar sign also has special meaning, since it is used to start and end
-math formulas. To typeset a dollar sign, use \verb+\$+, like this~\$.
-
-To force \LaTeX\ to insert a space, use a backslash followed by
-a space, that is, \verb+\ +. You can put in multiple extra spaces\ \ \ \ \ \ \ if you want.
+So, we can make use of the opcodes statistical information to detect the malware. 
 
 \section{Why my approach is good?}
 
-To change fonts, enclose the text in curly brackets and give the appropriate font command.
-For example, to italicize text, {\it do this}, and to get boldface, {\bf this is the ticket}.
-Another useful font is {\tt this one}, which produces a typewriter-like font.
-
+Generally JavaScript malware will be inducted into benign web pages. When a user visits this infected website, the malicious JavaScript code will be executed in the browser. To prevent this, we can develop an add-on which will monitor the JavaScript content of the every web page and  browser disable the JavaScript execution before the page gets loaded. Add-on will analyze the JavaScript in the background and will enable the JavaScript load, if the web page found to be benign or else prompt the user about malicious content without loading the JavaScript. This procedure can secure the victim's computer from malware infection.
