@@ -3,23 +3,22 @@
 Malware is a malicious program intended to do pernicious exercises on a client's computer with the proposition of removing data and misusing assets without his assent. Viruses and worms, are best known malwares on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014, culprits considered Citadel as the preferred banking malware to theft individual information, while Zeus keeps on being the favorite banking malware for stealing money from bank accounts.
 
 Figure 1 shows how the malware is swiftly growing in volume day-byday. In Figure 1, the x-axis specifies the year and the y-axis indicates the number of malware samples generated in the specified year on the x-axis.
-\begin{center}
+
+\begin{figure}
+    \centering    
     \includegraphics[width=8.4cm, height=6cm]{malware-growth-chart.jpg}
-\end{center}
-Virus writers are aware, how the signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to get rid of signature-based detection. In January 2015, AV-TEST's CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no more identified and thus, AV signature updates are required". Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
+    \caption[Annual Malware Growth]{Annual Malware Growth [10]}
+\end{figure}
+Virus writers are aware, how the signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to get rid of signature-based detection. In January 2015, AV-TEST's CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no more identified and thus, AV signature updates are required"[10]. Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
 
 \section{Encrypted Malware} 
 
-To typeset text, you type whatever you want. Multiple spaces are
-ignored                           when typesetting, and
-the end of a line is treated as another space.
-Consequently, when you are typing, you can break lines anywhere, like here
-or here,
-since the lines are formatted automatically when you typeset the document.
-You start a new paragraph by leaving a blank line.
-
-See how easy it is to start a new paragraph? A blank line does the trick.
-
+Cascade virus, which initially appeared in late 1986, was the first malware that used encryption strategy to scramble its contents [11]. Cascade virus comprises of two parts. First part is a decryptor and the second part is encrypted malware code. The reason for encryption is to conceal the malware signature, to evade signature identification. Later, this technique was adopted by almost every encrypted malware.  For the most part, virus writers use extremely simple and weak encryption methods, for example, a repeated XOR with a fixed bit pattern. Cascade malware also used XOR operation as encryption routine because of its symmetrical and reversible feature. In the event that the encryption key of malware was changed after every infection, the encrypted body signature also gets changed. If in case the same decryptor was used, signature detection technique can make use of decryptor code signature to detect the malware.
+\begin{figure}
+    \centering    
+    \includegraphics[width=8cm, height=6cm]{encryptedvirus.jpg}
+    \caption[Encrypted Malware Replication]{An Encrypting Malware spreads without changing decryptor but the key within decryptor varies from infection to infection. As the key value changes, the encrypted virus body also changes.[14]}
+\end{figure}
 \section{Polymorphic Malware} 
 
 To typeset text, you type whatever you want. Multiple spaces are
