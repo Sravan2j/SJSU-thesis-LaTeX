@@ -21,15 +21,32 @@ Cascade virus, which initially appeared in late 1986, was the first malware that
 \end{figure}
 \section{Polymorphic Malware} 
 
-To typeset text, you type whatever you want. Multiple spaces are
-ignored                           when typesetting, and
-the end of a line is treated as another space.
-Consequently, when you are typing, you can break lines anywhere, like here
-or here,
-since the lines are formatted automatically when you typeset the document.
-You start a new paragraph by leaving a blank line.
+Similar to an encrypted malware, polymorphic malware incorporates an encrypted virus code and a decryptor. Additionally in a polymorphic virus, the decryptor is morphed. During polymorphic malware propogation, not only is the virus code encrypted, but the decryptor also varies from infection to infection. As there is no fixed signature or no fixed decryptor to scan for, no two infections look alike to be exploited by the antivirus program for detection purpose. [16]
+Polymorphic virus uses code obfuscation techniques, for example, including junk codes or substitution of instructions, to mutate its decryptor. [18]
 
-See how easy it is to start a new paragraph? A blank line does the trick.
+\begin{figure}
+  \centering
+\begin{lstlisting}[language=myasm]
+MOV A,R1        MOV A,R1        MOV A,R1        MOV A,R1        MOV A,R1
+ADD B,R1        NOP             ADD #0,R1       OR R1,R1        TST R1
+ADD C,R1        ADD B,R1        ADD B,R1        ADD B,R1        ADD C,R1
+SUB #4,R1       NOP             OR R1,R1        MOV R1,R5       MOV R1,R5
+MOV R1,X        ADD C,R1        ADD C,R1        ADD C,R1        ADD B,R1
+                NOP             SHL #0,R1       SHL R1,0        CMP R2,R5
+                SUB #4,R1       SUB #4,R1       SUB #4,R1       SUB #4,R1
+                NOP             JMP .+1         ADD R5,R5       JMP .+1
+                MOV R1,X        MOV R1,X        MOV R1,X        MOV R1,X
+                                                MOV R5,Y        MOV R5,Y
+(a)             (b)             (c)             (d)             (e)
+
+
+\end{lstlisting}
+    \caption[Examples of a polymorphic virus.]{Examples of a polymorphic virus utilizing code obfuscation techniques. All of the Figure~\ref{fig:polyvirus} snippets perform the same operation, i.e.,  X = (A + B + C - 4). For instance, the program snippet of Figure~\ref{fig:polyvirus} (c) is functionally the same as Figure~\ref{fig:polyvirus} (a) in light of the fact that instructions like adding 0 to a register, ORing R1 with itself, shifting R1 left 0 bits, and jumping to the next instruction all do nothing. [19]}
+    \label{fig:polyvirus}
+\end{figure}
+
+    
+The first polymorphic malware, 1260, was developed by Mark Washburn in 1990. [15] And the first widespread polymorphic infection was caused by Tequila and Maltese Amoeba virus, in 1991. [16]
 
 \section{Metamorphic Malware} 
 

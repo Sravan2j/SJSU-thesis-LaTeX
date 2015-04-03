@@ -20,7 +20,10 @@ Malware is a malicious software, specifically designed to gain access to the dat
 
 In spite of the fact that malware can change their internal structure the priority order of the important commands cannot be changed. Case in point, consider a sample JavaScript code below,
 
-\begin{lstlisting}
+\begin{figure}
+  \centering
+
+\begin{lstlisting}[language=JavaScript]
 //sample.js
 <script>
     var x = 5;
@@ -29,9 +32,8 @@ In spite of the fact that malware can change their internal structure the priori
 </script>
 \end{lstlisting}
 
-The above code can be morphed as,
-\begin{lstlisting}
-//sample_morphed.js
+\begin{lstlisting}[language=JavaScript]
+//sample_morphed.js - obfuscated version of sample.js
 <script>
     var y_renamed = 6;
     var x_renamed = 5;
@@ -39,7 +41,11 @@ The above code can be morphed as,
 </script>
 \end{lstlisting}
 
-From the above example, it is clear that even though the variable names are changed and the order of declaration of x and y  (or x\_renamed and y\_renamed) are changed, the arithmetic operation always follows the declaration of those two variables else the code may give syntactical errors or wrong result.
+    \caption[JavaScript Sample and its obfuscated version.]{JavaScript Sample and its obfuscated version.}
+\label{fig:jssample}
+\end{figure}
+
+From the Figure~\ref{fig:jssample}, it is clear that even though the variable names are changed and the order of declaration of x and y  (or x\_renamed and y\_renamed) are changed, the arithmetic operation always follows the declaration of those two variables else the code may give syntactical errors or wrong result.
 
 So, we can make use of the opcodes statistical information to detect the malware. 
 
