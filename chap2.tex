@@ -70,12 +70,12 @@ In December 1998, a metamorphic malware named Win95/Regswap was developed by Vec
     \label{fig:regswap}
 \end{figure}
 
-
 The bold areas in figure~\ref{fig:regswap} illustrates the similarities of the two different code versions. Thus, a wildcard string, such as 5? B?, could be useful to detect the malware code [22]. 
 
 \subsection{Dead code insertion} 
 
-In December 1998, a metamorphic malware named Win95/Regswap was developed by Vecna [22]. Regswap used register renaming technique to morph the virus code. In this technique, instructions gets modified to use different registers. As just the register operands gets altered that too in some part of the code instead of whole code, so the complexity of final modified code wouldn't be high. Figure~\ref{fig:regswap} depicts how the register renaming technique transforms the code.
+Dead code can be a single instruction or a block of instructions, for example, adding NOPs [23], adding 0 to a register, moving between same registers, ORing register with itself, shifting register left 0 bits, jumping to next instruction, incrementing a register immediately followed by decrementing the same register by same value. Inserting dead code or do-nothing instructions is the easiest approach to morph the virus code without modifying its functionality [23]. 
+The Win32/Evol virus, which was found around July 2000 [24], used dead code insertion approach to obfuscate the signature of a code as illustrated in Figure~\ref{fig:deadcode}. 
 
 \begin{figure}
   \centering
@@ -90,8 +90,9 @@ B$640$ 						MOV dh, 40 					; garbage
 BA$8$BEC$5151$ 				MOV edx, $5151$EC$8$Bh
 53 					PUSH ebx						; garbage
 $8$BDA					MOV ebx, edx
-$895$E$04$						MOV [esi+0004], ebx  \end{lstlisting}
-    \caption[Register Renaming Example]{code snippet extracted from two different versions of RegSwap [22].}
+$895$E$04$						MOV [esi+0004], ebx  
+\end{lstlisting}
+    \caption[Example of code metamorphosis of Evol virus ]{Example of code metamorphosis of Evol virus with Dead code insertion [23].}
     \label{fig:deadcode}
 \end{figure}
 
