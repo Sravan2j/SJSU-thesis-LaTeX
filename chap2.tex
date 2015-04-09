@@ -1,19 +1,19 @@
 \chapter{Background}
 
-Malware is a malicious program intended to do pernicious exercises on a client's computer with the proposition of removing data and misusing assets without his assent. Viruses and worms, are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014, culprits considered Citadel as the preferred banking malware to theft individual information, while Zeus keeps on being the favorite banking malware for stealing money from bank accounts [9].
+Malware is a malicious program intended to do pernicious exercises on a client`s computer with the proposition of removing data and misusing assets without his assent. Viruses and worms are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014, culprits considered Citadel as the preferred banking malware for stealing individual information, while Zeus is the favorite banking malware for stealing money from bank accounts [9].
 
-Figure 1 shows how the malware is swiftly growing in volume day-byday. In Figure 1, the x-axis specifies the year and the y-axis indicates the number of malware samples generated in the specified year on the x-axis.
+Figure 1 shows how the malware is swiftly growing in volume day-by-day. In Figure 1, the x-axis specifies the year and the y-axis indicates the number of malware samples generated in the specified year on the x-axis.
 
 \begin{figure}
     \centering    
     \includegraphics[width=8.4cm, height=6cm]{malware-growth-chart.jpg}
     \caption[Annual Malware Growth]{Annual Malware Growth [10]}
 \end{figure}
-Virus writers are aware that signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to evade signature-based detection. In January 2015, AV-TEST's CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no more identified and thus, AV signature updates are required" [10]. Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
+Virus writers are aware that signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to evade signature-based detection. In January 2015, AV-TEST`s CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no more identified and thus, AV signature updates are required" [10]. Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
 
 \section{Encrypted Malware} 
 
-Cascade virus, which initially appeared in late 1986, was the first malware that used encryption strategy to scramble its contents [11]. Cascade virus comprises of two parts. First part is a decryptor and the second part is encrypted malware code. The reason for encryption is to conceal the malware signature, to evade signature identification. Later, this technique was adopted by almost every encrypted malware.  For the most part, virus writers use extremely simple and weak encryption methods, for example, a repeated XOR with a fixed bit pattern. Cascade malware also used XOR operation as encryption routine because of its symmetrical and reversible feature. In the event that the encryption key of malware was changed after every infection, the encrypted body signature also gets changed. If in case the same decryptor was used, signature detection technique can make use of decryptor code signature to detect the malware.
+The Cascade virus, which initially appeared in late 1986, was the first malware that used encryption to scramble its contents [11]. The Cascade virus is comprised of two parts. The first part is a decryptor and the second part is encrypted malware code. The reason for encryption is to conceal the malware signature, so as to evade signature identification. Later, this technique was adopted by almost every encrypted malware.  For the most part, virus writers use extremely simple and weak encryption methods, for example, a repeated XOR with a fixed bit pattern. Cascade malware also used XOR operation as encryption routine because of its symmetrical and reversible feature. In the event that the encryption key of malware was changed after every infection, the encrypted body signature also gets changed. If in case the same decryptor was used, signature detection can make use of the decryptor code`s signature to detect the malware.
 \begin{figure}
     \centering    
     \includegraphics[width=8cm, height=6cm]{encryptedvirus.jpg}
@@ -61,7 +61,7 @@ Virus writers took the next step and developed an advanced variant of polymorphi
 
 \subsection{Register renaming} 
 
-In December 1998, a metamorphic malware named Win95/Regswap was developed by Vecna [22]. Regswap used register renaming technique to morph the virus code. In this technique, instructions gets modified to use different registers. As just the register operands gets altered that too in some part of the code instead of whole code, so the complexity of final modified code wouldn't be high. Figure~\ref{fig:regswap} depicts how the register renaming technique transforms the code.
+In December 1998, a metamorphic malware named Win95/Regswap was developed by Vecna [22]. Regswap used register renaming technique to morph the virus code. In this technique, instructions gets modified to use different registers. As just the register operands gets altered that too in some part of the code instead of whole code, so the complexity of final modified code wouldn`t be high. Figure~\ref{fig:regswap} depicts how the register renaming technique transforms the code.
 
 \begin{figure}
   \centering
@@ -75,7 +75,7 @@ The bold areas in figure~\ref{fig:regswap} illustrates the similarities of the t
 \subsection{Dead code insertion} 
 
 Dead code can be a single instruction or a block of instructions, for example, adding NOPs [23], adding 0 to a register, moving between same registers, ORing register with itself, shifting register left 0 bits, jumping to next instruction, incrementing a register immediately followed by decrementing the same register by same value. Inserting dead code or do-nothing instructions is the easiest approach to morph the virus code without modifying its functionality [23]. 
-The Win32/Evol virus, which was found around July 2000 [24], used dead code insertion approach to obfuscate the signature of a code as illustrated in Figure~\ref{fig:deadcode}. 
+The Win32/Evol virus, which was found around July 2000 [24], used dead code insertion to obfuscate the signature of a code as illustrated in Figure~\ref{fig:deadcode}. 
 
 \begin{figure}
   \centering
@@ -108,10 +108,10 @@ Code may contain several subroutines (or) functions and changing the order of th
 \end{figure}
 
 \subsection{Equivalent code substitution} 
-Different variants of code can be generated by replacing instruction or block of instructions with an equivalent code. In assembly language there are numerous semantically equivalent instructions, for instance, 'INC ecx' is same as 'ADD ecx, 1', 'XOR R1, R1' is same as 'MOV R1, 0' [25].
+Different variants of code can be generated by replacing instruction or block of instructions with an equivalent code. In assembly language there are numerous semantically equivalent instructions, for instance, `INC ecx' is same as `ADD ecx, 1', `XOR R1, R1' is same as `MOV R1, 0' [25].
 
 \subsection{Transposition} 
-Morphed copies of virus code can also be created by changing the order of instructions in the code provided that there is no dependency exists among instructions, so this approach is also known as instruction permutation [23]. For instance, the code in figure~\ref{fig:beforetrans} can be transformed to figure~\ref{fig:aftertrans}, as the declaration order of variables doesn't effect the arithmetic calculation [4]. 
+Morphed copies of virus code can also be created by changing the order of instructions in the code provided that there is no dependency among instructions, so this approach is also known as instruction permutation [23]. For instance, the code in figure~\ref{fig:beforetrans} can be transformed to figure~\ref{fig:aftertrans}, as the declaration order of variables doesn`t affect the arithmetic calculation [4]. 
 
 \begin{figure}
   \centering
@@ -172,13 +172,13 @@ In subroutine inlining procedure, subroutine/function call replaces its code [23
 \begin{figure}
   \centering
   \begin{lstlisting}[language=myasm]
-	……									……
-	Call S1								move eax, ebx
-	Call S2								add eax, 12h
-	……									push eax
-	S1: 								mul ecx
-	 move eax, ebx						mov edx, eax
-	 add eax, 12h						…… 
+	/* some instrictions */				/* some instrictions */ 
+	Call S1									mov eax, ebx
+	Call S2									add eax, 12h
+	/* some instrictions */				push eax
+	S1: 										mul ecx
+	 mov eax, ebx							mov edx, eax
+	 add eax, 12h							/* some instrictions */
 	 push eax					
 	 ret						
 	S2:							
@@ -197,17 +197,17 @@ On the other hand, code outlining changes a block of instructions into subroutin
 \begin{figure}
   \centering
   \begin{lstlisting}[language=myasm]
-	……									……
-	move eax, ebx						move eax, ebx
-	add  eax, 12h						call S1
-	push eax							mov  edx, eax
-	mul  ecx							……
-	mov  edx, eax						S1: 
-	…… 							 		 push eax
-										 add  eax, 12h
-										 mul  ecx
-										 ret
-(a) before transformation			(b) after transformation
+	/* some instrictions */					/* some instrictions */
+	mov  eax, ebx								mov  eax, ebx
+	add  eax, 12h								call S1
+	push eax										mov  edx, eax
+	mul  ecx										/* some instrictions */
+	mov  edx, eax								S1: 
+	/* some instrictions */ 				 push eax
+										 	 	 	 add  eax, 12h
+										 	 	 	 mul  ecx
+										 	 	 	 ret
+(a) before transformation				(b) after transformation
 \end{lstlisting}
 
 
@@ -216,37 +216,176 @@ On the other hand, code outlining changes a block of instructions into subroutin
 \end{figure}
 
 \section{Transcriptase}
---------- BELOW DATA IS JUNK DATA --------
-Typesetting text is generally pretty easy. However, there are some special
-characters that will not be typeset as you might expect. In the remainder of this
-section we consider some of the most common of these
-special characters. 
 
-The backslash ``\verb+\+'' is used 
-as the ``escape'' character, meaning that
-whatever follows a backslash is interpreted as a macro.
-For example, when \verb+\LaTeX+ is typeset, it looks like \LaTeX, which 
-is a lot different from LaTeX.
+Transcriptase is a metamorphic virus implemented in JavaScript. Whenever Transcriptase is executed, a morphed version of the malware virus gets attached to all the JavaScript files in the folder [4]. The infected JavaScript file will become the variant of Transcriptase. By this way Transcriptase propagates and infects the benign JavaScript files.
+  
+Metamorphic engine attached to Transcriptase is a self-hosted compiler, which contains its own meta-language source-code. Transcriptase obtains information of its code from meta-language and changes its internal structure. 
 
-To get double quotes, use two single quotes. That is, the left double quote is ``, while the right double
-quote is ''. When you do it correctly, quoted text looks ``like this.''
-If you use the double quote key, you will always get right-quotes, which looks "like this," and is
-almost certainly not what you want.
+The format of every line of the meta-code looks like below [26]:
 
-A tilde ``\verb+~+'' is used as a ``tie,'' that is, a space is inserted, but no line break can occur.
-For example, you might type Dr.~Stamp just to be sure that the line of text
-does not break between Dr. and Stamp, as it otherwise might.
+\begin{lstlisting}[frame=none,numbers=none]
+(Identifier|Restrictions)instruction
+\end{lstlisting}
+For instance:
 
-The percent sign is used for comments---everything following a percent sign 
-on a given line is ignored when you \LaTeX\ your file. % Like this stuff here
-If you want a percent sign to appear in your document, use \verb+\%+, 
-which will give you this \%.
+\begin{lstlisting}[frame=none,numbers=none]
+(200|)var b=0
+(300|200)c+1(b)
+\end{lstlisting}
 
-The dollar sign also has special meaning, since it is used to start and end
-math formulas. To typeset a dollar sign, use \verb+\$+, like this~\$.
+Identifier and Restrictions are used by the Permutation function to do code obfuscation. Identifier is unique for every instruction in the entire code, restriction specifies the instructions on which the corresponding instruction is depending on and "instruction" contains the details used to create an actual code. 
 
-To force \LaTeX\ to insert a space, use a backslash followed by
-a space, that is, \verb+\ +. You can put in multiple extra spaces\ \ \ \ \ \ \ if you want.
+The compiler creates the new malicious JavaScript code with three steps:
+
+\begin{enumerate}
+  \item Permutation and Variable/Function-Name randomization
+  \item Code Creation
+  \item Variable/Function insertion \ldots
+\end{enumerate}
+
+\subsection{Permutator}
+
+In this phase, compiler parses through every meta-language instruction, scope by scope (global scope for global instructions and sub-scope for if/for/while/functions) and retrieves the identifiers and restrictions details for each meta-instruction. Later these identifier and restriction details are used by the compiler to perform the permutation of code.
+
+If the restriction details are empty for all the meta-language instructions, then it specifies that all the instructions in the code doesn't have any dependency instructions. So, the entire code can be permuted in all the possible combinations. For instance, if there are n lines of code, then permutator can create n! ways of different code. 
+
+For instance, consider the code specified in Figure~\ref{fig:permutator} [4]. It contains restriction details for some of the meta-instructions which means that those instructions have dependencies on other instructions. So all the combinations of the code cannot produce correct behaviour. 
+
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}[language=myasm]
+	(100|)var a=5
+	(200|)var b=-1
+	(300|)var x=8
+	(400|200)c+1(b)	// instruction c+1(b) means increasing b by 1: i.e. b++
+	(500|400,100)c+n(b,a) // instruction c+n(b,a) means increasing b by a: i.e. b+=a
+	(600|500)xWScript.Echo(x)
+\end{lstlisting}
+
+
+    \caption[Meta-language instructions example]{Meta-language instructions example [4].}
+    \label{fig:permutator}
+\end{figure}
+
+
+From the code in Figure~\ref{fig:permutator}, instruction 400 depends on instruction 200, because the variable "b" has to be defined before it can be incremented; instruction 500 depends on both the instructions 400 and 100; and instruction 600 depends on instruction 300. Figure ~\ref{fig:afterpermutator} contains the code, which could be one of the possible output generated by the permutator [4]:
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}[language=myasm]
+	(200|)var b=-1
+	(400|200)c+1(b)
+	(100|)var a=5	
+	(500|400,100)c+n(b,a) // instruction c+n(b,a) means increasing b by a: i.e. b+=a
+	(300|)var x=8
+	(600|500)xWScript.Echo(x)
+\end{lstlisting}
+    \caption[Permutator output]{Possible output of the permutator after parsing the code in Figure~\ref{fig:permutator} [4].}
+    \label{fig:afterpermutator}
+\end{figure}
+
+As growth-rate of permuation function is very fast, even for the large number of instruction this technique works effectively [26].
+
+\subsection{Variable/Function-Name randomization}
+
+In this step, initially compiler searches for the keywords like "var", "while", "for", "def" in the code and retrieves the details of the hard-coded names exists in those instructions. In other words, in this step compiler tries to get the details of all the variable names and function names. Then the compiler replaces these names with random names and also compiler replaces all the valid occurrences of these hard-coded names in the current scope.
+
+For instance, consider the code in Figure~\ref{fig:randomization}. First, compiler searches for "var", "function" and "def" keywords and retrieves the following hard-coded names - num, multiply, inputparam and twiceval. Then it will replaces these names with some random names like ljkjuytbenst, awsrsfagfqwxczv. Compiler also replaces all the occurences of the names i.e., there are two instances of "inputparam" present in the function, both these names are replaced with the random name. One of the possible changes to the code during this phase is shown in Figure~\ref{fig:afterrandomization}. 
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}[language=myasm]
+	var num=20;
+	function multiply(inputparam) 
+	{ 
+		return 2 * inputparam; 
+	}
+	def twiceval=multiply(num)
+\end{lstlisting}
+    \caption[Before Variable/Function-Name randomization]{Before Variable/Function-Name randomization [26].}
+    \label{fig:randomization}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}[language=myasm]
+	var ljkjuytbenst=20;
+	function trqwsdexcv(awsrsfagfqwxczv) 
+	{ 
+		return 2 * awsrsfagfqwxczv; 
+	}
+	def bxswdqtyzyqtc=trqwsdexcv(ljkjuytbenst)
+\end{lstlisting}
+    \caption[After Variable/Function-Name randomization]{After randomly changing the Variables/Function-Names of the code in Figure~\ref{fig:randomization} [26].}
+    \label{fig:afterrandomization}
+\end{figure}
+
+\subsection{Meta-Language Symbols}
+
+After permuting the instructions and replacing the hard-coded names, the compiler generates a valid JavaScript code by parsing through every meta-instruction. These meta-instructions contain meta-level symbols and each of these symbols has specific meaning like number, element, object etc. Compiler processes these meta-level symbols while parsing meta-instructions. 
+
+For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbol \#n...n\# specifies any value present in between \#n's (i.e., in place of ...) specifies Number, meta-symbol \#"..."\# specifies any value present in the place of dots (or ...) specifies string, any value in \#xN...Nx\# specifies elements, the values between \#01... \#. ...10\# specifies Objects and the symbol "°+ ... +°" specifies that the variable inside must be given as an argument for a function, if the instruction is derived into a function [26].
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}[language=myasm]
+	var number=#n1n#					
+	var str=#"Hello VXers"#				
+	var exp=#x1true1x#					
+	x#O1WScript#.Echo(°+str+°)1O#
+\end{lstlisting}
+    \caption[Meta-Language Symbols Example]{Meta-Language Symbols Example [26].}
+    \label{fig:metalanguage}
+\end{figure}
+
+When compiler finds these meta-symbols, these symbols will be obfuscated first before the instruction. Below Figure~\ref{fig:metalanguageprocessing} illustrates how the meta-symbols are processed.
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}[language=myasm,numbers=none]
+x#O1WScript#.Echo(°+str+°)1O# 
+
+could become
+
+function SomeFunction(SomeArg){WScript.Echo(SomeArg);}
+SomeFunction(str)
+\end{lstlisting}
+    \caption[Meta-Language Symbols processing Example]{Meta-Language Symbols processing Example [26].}
+    \label{fig:metalanguageprocessing}
+\end{figure}
+
+\subsection{Code Derivation}
+After processing all the meta-language symbols, the compiler generates JavaScript code by parsing the meta-language instructions. During this phase, compiler deals with some more meta-instructions that have specific properties as mentioned below [26]:
+
+\begin{description}
+
+\item[while(initial\$var1!var2?operator@action)NNN] \hfill \\
+"initial" specifies the code that is to be executed before the while loop like variable declaration
+"var1" and "var2" along with the "operator" specifies the while loop condition.
+"action" specifies instruction that will be executed in the end of the loop like counter increment.
+"NNN" specifies total number of lines in the loop
+\item[cO(1||n||s)] \hfill \\
+This specifies general way of representing number/string arithmetic instruction. "O" specifies operator like +, -, *, /. Below are some of the meta-instructions that follow this format,
+\begin{enumerate}
+\item c+1(var1): increment var1 by 1
+\item c+n(var1,var2): increment var1 by number var2
+\item c+s(var1,var2): increment var1 by string var2
+\item c-1(var1): decrement var1 by 1
+\item c-n(var1,var2): decrement var1 by number var2
+\item c*1(var1): multiply var1 by 1
+\item c*n(var1,var2): multiply var1 by number var2
+\item c/1(var1): divide var1 by 1
+\item c/n(var1,var2): divide var1 by number var2 
+  \end{enumerate}\ldots
+\end{description}
+
+\subsection{Variable/Function insertion}
+
+During the compilation, due to meta-instructions or obfuscation, several variables and functions are defined. They are not included into the code yet, but are saved in special arrays. During the code derivation phase, these details are inserted into the code.
+
+Functions can be included between instructions in the global scope. Variables can be included between instructions in the current scope, before they are used for the first time [4]. This phase takes lot of time as the whole code needs to be checked many number of times to find the suitable positions for the variable/function insertions [26].
+
 
 \section{Rhino}
 

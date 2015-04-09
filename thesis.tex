@@ -66,10 +66,12 @@
     		jz,jnz,jg,jge,jl,jle,addl,subl,imul,idiv,cdq,incl,decl,
     		negl,andl,orl,xorl,notl,shrl,shll,sarl,sall,ret,leave,
     		call,setg,setl,setge,setle,setne,sete,movzbl,
-    		eax,ebx,ecx,edx,edi,esi,ebp,esp,al,bl,cl,dl,
+    		eax,ebx,ecx,edx,edi,esi,ebp,esp,al,bl,cl,dl,ah,bh,ch,dh,
+    		mov, add, sub, nop, or, tst, shl, sub, jmp, cmp, pop, push, mul,
     		MOV,ADD,SUB,NOP,OR,TST,SHL,SUB,JMP,CMP, POP, PUSH
     	},
     	sensitive=true,
+    	morecomment=[s]{/*}{*/},
     	morecomment=[l]{;},
     	morestring=[b]"
     }
