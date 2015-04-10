@@ -217,16 +217,16 @@ On the other hand, code outlining changes a block of instructions into subroutin
 
 \section{Transcriptase}
 
-Transcriptase is a metamorphic virus implemented in JavaScript. Whenever Transcriptase is executed, a morphed version of the malware virus gets attached to all the JavaScript files in the folder [4]. The infected JavaScript file will become the variant of Transcriptase. By this way Transcriptase propagates and infects the benign JavaScript files.
+Transcriptase is a metamorphic virus implemented in JavaScript. Whenever Transcriptase is executed, a morphed version of the malware virus gets prepended to all the JavaScript files in the folder [4]. The infected JavaScript file will become the variant of Transcriptase. By this way Transcriptase propagates and infects the benign JavaScript files.
   
 Metamorphic engine attached to Transcriptase is a self-hosted compiler, which contains its own meta-language source-code. Transcriptase obtains information of its code from meta-language and changes its internal structure. 
 
-The format of every line of the meta-code looks like below [26]:
+The format of every line of the meta-code looks like [26]:
 
 \begin{lstlisting}[frame=none,numbers=none]
 (Identifier|Restrictions)instruction
 \end{lstlisting}
-For instance:
+For instance, below are sample meta-instructions:
 
 \begin{lstlisting}[frame=none,numbers=none]
 (200|)var b=0
@@ -377,7 +377,7 @@ This specifies general way of representing number/string arithmetic instruction.
 \item c*n(var1,var2): multiply var1 by number var2
 \item c/1(var1): divide var1 by 1
 \item c/n(var1,var2): divide var1 by number var2 
-  \end{enumerate}\ldots
+  \end{enumerate}
 \end{description}
 
 \subsection{Variable/Function insertion}
@@ -389,7 +389,71 @@ Functions can be included between instructions in the global scope. Variables ca
 
 \section{Rhino}
 
-To change fonts, enclose the text in curly brackets and give the appropriate font command.
-For example, to italicize text, {\it do this}, and to get boldface, {\bf this is the ticket}.
-Another useful font is {\tt this one}, which produces a typewriter-like font.
+Netscape began working on developing a Java’s variant of Netscape Navigator in 1997 [28]. In order to implement Netscape Navigator in Java, they built a JavaScript engine entirely in Java, named as Rhino. Rhino is open source software and is currently maintained by Mozilla [27].
 
+For the most part, JavaScript is utilized as a part of HTML for making interactive webpages. Anyhow, Rhino is not used to create or manipulate webpages; it is an implementation of the core JavaScript. Rhino has the below aspects [27]:
+
+\begin{enumerate}
+\item Entire JavaScript 1.7 features
+\item Allows direct scripting of Java
+\item Rhino Shell to execute the JavaScript code interactively or in batch
+\item JavaScript Compiler to compile the JavaScript code into Java classes
+\item JavaScript Debugger for debugging scripts in Rhino
+\end{enumerate}
+ 
+In this research, we will use Rhino to translate the JavaScript code into Java classes. The engine supports both compile mode and interpretive mode. During compile mode, engine first translates each JavaScript file to separate Java class files. These .class files may be executed as Java programs using rhino runtime support routines. During interpretive mode, JavaScript is compiled and is stored as internal representation of the compiled form instead of byte codes. During runtime this compiled form is evaluated using rhino functions.
+
+\subsection{Architecture}
+The four basic blocks in Rhino JavaScript engine are - Parser, Byte-Code Generator, Interpreter and JIT [4]. Figure~\ref{fig:architecture} depicts the block diagram of Rhino Engine [29].
+
+\begin{figure}
+  \centering
+      \includegraphics[width=15cm, height=8.25cm]{rhino.jpg}
+    \caption[Block Diagram of Rhino Engine]{Block Diagram of Rhino Engine [29].}
+    \label{fig:architecture}
+\end{figure}
+
+\textbf{Parser}: The input for this module is JavaScript code and the output generated is the Abstract Syntax Tree (AST). AST is a tree representation of the abstract syntactic structure of a program. For instance, Figure~\ref{fig:ASTcode} represents the AST for the GCD code in Figure~\ref{fig:AST} [30].
+
+\begin{figure}
+  \centering
+\begin{lstlisting}[language=JavaScript] 
+function gcd(a, b)
+{
+	while (b != 0)
+    {
+    	if a > b
+        	a -= b
+        else
+        	b -= a
+    }
+    return a
+}
+\end{lstlisting}
+    \caption[Euclid's GCD algorithm]{Euclid's GCD algorithm.}
+    \label{fig:ASTcode}
+\end{figure}
+
+\begin{figure}
+  \centering
+      \includegraphics[width=11cm, height=12cm]{AST.jpg}
+    \caption[Abstract Syntax Tree]{Abstract Syntax Tree for the GCD code in Figure~\ref{fig:ASTcode} [30].}
+    \label{fig:AST}
+\end{figure}
+The non-leaf nodes in AST specify the operations to be performed, for instance, equal, comparison, arithmetic operation and so on. The leaf nodes in AST specify operands in the source code, for instance, a and b variables [4]. 
+
+\textbf{Byte-Code Generator}: The AST output generated from the parser acts as input to the Byte-Code Generator which then converts the tree into byte code. During the conversion process, Byte-Code generator picks each code block in the tree and translates it into bytecode. For instance, byte code for the instruction c = a - b is shown in Figure~\ref{fig:samplebytecode} [4].
+
+\begin{figure}
+  \centering
+\begin{lstlisting} 
+iload_1
+iload_2
+isub 3
+istore_3
+\end{lstlisting}
+    \caption[Sample byte code]{Sample byte code for the instruction c = a - b [4].}
+    \label{fig:samplebytecode}
+\end{figure}
+
+The bytecode in Figure can be interpreted as - Load the values that are stored at offset 1 and offset 2 into registers and then subtract these values. Finally, store the result at offset 3.
