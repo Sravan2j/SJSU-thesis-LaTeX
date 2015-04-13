@@ -20,13 +20,17 @@
 \usepackage[T1]{fontenc}
 \usepackage[tableposition=top]{caption}
 \usepackage{color}
-
+\usepackage[utf8x]{inputenc}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{maroon}{RGB}{175,50,53}
 \newcommand*{\ColorIfNotInString}[1]{\iftoggle{InString}{#1}{\color{red}#1}}%
 \newcommand*{\ProcessQuote}[1]{#1\iftoggle{InString}{\global\togglefalse{InString}}{\global\toggletrue{InString}}}%
+\usepackage{seqsplit}
+\usepackage{textcomp}
+\DeclareUnicodeCharacter{"2103}{\textcelsius}
+
 
 \lstdefinelanguage{JavaScript}{
 %
@@ -53,11 +57,13 @@
          {\ }{{ }}{1}% handle the space
          ,%
          mathescape=true,
-      morekeywords={break, case, catch, continue, debugger, default, delete,         do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, script},
+      morekeywords={break, case, catch, continue, debugger, default, delete,         do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with, def, script},
       morecomment=[s]{/*}{*/},          
       morecomment=[l]//,
       morestring=[b]",
-      morestring=[b]'
+      morestring=[b]',
+      literate= %
+          	      {°}{\textdegree{}}1%
     }
     
     \lstdefinelanguage{myasm} {
@@ -68,14 +74,33 @@
     		call,setg,setl,setge,setle,setne,sete,movzbl,
     		eax,ebx,ecx,edx,edi,esi,ebp,esp,al,bl,cl,dl,ah,bh,ch,dh,
     		mov, add, sub, nop, or, tst, shl, sub, jmp, cmp, pop, push, mul,
-    		MOV,ADD,SUB,NOP,OR,TST,SHL,SUB,JMP,CMP, POP, PUSH
+    		NOP,MOVL,PUSHL,POPL,CMPL,TESTL,LEAL,CMOVL,JMP,JE,JNE,
+    		JZ,JNZ,JG,JGE,JL,JLE,ADDL,SUBL,IMUL,IDIV,CDQ,INCL,DECL,
+    		NEGL,ANDL,ORL,XORL,NOTL,SHRL,SHLL,SARL,SALL,RET,LEAVE,
+    		CALL,SETG,SETL,SETGE,SETLE,SETNE,SETE,MOVZBL,
+    		EAX,EBX,ECX,EDX,EDI,ESI,EBP,ESP,AL,BL,CL,DL,AH,BH,CH,DH,    		
+    		MOV,ADD,SUB,NOP,OR,TST,SHL,SUB,JMP,CMP, POP, PUSH, MUL
     	},
     	sensitive=true,
     	morecomment=[s]{/*}{*/},
     	morecomment=[l]{;},
-    	morestring=[b]"
+    	morestring=[b]",
+    	literate= %
+    	      {°}{\textdegree{}}1%
     }
-    
+\lstdefinelanguage{UbuntuSC}{
+sensitive=true
+    }    
+\lstset{
+  language=UbuntuSC,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  tabsize=3,
+  literate={\$}{{\textcolor{blue}{\$}}}1
+}
     
 \lstset{frame=tb,
   language=JavaScript,

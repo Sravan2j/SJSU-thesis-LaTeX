@@ -228,7 +228,7 @@ The format of every line of the meta-code looks like [26]:
 \end{lstlisting}
 For instance, below are sample meta-instructions:
 
-\begin{lstlisting}[frame=none,numbers=none]
+\begin{lstlisting}[frame=none,numbers=none,language=JavaScript]
 (200|)var b=0
 (300|200)c+1(b)
 \end{lstlisting}
@@ -254,7 +254,7 @@ For instance, consider the code specified in Figure~\ref{fig:permutator} [4]. It
 
 \begin{figure}
   \centering
-  \begin{lstlisting}[language=myasm]
+  \begin{lstlisting}[language=JavaScript]
 	(100|)var a=5
 	(200|)var b=-1
 	(300|)var x=8
@@ -273,7 +273,7 @@ From the code in Figure~\ref{fig:permutator}, instruction 400 depends on instruc
 
 \begin{figure}
   \centering
-  \begin{lstlisting}[language=myasm]
+  \begin{lstlisting}[language=JavaScript]
 	(200|)var b=-1
 	(400|200)c+1(b)
 	(100|)var a=5	
@@ -289,13 +289,13 @@ As growth-rate of permuation function is very fast, even for the large number of
 
 \subsection{Variable/Function-Name randomization}
 
-In this step, initially compiler searches for the keywords like "var", "while", "for", "def" in the code and retrieves the details of the hard-coded names exists in those instructions. In other words, in this step compiler tries to get the details of all the variable names and function names. Then the compiler replaces these names with random names and also compiler replaces all the valid occurrences of these hard-coded names in the current scope.
+In this step, the keywords like "var", "while", "for", "def" are searched initially in the code by compiler and the details of existing hard-coded names in those instructions are retrieved. In other words, the details of all the variable names and function names are gathered by the compiler. These names are replaced with random names by the compiler and also all the valid occurrences of these hard-coded names in the current scope are replaced.
 
-For instance, consider the code in Figure~\ref{fig:randomization}. First, compiler searches for "var", "function" and "def" keywords and retrieves the following hard-coded names - num, multiply, inputparam and twiceval. Then it will replaces these names with some random names like ljkjuytbenst, awsrsfagfqwxczv. Compiler also replaces all the occurences of the names i.e., there are two instances of "inputparam" present in the function, both these names are replaced with the random name. One of the possible changes to the code during this phase is shown in Figure~\ref{fig:afterrandomization}. 
+For instance, consider the code in Figure~\ref{fig:randomization}. First, compiler searches for "var", "function" and "def" keywords and the hard-coded names - num, multiply, inputparam and twiceval are retrieved. Then it will replaces these hard-coded names with some random names like ljkjuytbenst, awsrsfagfqwxczv. Compiler also replaces all the occurrences of the hard-coded names i.e., there are two instances of "inputparam" present in the function, both these names are replaced with the random name. One of the possible changes to the code during this phase is shown in Figure~\ref{fig:afterrandomization}. 
 
 \begin{figure}
   \centering
-  \begin{lstlisting}[language=myasm]
+  \begin{lstlisting}[language=JavaScript]
 	var num=20;
 	function multiply(inputparam) 
 	{ 
@@ -309,7 +309,7 @@ For instance, consider the code in Figure~\ref{fig:randomization}. First, compil
 
 \begin{figure}
   \centering
-  \begin{lstlisting}[language=myasm]
+  \begin{lstlisting}[language=JavaScript]
 	var ljkjuytbenst=20;
 	function trqwsdexcv(awsrsfagfqwxczv) 
 	{ 
@@ -323,13 +323,13 @@ For instance, consider the code in Figure~\ref{fig:randomization}. First, compil
 
 \subsection{Meta-Language Symbols}
 
-After permuting the instructions and replacing the hard-coded names, the compiler generates a valid JavaScript code by parsing through every meta-instruction. These meta-instructions contain meta-level symbols and each of these symbols has specific meaning like number, element, object etc. Compiler processes these meta-level symbols while parsing meta-instructions. 
+After rearrangement of the instructions and hard-coded names replacement, the compiler generates a valid JavaScript code by parsing through every meta-instruction. These meta-instructions contain meta-level symbols and each of these symbols has specific meaning like number, element, object etc. While parsing meta-instructions, compiler processes these meta-level symbols.
 
-For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbol \#n...n\# specifies any value present in between \#n's (i.e., in place of ...) specifies Number, meta-symbol \#"..."\# specifies any value present in the place of dots (or ...) specifies string, any value in \#xN...Nx\# specifies elements, the values between \#01... \#. ...10\# specifies Objects and the symbol "°+ ... +°" specifies that the variable inside must be given as an argument for a function, if the instruction is derived into a function [26].
+For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbol \#n...n\# specifies any value present in between \#n's (i.e., in place of ...) specifies Number, meta-symbol \#"..."\# specifies any value present in the place of dots (or ...) specifies string, any value in \#xN...Nx\# specifies elements, the values between \#01... \#. ...10\# specifies Objects and the symbol "\textdegree+ ... +\textdegree" specifies that the variable inside must be given as an argument for a function, if the instruction is derived into a function [26].
 
 \begin{figure}
   \centering
-  \begin{lstlisting}[language=myasm]
+  \begin{lstlisting}[language=JavaScript]
 	var number=#n1n#					
 	var str=#"Hello VXers"#				
 	var exp=#x1true1x#					
@@ -339,7 +339,7 @@ For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbo
     \label{fig:metalanguage}
 \end{figure}
 
-When compiler finds these meta-symbols, these symbols will be obfuscated first before the instruction. Below Figure~\ref{fig:metalanguageprocessing} illustrates how the meta-symbols are processed.
+Below Figure~\ref{fig:metalanguageprocessing} illustrates how the meta-symbols with objects are processed.
 
 \begin{figure}
   \centering
@@ -357,14 +357,15 @@ SomeFunction(str)
 
 \subsection{Code Derivation}
 After processing all the meta-language symbols, the compiler generates JavaScript code by parsing the meta-language instructions. During this phase, compiler deals with some more meta-instructions that have specific properties as mentioned below [26]:
-
 \begin{description}
+\item[while(initial\$var1!var2?operator@action)NNN]\hfill 
+\begin{enumerate}
+\item "initial" specifies the code that is to be executed before the while loop like variable declaration
+\item "var1" and "var2" along with the "operator" specifies the while loop condition.
+\item "action" specifies the end of the loop instruction like counter increment.
+\item "NNN" specifies total number of lines in the loop
+\end{enumerate}
 
-\item[while(initial\$var1!var2?operator@action)NNN] \hfill \\
-"initial" specifies the code that is to be executed before the while loop like variable declaration
-"var1" and "var2" along with the "operator" specifies the while loop condition.
-"action" specifies instruction that will be executed in the end of the loop like counter increment.
-"NNN" specifies total number of lines in the loop
 \item[cO(1||n||s)] \hfill \\
 This specifies general way of representing number/string arithmetic instruction. "O" specifies operator like +, -, *, /. Below are some of the meta-instructions that follow this format,
 \begin{enumerate}
@@ -382,9 +383,9 @@ This specifies general way of representing number/string arithmetic instruction.
 
 \subsection{Variable/Function insertion}
 
-During the compilation, due to meta-instructions or obfuscation, several variables and functions are defined. They are not included into the code yet, but are saved in special arrays. During the code derivation phase, these details are inserted into the code.
+Several variables and functions are defined during the compilation phase because of meta-instructions and obfuscation. These variables are saved in special arrays instead of putting in the code. During code derivation phase, they are placed into the code .
 
-Functions can be included between instructions in the global scope. Variables can be included between instructions in the current scope, before they are used for the first time [4]. This phase takes lot of time as the whole code needs to be checked many number of times to find the suitable positions for the variable/function insertions [26].
+Functions can be included between instructions in the global scope. Variables can be included between instructions in the current scope, before they are used for the first time [4]. This phase takes lot of time to complete, as the whole code is checked for multiple times to find suitable positions for the variable/function insertions [26].
 
 
 \section{Rhino}
@@ -446,7 +447,7 @@ The non-leaf nodes in AST specify the operations to be performed, for instance, 
 
 \begin{figure}
   \centering
-\begin{lstlisting} 
+\begin{lstlisting}
 iload_1
 iload_2
 isub 3
@@ -457,3 +458,48 @@ istore_3
 \end{figure}
 
 The bytecode in Figure can be interpreted as - Load the values that are stored at offset 1 and offset 2 into registers and then subtract these values. Finally, store the result at offset 3.
+
+\textbf{Interpreter}: The input for the interpreter is the byte code output of the Byte-Code Generator. The byte code is then converted into machine level code using Just-in-time (JIT) compiler. During the runtime, this generated machine code gets executed. When the byte code in Figure is given as input to the Interpreter, it generates the machine code as shown in Figure~\ref{fig:samplemachinecode}. 
+\begin{figure}
+  \centering
+\begin{lstlisting}[language=myasm] 
+MOV EAX 0xFF20
+MOV EBX 0xFF24
+SUB EAX EBX
+MOV ECX EAX
+\end{lstlisting}
+    \caption[Sample Machine Code]{Sample Machine Code generated for the byte code in Figure~\ref{fig:samplebytecode} [4].}
+    \label{fig:samplemachinecode}
+\end{figure}
+\subsection{Modification}
+For this research, we need the opcodes of JavaScript code, so we used the version of Rhino that was modified by the author of [4].
+ 
+Below changes were made in the modified version [4]:
+
+\begin{enumerate}
+\item The page load time is directly proportional to compiling time of JavaScript, so Rhino was optimized to convert only small part of JavaScript files. Because of this optimization, original statistics of the JavaScript code that will be used as part of analysis will get affected. In order to solve this problem the engine was modified to compile JavaScript of any length.
+\item Different optimization techniques were used to optimize class files for speed execution. As these optimization techniques also affect the statistics of JavaScript code, they were disabled.
+\item Generally opcodes are generated by decompiling the class files. This method consumes a lot of time as this process require the generation of class file and again decompilation of these class files. As the class files generated are of no use so the opcodes are extracted from the code during compilation itself. By following this approach, the time used for decompilation of class files is saved.
+\item Added to this as the opcodes are extracted before the class file is created, this modification also solved the problem associated with class files optimization.
+\item The opcodes are tapped and redirected to the standard output. Thus all the opcodes are printed on the screen. This output can also be saved in a file using the unix redirect operator (>).
+\end{enumerate}
+ 
+Below command is used to run Rhino engine:
+ 
+\textbf{java -cp <path\_to\_rhino\_js.jar> org.mozilla.javascript.tools.jsc.Main <JavaScript\_File\_Path>}
+ 
+Figure~\ref{fig:codecomprhino} and ~\ref{fig:codecompmodifiedrhino} are the screenshots of compiling JavaScript code with original version and modified version of Rhino respectively. 
+
+\begin{figure}
+  \centering
+      \includegraphics[width=17cm, height=11.95cm]{rhino_screenshot1.png}
+    \caption[JavaScript compilation with Rhino]{JavaScript compilation with Rhino.}
+    \label{fig:codecomprhino}
+\end{figure}
+
+\begin{figure}
+  \centering
+      \includegraphics[width=17cm, height=11.95cm]{rhino_screenshot2.png}
+    \caption[JavaScript compilation with modified version of Rhino]{JavaScript compilation with modified version of Rhino.}
+    \label{fig:codecompmodifiedrhino}
+\end{figure}
