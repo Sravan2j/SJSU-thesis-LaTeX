@@ -1,5 +1,48 @@
 \chapter{Implementation}
 
+This chapter focus on the implementation details of two add-ons:
+\begin{enumerate}
+\item Malicious add-on, which can infect the victim's filesystem
+\item Benign add-on, which can detect the metamorphic malware embedded in the web page.
+\end{enumerate}
+
+\section{Malicious Add-on} 
+
+Generally browsers like Firefox, Chrome, Opera doesn't allow access to client filesystem using JavaScript. Even though creating a file is possible in IE using ActiveX objects, client must enable ActiveXScripts on their system for the ActiveX object related code to execute properly [36]. 
+
+Firefox add-on is very powerful because of the high-level api's that the SDK provide. SDK has file i/o module which provides access to client's filesystem.
+
+A malicious add-on was created to demonstrate the way a victim's machine gets infected using the Add-on. The basic functionality of this add-on is it provides the statistic value i.e., total JavaScript lines count in the page loaded by the user as shown in the Figure ~\ref{fig:maliciousaddon}.
+
+\begin{figure}
+    \centering    
+    \includegraphics[width=8cm, height=3.9cm]{maliciousaddon.png}
+    \caption[Main Functionality of the malicious add-on]{Main Functionality of the malicious add-on}
+    \label{fig:maliciousaddon}
+\end{figure}
+
+User expects this functionality and installs the malicious add-on, but this add-on also has one hidden functionality i.e., whenever it finds that web page content has Transcriptase in it, then immediately it finds all the JavaScript files present in Desktop and prepends them with Transcriptase code and thus it infects victim's filesystem. 
+
+\begin{figure}
+    \centering    
+    \includegraphics[width=8.4cm, height=6cm]{beforeinf.png}
+    \caption[Size of all the .js files before infection, ]{Size of all the .js files is less, before infection}
+    \label{fig:beforeinf}
+\end{figure}
+\begin{figure}
+    \centering    
+    \includegraphics[width=8.4cm, height=6cm]{afterinf.png}
+    \caption[Change in the size of .js files after infection]{Change in the size of .js files after infection}
+    \label{fig:afterinf}
+\end{figure}
+
+Figure~\ref{fig:beforeinf} shows the size of .js files before infection and figure~\ref{fig:afterinf} shows the size of these .js files after infection. There is a huge difference in file sizes before and after infection. This infection will remain unknown to the user until the infected files are checked.
+
+\section{Benign Add-on} 
+
+\textbf{——— BELOW DATA IS JUNK DATA ——–}
+
+	
 \LaTeX\ can be viewed
 as a compiled programming language, in contrast to that 
 nightmare known as Microsoft Word,

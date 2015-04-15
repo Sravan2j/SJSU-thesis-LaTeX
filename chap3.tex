@@ -1,18 +1,18 @@
 \chapter{Firefox Add-on Development}
 
-There are two main ways to build Firefox extensions. The traditional way is using XPCOM and XUL. Much of mozilla documentation is focused on XUL add-on, because this has been around for many years. More details about XUL add-on development can be found at [32]. Add-on SDK is the newer kind and was built under Jetpack Project. Jetpack's main agenda is to make it easy to build Firefox add-ons by using HTML, CSS and JavaScript [3].
+There are two main ways to build Firefox extensions. The traditional way is using XPCOM and XUL. Much of Mozilla's documentation is focused on XUL add-on, because this has been around for many years. More details about XUL add-on development can be found at [32]. The add-on SDK is the newer kind and was built under the Jetpack Project. Jetpack's main agenda is to make it easy to build Firefox add-ons by using HTML, CSS, and JavaScript [3].
 
 It is advisable to use the Add-on SDK because of the advantages it provides compared to XUL [33]:
 
 \begin{enumerate}
-\item Simplicity: High-level JavaScript APIs provided by SDK like basic user interface components and their functionality simplifies all the common tasks in add-on development. 
-\item Compatibility : Electrolysis, also called e10s, is the project under which Firefox is being developed with new multiple process architecture [34]. API's provided by this SDK are designed to be forward-compatible with this new architecture. 
-\item Security: It is not easy to build insecure add-ons using the SDK. Even the insecure Add-on that was compromised can do very less damage to the victim's machine.
-\item Restartlessness: To install extensions developed using SDK, we no need to restart the browser.
-\item Mobile Support: Add-ons can also be developed for the Firefox mobile using the experimental support provided by SDK 1.5
+\item Simplicity: High-level JavaScript APIs provided by the SDK like basic user interface components and their functionality simplify all the common tasks in add-on development. 
+\item Compatibility : Electrolysis [34], also called e10s, is the project under which Firefox is being developed with new multiple process architecture. The API's provided by this SDK are designed to be forward-compatible with this new architecture. 
+\item Security: It is not easy to build insecure add-ons using the SDK. Even the insecure Add-on that was compromised can do much less damage to the victim's machine.
+\item No restarts required: To install extensions developed using the SDK, we do not need to restart the browser.
+\item Mobile Support: Add-ons can be developed for the Firefox mobile using the experimental support provided by SDK 1.5
 \end{enumerate}
 
-Whereas XUL provides huge number of options for UI when compared to SDK and that's the reason XUL is user for developing add-ons that require rich user interface.
+However, XUL provides a huge number of options for the UI when compared to the SDK, and that's the reason XUL is used for developing add-ons that require a rich user interface.
 
 This chapter focuses on important topics of SDK based Add-on development including download and installation of SDK, usage of cfx tool, creation of user interface, interaction with the browser, logging messages to the console for debugging Add-on code and unit testing.
 
@@ -342,7 +342,7 @@ contentScriptFile: [ "./content-script1.js", "./content-script2.js" ]
 To enable add-on scripts and content scripts to communicate with each other, each end of the conversation has access to a port object.
 \begin{enumerate}
 \item port.emit() is used to send messages from one side to the other 
-\item port.emit() is used to receive messages sent from the other side
+\item port.on() is used to receive messages sent from the other side
 \end{enumerate}
 
 \begin{figure}
@@ -354,7 +354,7 @@ To enable add-on scripts and content scripts to communicate with each other, eac
 
 Messages are asynchronous i.e., after sending the message, sender continues processing without waiting for a reply from the recipient.
 
-Add-on code in Figure~\ref{fig:communication}, adds a button to Firefox. When the user clicks this button, add-on attaches a content script to the active tab, sends the \textbf{addon-message} to content script. When content script receives add-on message, it will retrieve the first paragraph from the loaded web page and send it to add-on along with \textbf{script-response} message. As soon as the add-on receives response from content script, it logs the first paragraph.
+The add-on code in Figure~\ref{fig:communication} adds a button to Firefox. When the user clicks this button, add-on attaches a content script to the active tab, sends the \textbf{addon-message} to content script. When content script receives add-on message, it will retrieve the first paragraph from the loaded web page and send it to add-on along with \textbf{script-response} message. As soon as the add-on receives a response from content script, it logs the first paragraph.
 
 \begin{figure}[h]
   \centering

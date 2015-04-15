@@ -1,6 +1,6 @@
 \chapter{Background}
 
-Malware is a malicious program intended to do pernicious exercises on a client`s computer with the proposition of removing data and misusing assets without his assent. Viruses and worms are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014, culprits considered Citadel as the preferred banking malware for stealing individual information, while Zeus is the favorite banking malware for stealing money from bank accounts [9].
+Malware is a malicious program intended to do pernicious exercises on a client`s computer with the proposition of removing data and misusing assets without his assent. Viruses and worms are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014 [9], Citadel is the preferred banking malware among attackers for stealing individual information. And for stealing money from bank accounts, Zeus is the favorite banking malware.
 
 Figure 1 shows how the malware is swiftly growing in volume day-by-day. In Figure 1, the x-axis specifies the year and the y-axis indicates the number of malware samples generated in the specified year on the x-axis.
 
@@ -9,7 +9,7 @@ Figure 1 shows how the malware is swiftly growing in volume day-by-day. In Figur
     \includegraphics[width=8.4cm, height=6cm]{malware-growth-chart.jpg}
     \caption[Annual Malware Growth]{Annual Malware Growth [10]}
 \end{figure}
-Virus writers are aware that signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to evade signature-based detection. In January 2015, AV-TEST`s CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no more identified and thus, AV signature updates are required" [10]. Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
+Virus writers are aware that signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to evade signature-based detection. In January 2015, AV-TEST`s CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no longer detected and thus, AV signature updates are required" [10]. Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
 
 \section{Encrypted Malware} 
 
@@ -98,7 +98,7 @@ $895$E$04$						MOV [esi+0004], ebx
 
 \subsection{Subroutine permutation} 
 
-Code may contain several subroutines (or) functions and changing the order of this subroutines may not impact the execution of code. Subroutine permutation approach makes use of this advantage i.e., altering the order of subroutines, to change its internal structure without modifying the functionality of code. A code with n different subroutines can generate n! different permutations of subroutines, thus large number of versions of the same code can be generated [4].
+Code may contain several subroutines (or) functions and changing the order of this subroutines may not impact the execution of code. Subroutine permutation approach makes use of this advantage i.e., altering the order of subroutines, to change its internal structure without modifying the functionality of code. A code with $n$ different subroutines can generate $n!$ different permutations of subroutines, thus large number of versions of the same code can be generated [4].
 
 \begin{figure}
   \centering
@@ -136,7 +136,7 @@ Morphed copies of virus code can also be created by changing the order of instru
 \end{figure}
 
 \subsection{Changing control flow} 
-The next code obfuscation method involves insertion of a conditional or unconditional branch instruction after a block of instructions. Further, instruction blocks referenced by this branching instructions can be permuted to change the control flow [23]. Zperm malware used used this approach to change the internal structure of a code [25]. Figure ~\ref{fig:changecntflow} is an example of changing control flow.
+The next code obfuscation method involves insertion of a conditional or unconditional branch instruction after a block of instructions. Further, instruction blocks referenced by this branching instructions can be permuted to change the control flow [23]. Zperm malware used this approach to change the internal structure of a code [25]. Figure ~\ref{fig:changecntflow} is an example of changing control flow.
 
 \begin{figure}
   \centering
@@ -219,7 +219,7 @@ On the other hand, code outlining changes a block of instructions into subroutin
 
 Transcriptase is a metamorphic virus implemented in JavaScript. Whenever Transcriptase is executed, a morphed version of the malware virus gets prepended to all the JavaScript files in the folder [4]. The infected JavaScript file will become the variant of Transcriptase. By this way Transcriptase propagates and infects the benign JavaScript files.
   
-Metamorphic engine attached to Transcriptase is a self-hosted compiler, which contains its own meta-language source-code. Transcriptase obtains information of its code from meta-language and changes its internal structure. 
+The metamorphic engine attached to Transcriptase is a self-hosted compiler, which contains its own meta-language source-code. Transcriptase obtains information of its code from meta-language and changes its internal structure. 
 
 The format of every line of the meta-code looks like [26]:
 
@@ -233,23 +233,23 @@ For instance, below are sample meta-instructions:
 (300|200)c+1(b)
 \end{lstlisting}
 
-Identifier and Restrictions are used by the Permutation function to do code obfuscation. Identifier is unique for every instruction in the entire code, restriction specifies the instructions on which the corresponding instruction is depending on and "instruction" contains the details used to create an actual code. 
+An Identifier and Restrictions are used by the Permutation function to do code obfuscation. The identifier is unique for every instruction in the entire code and restrictions specify the instructions on which the corresponding instruction is depending. The "instruction" contains the details used to create an actual code. 
 
 The compiler creates the new malicious JavaScript code with three steps:
 
 \begin{enumerate}
   \item Permutation and Variable/Function-Name randomization
   \item Code Creation
-  \item Variable/Function insertion \ldots
+  \item Variable/Function insertion
 \end{enumerate}
 
 \subsection{Permutator}
 
-In this phase, compiler parses through every meta-language instruction, scope by scope (global scope for global instructions and sub-scope for if/for/while/functions) and retrieves the identifiers and restrictions details for each meta-instruction. Later these identifier and restriction details are used by the compiler to perform the permutation of code.
+In this phase, the compiler parses through every meta-language instruction, scope by scope (global scope for global instructions and sub-scope for if/for/while/functions) and retrieves the identifiers and restrictions details for each meta-instruction. Later these identifier and restriction details are used by the compiler to perform the permutation of code.
 
-If the restriction details are empty for all the meta-language instructions, then it specifies that all the instructions in the code doesn't have any dependency instructions. So, the entire code can be permuted in all the possible combinations. For instance, if there are n lines of code, then permutator can create n! ways of different code. 
+If the restriction details are empty for all the meta-language instructions, then it specifies that all the instructions in the code do not have any dependency instructions. So, the entire code can be permuted in all the possible combinations. For instance, if there are $n$ lines of code, then the permutator can create $n!$ variations of the original code. 
 
-For instance, consider the code specified in Figure~\ref{fig:permutator} [4]. It contains restriction details for some of the meta-instructions which means that those instructions have dependencies on other instructions. So all the combinations of the code cannot produce correct behaviour. 
+For instance, consider the code specified in Figure~\ref{fig:permutator} [4]. It contains restriction details for some of the meta-instructions, which means that those instructions have dependencies on other instructions. So all the combinations of the code cannot produce the correct behaviour. 
 
 
 \begin{figure}
@@ -285,13 +285,13 @@ From the code in Figure~\ref{fig:permutator}, instruction 400 depends on instruc
     \label{fig:afterpermutator}
 \end{figure}
 
-As growth-rate of permuation function is very fast, even for the large number of instruction this technique works effectively [26].
+As the growth-rate of the permuation function is very fast, even for the large number of instruction this technique works effectively [26].
 
 \subsection{Variable/Function-Name randomization}
 
-In this step, the keywords like "var", "while", "for", "def" are searched initially in the code by compiler and the details of existing hard-coded names in those instructions are retrieved. In other words, the details of all the variable names and function names are gathered by the compiler. These names are replaced with random names by the compiler and also all the valid occurrences of these hard-coded names in the current scope are replaced.
+In this step, the keywords like "var", "while", "for", and "def" are searched initially in the code by the compiler and the details of existing hard-coded names in those instructions are retrieved. In other words, the details of all the variable names and function names are gathered by the compiler. These names are replaced with random names by the compiler and also all the valid occurrences of these hard-coded names in the current scope are replaced.
 
-For instance, consider the code in Figure~\ref{fig:randomization}. First, compiler searches for "var", "function" and "def" keywords and the hard-coded names - num, multiply, inputparam and twiceval are retrieved. Then it will replaces these hard-coded names with some random names like ljkjuytbenst, awsrsfagfqwxczv. Compiler also replaces all the occurrences of the hard-coded names i.e., there are two instances of "inputparam" present in the function, both these names are replaced with the random name. One of the possible changes to the code during this phase is shown in Figure~\ref{fig:afterrandomization}. 
+For instance, consider the code in Figure~\ref{fig:randomization}. First, the compiler searches for the "var", "function", and "def" keywords and the hard-coded names - num, multiply, inputparam, and twiceval are retrieved. Then it replaces these hard-coded names with some random names like "ljkjuytbenst" or "awsrsfagfqwxczv". The compiler also replaces all occurrences of the hard-coded names, for example, there are two instances of "inputparam" present in the function, both these names are replaced with the random name. One of the possible changes to the code during this phase is shown in Figure~\ref{fig:afterrandomization}. 
 
 \begin{figure}
   \centering
@@ -339,7 +339,7 @@ For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbo
     \label{fig:metalanguage}
 \end{figure}
 
-Below Figure~\ref{fig:metalanguageprocessing} illustrates how the meta-symbols with objects are processed.
+Figure~\ref{fig:metalanguageprocessing} illustrates how the meta-symbols with objects are processed.
 
 \begin{figure}
   \centering
@@ -370,42 +370,42 @@ After processing all the meta-language symbols, the compiler generates JavaScrip
 This specifies general way of representing number/string arithmetic instruction. "O" specifies operator like +, -, *, /. Below are some of the meta-instructions that follow this format,
 \begin{enumerate}
 \item c+1(var1): increment var1 by 1
-\item c+n(var1,var2): increment var1 by number var2
-\item c+s(var1,var2): increment var1 by string var2
+\item c+n(var1,var2): increment var1 by the number var2
+\item c+s(var1,var2): concatenate var1 by the string var2
 \item c-1(var1): decrement var1 by 1
-\item c-n(var1,var2): decrement var1 by number var2
+\item c-n(var1,var2): decrement var1 by the number var2
 \item c*1(var1): multiply var1 by 1
-\item c*n(var1,var2): multiply var1 by number var2
+\item c*n(var1,var2): multiply var1 by the number var2
 \item c/1(var1): divide var1 by 1
-\item c/n(var1,var2): divide var1 by number var2 
+\item c/n(var1,var2): divide var1 by the number var2 
   \end{enumerate}
 \end{description}
 
 \subsection{Variable/Function insertion}
 
-Several variables and functions are defined during the compilation phase because of meta-instructions and obfuscation. These variables are saved in special arrays instead of putting in the code. During code derivation phase, they are placed into the code .
+Several variables and functions are defined during the compilation phase because of meta-instructions and obfuscation. These variables are saved in special arrays instead of being stored in the code. During code derivation phase, they are placed into the code .
 
 Functions can be included between instructions in the global scope. Variables can be included between instructions in the current scope, before they are used for the first time [4]. This phase takes lot of time to complete, as the whole code is checked for multiple times to find suitable positions for the variable/function insertions [26].
 
 
 \section{Rhino}
 
-Netscape began working on developing a Java’s variant of Netscape Navigator in 1997 [28]. In order to implement Netscape Navigator in Java, they built a JavaScript engine entirely in Java, named as Rhino. Rhino is open source software and is currently maintained by Mozilla [27].
+Netscape began working on developing a Java’s variant of Netscape Navigator in 1997 [28]. In order to implement Netscape Navigator in Java, they built a JavaScript engine entirely in Java, named Rhino. Rhino is open source software and is currently maintained by Mozilla [27].
 
-For the most part, JavaScript is utilized as a part of HTML for making interactive webpages. Anyhow, Rhino is not used to create or manipulate webpages; it is an implementation of the core JavaScript. Rhino has the below aspects [27]:
+Most of the time, JavaScript is utilized as a part of HTML for making interactive webpages. Anyhow, Rhino is not used to create or manipulate webpages; it is an implementation of the core JavaScript. Rhino has the below aspects [27]:
 
 \begin{enumerate}
-\item Entire JavaScript 1.7 features
+\item Supports JavaScript 1.7 features
 \item Allows direct scripting of Java
-\item Rhino Shell to execute the JavaScript code interactively or in batch
-\item JavaScript Compiler to compile the JavaScript code into Java classes
-\item JavaScript Debugger for debugging scripts in Rhino
+\item The Rhino Shell can execute the JavaScript code interactively or in batch mode
+\item The JavaScript Compiler can compile the JavaScript code into Java classes
+\item The JavaScript Debugger for debugging scripts in Rhino
 \end{enumerate}
  
-In this research, we will use Rhino to translate the JavaScript code into Java classes. The engine supports both compile mode and interpretive mode. During compile mode, engine first translates each JavaScript file to separate Java class files. These .class files may be executed as Java programs using rhino runtime support routines. During interpretive mode, JavaScript is compiled and is stored as internal representation of the compiled form instead of byte codes. During runtime this compiled form is evaluated using rhino functions.
+In this research, we use Rhino to translate the JavaScript code into Java classes. The engine supports both compile mode and interpretive mode. During compile mode, the engine first translates each JavaScript file to separate Java class files. These .class files may be executed as Java programs using Rhino runtime support routines. During interpretive mode, JavaScript is compiled and is stored as internal representation of the compiled form instead of byte codes. During runtime this compiled form is evaluated using rhino functions.
 
 \subsection{Architecture}
-The four basic blocks in Rhino JavaScript engine are - Parser, Byte-Code Generator, Interpreter and JIT [4]. Figure~\ref{fig:architecture} depicts the block diagram of Rhino Engine [29].
+The four basic blocks in the Rhino JavaScript engine are - the parser, the byte-code generator, the interpreter and the JIT [4]. Figure~\ref{fig:architecture} depicts the block diagram of the Rhino Engine [29].
 
 \begin{figure}
   \centering
@@ -414,7 +414,7 @@ The four basic blocks in Rhino JavaScript engine are - Parser, Byte-Code Generat
     \label{fig:architecture}
 \end{figure}
 
-\textbf{Parser}: The input for this module is JavaScript code and the output generated is the Abstract Syntax Tree (AST). AST is a tree representation of the abstract syntactic structure of a program. For instance, Figure~\ref{fig:ASTcode} represents the AST for the GCD code in Figure~\ref{fig:AST} [30].
+\textbf{Parser}: The input for this module is JavaScript code and the output generated is the Abstract Syntax Tree (AST). The AST is a tree representation of the abstract syntactic structure of a program. For instance, Figure~\ref{fig:ASTcode} represents the AST for the GCD code in Figure~\ref{fig:AST} [30].
 
 \begin{figure}
   \centering
@@ -441,9 +441,9 @@ function gcd(a, b)
     \caption[Abstract Syntax Tree]{Abstract Syntax Tree for the GCD code in Figure~\ref{fig:ASTcode} [30].}
     \label{fig:AST}
 \end{figure}
-The non-leaf nodes in AST specify the operations to be performed, for instance, equal, comparison, arithmetic operation and so on. The leaf nodes in AST specify operands in the source code, for instance, a and b variables [4]. 
+The non-leaf nodes in the AST specify the operations to be performed, for instance, equal, comparison, arithmetic operation and so on. The leaf nodes in AST specify operands in the source code, for instance, a and b variables [4]. 
 
-\textbf{Byte-Code Generator}: The AST output generated from the parser acts as input to the Byte-Code Generator which then converts the tree into byte code. During the conversion process, Byte-Code generator picks each code block in the tree and translates it into bytecode. For instance, byte code for the instruction c = a - b is shown in Figure~\ref{fig:samplebytecode} [4].
+\textbf{Byte-Code Generator}: The AST output generated from the parser acts as input to the Byte-Code Generator which then converts the tree into byte code. During the conversion process, the Byte-Code generator picks each code block in the tree and translates it into bytecode. For instance, the byte code for the instruction c = a - b is shown in Figure~\ref{fig:samplebytecode} [4].
 
 \begin{figure}
   \centering
@@ -457,9 +457,15 @@ istore_3
     \label{fig:samplebytecode}
 \end{figure}
 
-The bytecode in Figure can be interpreted as - Load the values that are stored at offset 1 and offset 2 into registers and then subtract these values. Finally, store the result at offset 3.
+The bytecode in Figure can be interpreted as - 
+\begin{enumerate}
+\item Load the values that are stored at offset 1 and offset 2 into registers
+\item Subtract these loaded values 
+\item Store the result at offset 3.
+\end{enumerate}
 
-\textbf{Interpreter}: The input for the interpreter is the byte code output of the Byte-Code Generator. The byte code is then converted into machine level code using Just-in-time (JIT) compiler. During the runtime, this generated machine code gets executed. When the byte code in Figure is given as input to the Interpreter, it generates the machine code as shown in Figure~\ref{fig:samplemachinecode}. 
+
+\textbf{Interpreter}: The input for the interpreter is the byte code output of the Byte-Code Generator. The byte code is then converted into machine level code using the Just-in-time (JIT) compiler. During runtime, this generated machine code gets executed. When the byte code in Figure~\ref{fig:samplebytecode} is given as input to the Interpreter, it generates the machine code as shown in Figure~\ref{fig:samplemachinecode}. 
 \begin{figure}
   \centering
 \begin{lstlisting}[language=myasm] 
@@ -477,18 +483,18 @@ For this research, we need the opcodes of JavaScript code, so we used the versio
 Below changes were made in the modified version [4]:
 
 \begin{enumerate}
-\item The page load time is directly proportional to compiling time of JavaScript, so Rhino was optimized to convert only small part of JavaScript files. Because of this optimization, original statistics of the JavaScript code that will be used as part of analysis will get affected. In order to solve this problem the engine was modified to compile JavaScript of any length.
+\item The page load time is directly proportional to compiling time of JavaScript, so Rhino was optimized to convert only small part of JavaScript files. Because of this optimization, the original statistics of the JavaScript code that will be used as part of analysis will get affected. In order to solve this problem the engine was modified to compile JavaScript of any length.
 \item Different optimization techniques were used to optimize class files for speed execution. As these optimization techniques also affect the statistics of JavaScript code, they were disabled.
-\item Generally opcodes are generated by decompiling the class files. This method consumes a lot of time as this process require the generation of class file and again decompilation of these class files. As the class files generated are of no use so the opcodes are extracted from the code during compilation itself. By following this approach, the time used for decompilation of class files is saved.
-\item Added to this as the opcodes are extracted before the class file is created, this modification also solved the problem associated with class files optimization.
+\item Generally opcodes are generated by decompiling the class files. This method consumes a lot of time as this process require the generation of class file and again decompilation of these class files. As the class files generated are of no use, the opcodes are extracted from the code during compilation itself. By following this approach, the time used for decompilation of class files is saved.
+\item As the opcodes are extracted before the class file is created, this modification also solved the problem associated with class files optimization.
 \item The opcodes are tapped and redirected to the standard output. Thus all the opcodes are printed on the screen. This output can also be saved in a file using the unix redirect operator (>).
 \end{enumerate}
  
-Below command is used to run Rhino engine:
- 
-\textbf{java -cp <path\_to\_rhino\_js.jar> org.mozilla.javascript.tools.jsc.Main <JavaScript\_File\_Path>}
- 
-Figure~\ref{fig:codecomprhino} and ~\ref{fig:codecompmodifiedrhino} are the screenshots of compiling JavaScript code with original version and modified version of Rhino respectively. 
+The below command is used to run the Rhino engine:
+\begin{lstlisting}[frame=none,numbers=none,language=JavaScript] 
+java -cp <path_to_rhino_js.jar> org.mozilla.javascript.tools.jsc.Main <JavaScript_File_Path>
+\end{lstlisting} 
+Figures~\ref{fig:codecomprhino} and ~\ref{fig:codecompmodifiedrhino} are the screenshots of compiling JavaScript code with the original version and the modified version of Rhino respectively. 
 
 \begin{figure}
   \centering
