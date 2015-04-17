@@ -2,17 +2,17 @@
 
 This chapter focus on the implementation details of two add-ons:
 \begin{enumerate}
-\item Malicious add-on, which can infect the victim's filesystem
-\item Benign add-on, which can detect the metamorphic malware embedded in the web page.
+\item a malicious add-on, which can infect the victim`s filesystem
+\item a Transcriptase detection add-on, which can detect the metamorphic malware embedded in the web page.
 \end{enumerate}
 
-\section{Malicious Add-on} 
+\section{Malicious add-on}
 
-Generally browsers like Firefox, Chrome, Opera doesn't allow access to client filesystem using JavaScript. Even though creating a file is possible in IE using ActiveX objects, client must enable ActiveXScripts on their system for the ActiveX object related code to execute properly [36]. 
+Generally browsers like Firefox, Chrome, and Opera do not allow access to the client filesystem using JavaScript. Even though creating a file is possible in IE using ActiveX objects, the client must enable ActiveX scripts on their system for the ActiveX object related code to execute properly [36]. 
 
-Firefox add-on is very powerful because of the high-level api's that the SDK provide. SDK has file i/o module which provides access to client's filesystem.
+Firefox add-ons are very powerful because of the high-level APIs that the SDK provides. The SDK has a file I/O module which provides access to the client`s filesystem.
 
-A malicious add-on was created to demonstrate the way a victim's machine gets infected using the Add-on. The basic functionality of this add-on is it provides the statistic value i.e., total JavaScript lines count in the page loaded by the user as shown in the Figure ~\ref{fig:maliciousaddon}.
+A malicious add-on was created to demonstrate the way that a victim`s machine may get infected by a malicious add-on. The basic functionality of this add-on is it provides the statistic value i.e., the total JavaScript bytes in the page loaded by the user as shown in the Figure ~\ref{fig:maliciousaddon}.
 
 \begin{figure}
     \centering    
@@ -21,24 +21,24 @@ A malicious add-on was created to demonstrate the way a victim's machine gets in
     \label{fig:maliciousaddon}
 \end{figure}
 
-User expects this functionality and installs the malicious add-on, but this add-on also has one hidden functionality i.e., whenever it finds that web page content has Transcriptase in it, then immediately it finds all the JavaScript files present in Desktop and prepends them with Transcriptase code and thus it infects victim's filesystem. 
+The user expects this functionality and installs the malicious add-on, but this add-on also has hidden functionality. Whenever it finds that web page content has Transcriptase in it, it finds all the JavaScript files present in the filesystem and prepends them with Transcriptase code and thus it infects the victim`s filesystem. 
 
 \begin{figure}
     \centering    
     \includegraphics[width=17cm, height=11.95cm]{beforeinf.png}
-    \caption[Sizes of all the .js files before infection, ]{Size of all the .js files is less, before infection}
+    \caption[Size of sample JavaScript files before infection, ]{Size of sample JavaScript files before infection}
     \label{fig:beforeinf}
 \end{figure}
 \begin{figure}
     \centering    
     \includegraphics[width=17cm, height=11.95cm]{afterinf.png}
-    \caption[Change in the size of .js files after infection]{Change in the size of .js files after infection}
+    \caption[JavaScript file sizes after infection]{JavaScript file sizes after infection}
     \label{fig:afterinf}
 \end{figure}
 
-Figure~\ref{fig:beforeinf} shows the size of .js files before infection and figure~\ref{fig:afterinf} shows the size of these .js files after infection. There is a huge difference in file sizes before and after infection. This infection will remain unknown to the user until the infected files are checked.
+Figure~\ref{fig:beforeinf} shows the size of our sample JavaScript files before infection and figure~\ref{fig:afterinf} shows the size of these files after infection. There is a huge difference in file sizes before and after infection. This infection will remain unknown to the user until the infected files are checked.
 
-\section{Benign Add-on} 
+\section{Transcriptase detection add-on} 
 
 \textbf{——— BELOW DATA IS JUNK DATA ——–}
 

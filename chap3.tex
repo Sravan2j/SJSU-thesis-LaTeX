@@ -43,6 +43,26 @@ However, XUL provides a huge number of options for the UI when compared to the S
 
 In this research, all the add-ons are built using SDK as it provides simple APIs for developing most of the common tasks.
 
+\section{Chrome Authority Usage}
+
+Chrome Authority has nothing to do with Google Chrome browser, this feature is related to Firefox. Mozilla Developer Network(MDN) defines "\textbf{chrome}" as any visible parts of a browser other than the web pages, For instance, tabs, menu bar, and toolbars.
+
+From the beginning of developing SDK, it was assumed that developers may need to access the underlying browser (or) XPCOM services. So, add-on SDK was developed to provide "chrome privileges" to the most powerful low level APIs. The "chrome privileges" grants low-level APIs to access the Components object that gives unrestricted access to the user system.  
+
+With chrome privileges, add-on can perform any function the browser is capable of. These privileges can be obtained by the add-on using the "chrome" module as shown below [1]:
+\begin{lstlisting}[frame=single,language=JavaScript,numbers=none,mathescape=false]
+var {Cc, Ci} = require("chrome");
+\end{lstlisting}
+"chrome" module returns Components object, which can be unpacked using destructuring assignment feature provided by the Mozilla JavaScript to obtain the Components.* aliases: 
+\begin{enumerate}
+\item Cc, otherwise called Components.classes
+\item Ci, otherwise called Components.interfaces
+\item Cu, otherwise called Components.utils.
+\item Cr, otherwise called Components.results.
+\item Cm, otherwise called Components.manager.
+\end{enumerate}
+It is not advisable to use chrome authority in the add-on code unless it is required because the add-ons that uses chrome authority requires extra security review before they are made available for distribution to the public.
+
 \section{Content Scripts}
 
 The add-on`s main code, including "main.js" and other modules in "lib", can use the SDK high-level and low-level APIs, but can`t access web content directly. Whereas content scripts can`t use the SDK`s APIs, but can access web content.
