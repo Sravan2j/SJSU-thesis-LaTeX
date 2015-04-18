@@ -27,21 +27,21 @@ Several techniques are utilized to decrypt the polymorphic virus, such as, crypt
 \begin{figure}
   \centering
 \begin{lstlisting}[language=myasm]
-MOV A,R$1$        MOV A,R$1$        MOV A,R$1$        MOV A,R$1$        MOV A,R$1$
-ADD B,R$1$        NOP             ADD #0,R$1$       OR R$1$,R$1$        TST R$1$
-ADD C,R$1$        ADD B,R$1$        ADD B,R$1$        ADD B,R$1$        ADD C,R$1$
-SUB #4,R$1$       NOP             OR R$1$,R$1$        MOV R$1$,R$5$       MOV R$1$,R$5$
-MOV R$1$,X        ADD C,R$1$        ADD C,R$1$        ADD C,R$1$        ADD B,R$1$
-                NOP             SHL #0,R$1$       SHL R$1$,0        CMP R$2$,R$5$
-                SUB #4,R$1$       SUB #4,R$1$       SUB #4,R$1$       SUB #4,R$1$
-                NOP             JMP .+1         ADD R$5$,R$5$       JMP .+1
-                MOV R$1$,X        MOV R$1$,X        MOV R$1$,X        MOV R$1$,X
-                                                MOV R$5$,Y        MOV R$5$,Y
+MOV A,R$1$         MOV A,R$1$        MOV A,R$1$         MOV A,R$1$         MOV A,R$1$
+ADD B,R$1$         NOP            ADD #0,R$1$        OR R$1$,R$1$          TST R$1$
+ADD C,R$1$         ADD B,R$1$        ADD B,R$1$         ADD B,R$1$         ADD C,R$1$
+SUB #4,R$1$        NOP            OR R$1$,R$1$          MOV R$1$,R$5$         MOV R$1$,R$5$
+MOV R$1$,X         ADD C,R$1$        ADD C,R$1$         ADD C,R$1$         ADD B,R$1$
+                NOP            SHL #0,R$1$        SHL R$1$,0         CMP R$2$,R$5$
+                SUB #4,R$1$       SUB #4,R$1$        SUB #4,R$1$        SUB #4,R$1$
+                NOP            JMP .+1         ADD R$5$,R$5$         JMP .+1
+                MOV R$1$,X        MOV R$1$,X         MOV R$1$,X         MOV R$1$,X
+                                               MOV R$5$,Y         MOV R$5$,Y
 (a)             (b)             (c)             (d)             (e)
 
 
 \end{lstlisting}
-    \caption[Examples of a polymorphic virus.]{Examples of a polymorphic virus utilizing code obfuscation techniques. All of the Figure~\ref{fig:polyvirus} snippets perform the same operation, i.e.,  X = (A + B + C - 4). For instance, the program snippet of Figure~\ref{fig:polyvirus} (c) is functionally the same as Figure~\ref{fig:polyvirus} (a) in light of the fact that instructions like adding 0 to a register, ORing R1 with itself, shifting R1 left 0 bits, and jumping to the next instruction all do nothing [19].}
+    \caption[Examples of a polymorphic virus.]{Examples of a polymorphic virus utilizing code obfuscation techniques. All of the Figure~\ref{fig:polyvirus} snippets perform the same operation, i.e.,  $X = (A + B + C - 4)$. For instance, the program snippet of Figure~\ref{fig:polyvirus} (c) is functionally the same as Figure~\ref{fig:polyvirus} (a) in light of the fact that instructions like adding 0 to a register, ORing R1 with itself, shifting R1 left 0 bits, and jumping to the next instruction all do nothing [19].}
     \label{fig:polyvirus}
 \end{figure}
 
@@ -70,7 +70,7 @@ In December 1998, a metamorphic malware named Win95/Regswap was developed by Vec
     \label{fig:regswap}
 \end{figure}
 
-The bold areas in figure~\ref{fig:regswap} illustrates the similarities of the two different code versions. Thus, a wildcard string, such as 5? B?, could be useful to detect the malware code [22]. 
+The bold areas in figure~\ref{fig:regswap} illustrates the similarities of the two different code versions. Thus, a wildcard string, such as $5? B?$, could be useful to detect the malware code [22]. 
 
 \subsection{Dead code insertion} 
 
@@ -443,7 +443,7 @@ function gcd(a, b)
 \end{figure}
 The non-leaf nodes in the AST specify the operations to be performed, for instance, equal, comparison, arithmetic operation and so on. The leaf nodes in AST specify operands in the source code, for instance, a and b variables [4]. 
 
-\textbf{Byte-Code Generator}: The AST output generated from the parser acts as input to the Byte-Code Generator which then converts the tree into byte code. During the conversion process, the Byte-Code generator picks each code block in the tree and translates it into bytecode. For instance, the byte code for the instruction c = a - b is shown in Figure~\ref{fig:samplebytecode} [4].
+\textbf{Byte-Code Generator}: The AST output generated from the parser acts as input to the Byte-Code Generator which then converts the tree into byte code. During the conversion process, the Byte-Code generator picks each code block in the tree and translates it into bytecode. For instance, the byte code for the instruction $c = a - b$ is shown in Figure~\ref{fig:samplebytecode} [4].
 
 \begin{figure}
   \centering
@@ -453,7 +453,7 @@ iload_2
 isub 3
 istore_3
 \end{lstlisting}
-    \caption[Sample byte code]{Sample byte code for the instruction c = a - b [4].}
+    \caption[Sample byte code]{Sample byte code for the instruction $c = a - b$ [4].}
     \label{fig:samplebytecode}
 \end{figure}
 
