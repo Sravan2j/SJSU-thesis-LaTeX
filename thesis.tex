@@ -9,6 +9,8 @@
 \usepackage{amsmath,amsthm, amsfonts, amssymb, amsxtra,amsopn}
 \usepackage{graphicx}
 \usepackage{multirow}
+\usepackage{rotating}
+\usepackage{multicol}
 \usepackage{algorithmic}
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -79,7 +81,8 @@
     		NEGL,ANDL,ORL,XORL,NOTL,SHRL,SHLL,SARL,SALL,RET,LEAVE,
     		CALL,SETG,SETL,SETGE,SETLE,SETNE,SETE,MOVZBL,
     		EAX,EBX,ECX,EDX,EDI,ESI,EBP,ESP,AL,BL,CL,DL,AH,BH,CH,DH,    		
-    		MOV,ADD,SUB,NOP,OR,TST,SHL,SUB,JMP,CMP, POP, PUSH, MUL
+    		MOV,ADD,SUB,NOP,OR,TST,SHL,SUB,JMP,CMP, POP, PUSH, MUL,
+    		ADD, TEST, INT, MOVZX, RETN, ALIGN, XOR, AND
     	},
     	sensitive=true,
     	morecomment=[s]{/*}{*/},
