@@ -23,14 +23,17 @@
 \usepackage[tableposition=top]{caption}
 \usepackage{color}
 \usepackage[utf8x]{inputenc}
+\usepackage{xcolor}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{maroon}{RGB}{175,50,53}
 \newcommand*{\ColorIfNotInString}[1]{\iftoggle{InString}{#1}{\color{red}#1}}%
 \newcommand*{\ProcessQuote}[1]{#1\iftoggle{InString}{\global\togglefalse{InString}}{\global\toggletrue{InString}}}%
+\newcommand{\shellcmd}[1]{\\\indent\indent\texttt{\footnotesize\# #1}\\}
 \usepackage{seqsplit}
 \usepackage{textcomp}
+\usepackage{fancyvrb}
 \DeclareUnicodeCharacter{"2103}{\textcelsius}
 
 
@@ -121,6 +124,24 @@ sensitive=true
   breakatwhitespace=true,
   tabsize=3
 }
+
+\lstdefinestyle{BashInputStyle}{
+  language=bash,
+  basicstyle=\small\sffamily\singlespace,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=3pt,
+  frame=tb,
+  columns=fullflexible,
+  backgroundcolor=\color{yellow!20},
+  linewidth=1.0\linewidth,
+  xleftmargin=0.1\linewidth,
+  breakatwhitespace=false,
+  tabsize=3
+}
+
+\newcommand*{\Package}[1]{\texttt{#1}}%
+
 \lstset{language=myasm,frame=tb,  
   aboveskip=3mm,
   belowskip=3mm,

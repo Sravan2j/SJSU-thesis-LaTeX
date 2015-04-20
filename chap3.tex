@@ -63,7 +63,7 @@ var {Cc, Ci} = require("chrome");
 \end{enumerate}
 It is not advisable to use chrome authority in the add-on code unless it is required because the add-ons that uses chrome authority requires extra security review before they are made available for distribution to the public.
 
-\section{Content Scripts}
+\section{Content Scripts} \label{sec:contentscript}
 
 The add-on`s main code, including "main.js" and other modules in "lib", can use the SDK high-level and low-level APIs, but can`t access web content directly. Whereas content scripts can`t use the SDK`s APIs, but can access web content.
 

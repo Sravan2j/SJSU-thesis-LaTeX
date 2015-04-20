@@ -173,8 +173,8 @@ In subroutine inlining procedure, subroutine/function call replaces its code [23
   \centering
   \begin{lstlisting}[language=myasm]
 	/* some instrictions */				/* some instrictions */ 
-	Call S1									mov eax, ebx
-	Call S2									add eax, 12h
+	call S1									mov eax, ebx
+	call S2									add eax, 12h
 	/* some instrictions */				push eax
 	S1: 										mul ecx
 	 mov eax, ebx							mov edx, eax

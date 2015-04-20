@@ -181,33 +181,203 @@ Before using the similarity score, we have to determine the threshold score whic
 \item Calculate the similarity scores for every benign files against malware from step 1.
 \item Determine a threshold value using the scores calculated in steps 3 and 4.
 \end{enumerate}
-\textbf{——— BELOW DATA IS JUNK DATA ——–}
 
+\section{Transcriptase detection add-on structure}
+
+\begin{figure}[h]
+  \centering
+\begin{lstlisting}[style=BashInputStyle,numbers=none,mathescape=false,tabsize=4,keywords=none]
+Sravans-MacBook-Pro:TranscriptaseDetectionAddon sravan2j$ tree
+.
+|-- data
+|  	  	  	  	   	|-- content-script.js
+|  	  	  	  	   	|-- icon-16.png
+|  	  	  	   	   	|-- icon-32.png
+|  	  	  	  	   	|-- icon-64.png
+|  	  	  	  	   	|-- java
+|  	  	  	  	   	|  	  	  	  	   	|-- CheckOpcodes.class
+|  	  	  	  	   	|  	  	  	  	   	|-- DownloadThread.class
+|  	  	  	  	   	|  	  	  	  	   	|-- DownloaderApp.class
+|  	  	  	  	   	|  	  	  	  	   	|-- GetScore.class
+|  	  	  	  	   	|  	  	  	  	   	|-- ImageDownloader.class
+|  	  	  	  	   	|  	  	  	  	   	|-- Lock.class
+|  	  	  	  	   	|-- javaext.js
+|  	  	  	  	   	|-- jquery-1.10.0.min.js
+|  	  	  	  	   	|-- js.jar
+|  	  	  	  	   	|-- malware_opcodes.txt
+|  	  	  	  	   	|-- opcodes.bat
+|  	  	  	  	   	|-- opcodes.sh
+|-- lib
+|  	  	  	  	   	|-- main.js
+|-- package.json
+|-- test
+  	 |-- test-main.js
 	
-\LaTeX\ can be viewed
-as a compiled programming language, in contrast to that 
-nightmare known as Microsoft Word,
-which can be viewed as an interpreted language. So, to typeset a
-document in \LaTeX, you create a text file that has the {\tt .tex} extension.
-This file includes some special
-commands, known as macros. Then
-you compile your {\tt .tex} file by running  \LaTeX,
-which produces your typeset document, as a pdf. 
+4 directories, 17 files
+\end{lstlisting}
+    \caption[Transcriptase detection add-on directory structure]{Transcriptase detection add-on directory structure}
+    \label{fig:transdetectaddon}
+\end{figure}
+Figure~\ref{fig:transdetectaddon} shows the directory structure of Transcriptase detection add-on. 
+\begin{enumerate}
+\item "content-script.js" uses jQuery code to find the JavaScipt content in web page, so included "jquery-1.10.0.min.js" file in /data directory to enable this functionality. 
+\item "js.jar" helps add-on to use Rhino JS engine.
+\item Java files in the add-on are used to download the files, and to calculate similarity score. All these files are placed in "/data/java" directory.
+\item "opcode.sh" is a shell script to invoke java files. As shell scripts won`t work on Windows, included "opcode.bat" file to invoke java files on Windows. 
+\item "malware\_opcodes.txt" file contains the opcodes of Transcriptase family malware. This file is used while validating web page JS content using opcode graph similarity technique. 
+\end{enumerate}
+More details about these files are covered in subsequent sections.
 
-In this paper, a few basics are discussed. There are plenty of good online resource
-if you need help with more advanced topics.
+\section{JavaScript extraction from web page}
+
+As soon as user enters web page link, browser loads the JavaScript content along with HTML, CSS on the page. Before extracting the JS from web page, we have to disable JS load in the browser to prevent the execution of JS malware code.
+
+Enabling/disabling JS feature deals with browser preferences. Preferences system of Mozilla browser can be accessed using XPCOM interfaces like $nsIPrefService$ and $nsIPrefBranch$. Below code is used to disable JavaScript code,
+
+\begin{figure}[h]
+  \centering
+
+\begin{lstlisting}[language=JavaScript] 
+var prefSrv = this.prefService = Cc["@mozilla.org/preferences-service;1"]
+                .getService(Ci.nsIPrefService);
+var PBI = Ci.nsIPrefBranch2;
+this.mozJSPref = prefSrv.getBranch("javascript.").QueryInterface(PBI);
+this.mozJSPref.setBoolPref("enabled", false);
+\end{lstlisting}
+    \caption[Add-on code to disable JavaScript load on web page]{Add-on code to disable JavaScript load on web page.}
+    \label{fig:disablejs}
+\end{figure}
+
+Code in Figure~\ref{fig:disablejs} is interpreted as follows: Line 1 in the above code retrieves the preference services of Mozilla. nsIPrefBranch2 interface, in line 2, allows add-on to listen the changes to preferences. Line 3 retrieves the "javascript" preference and queues nsIPrefBranch2 interface using QueryInterface(). Later, setBoolPref() method is used to disable the JS by setting "false" to "enabled". Similarly below line of code enables JS load,
+\begin{lstlisting}[language=JavaScript] 
+this.mozJSPref.setBoolPref("enabled", true); 
+\end{lstlisting}
+
+After disabling JavaScript, as explained in Section ~\ref{sec:contentscript} content script i.e., "content-script.js", is used to extract JS. "content-script.js" uses jQuery element selector to find all the <script> elements and extracts the JavaScript instructions contained in <script> tags as shown below,
+\begin{lstlisting}[language=JavaScript,numbers=none,mathescape=false]
+var code="";
+$("script").each(function(){ 
+    code=code+$(this).html();
+});
+\end{lstlisting}
+Sometimes, JavaScript code is also placed in an external file and the location of external JavaScript file is specified in the web page using src attribute of <script> element as shown below,
+\begin{lstlisting}[language=JavaScript,numbers=none,mathescape=false]
+<script src="external_javascript.js"></script>
+\end{lstlisting}
+There are a chances that this external files may contain JavaScript malware code, so using the code in Figure ~\ref{fig:extracturls}, all the external files URL`s are extracted from the web page,
+\begin{figure}[h]
+  \centering
+\begin{lstlisting}[frame=single,language=JavaScript,mathescape=false]
+var baseUrl = window.location.protocol + "//" + window.location.host + "/";
+var Urls = "";
+var regex = new RegExp("^(?:[a-z]+:)?//", "i");
+$("script[src]").each(function(){
+  var sourceurl = $(this).attr("src");
+  if(!regex.test(sourceurl))
+  {
+    Urls=Urls+baseUrl;
+  }
+  Urls=Urls+(sourceurl.replace(/^\/+/, ""))+"\n";
+});
+\end{lstlisting}
+\caption[JavaScript to extract all the external script file URLs]{JavaScript to extract all the external script file URLs}
+    \label{fig:extracturls}
+\end{figure}
+Following is the explanation of code snippet in Figure ~\ref{fig:extracturls}:
+\begin{enumerate}
+\item "window.location.protocol" returns the protocol of the current web page URL along with colon(:), for instance, http:, https:, ftp:. "window.location.host" returns the host name of the web page, for instance, hostname of "http://www.somewebsite.com/tryit.jsp?filename=sample\_code" web page is "www.somewebsite.com". So, line 1 creates a base URL of the web page.
+\item line 4 uses jQuery element selector to retrieve the external file locations defined in src attribute of <script> tag
+\item line 6 uses regex to test whether the external files location is relative or absolute path
+\item Line 8 contains the logic for prepending the base URL to external file location, if the external file location is relative path.
+\item Finally, "Urls" variable contains all the external local URLs and these URLs will be saved in a temporary file.  
+\end{enumerate}
 
 
-\section{Opcode Graph Similarity} 
+Later, the add-on invokes the $opcodes.sh$ file as shown in Figure ~\ref{fig:invokeopcode}, which performs the following two functions,.
+\begin{description}
+\item[Creates a temporary file] \hfill \\
+"TmpD" returns the temporary directory location of the OS. In line 1, "opcodes.tmp" filename is concatenated to temporary directory path and getFile() method returns a nsIFile object referring to "<TMP\_DIR>/opcodes.tmp" location. Then createUnique() method creates the requested temporary file.
+\item[Invokes opcode.sh] \hfill \\
+nsIProcess interface is used to execute a process. nsIProcess requires executable name to execute and if executable file requires any parameters then these parameters need to be passed as args[] to nsIProcess. Line 3 and 4 creates a nsIFile object referring to executable "/bin/sh". line 5 and 6 creates an instance of process and initializes it to "/bin/sh" executable. Line 7 and 8 adds both "opcode.sh" file path and temporary file path to "args" array. Then the process is executed using run() which executes the below command internally,
+\begin{figure}[h]
+  \centering
+\begin{lstlisting}[frame=single,language=JavaScript,mathescape=false,numbers=none]
+/bin/sh /Users/sravan2j/Downloads/TranscriptaseDetectionAddon/data/opcode.sh /tmp/opcodes.tmp
+\end{lstlisting}
+\caption[command that invokes opcode.sh internally]{command that invokes opcode.sh internally}
+    \label{fig:invokeopcodeint}
+\end{figure}
 
-To typeset text, you type whatever you want. Multiple spaces are
-ignored                           when typesetting, and
-the end of a line is treated as another space.
-Consequently, when you are typing, you can break lines anywhere, like here
-or here,
-since the lines are formatted automatically when you typeset the document.
-You start a new paragraph by leaving a blank line.
+\end{description}
 
-See how easy it is to start a new paragraph? A blank line does the trick.
+\begin{figure}[h]
+  \centering
+\begin{lstlisting}[frame=single,language=JavaScript,mathescape=false]
+Cu.import("resource://gre/modules/FileUtils.jsm");
 
+// create a new tmp file
+var file = FileUtils.getFile("TmpD", ["opcodes.tmp"]);
+file.createUnique(Ci.nsIFile.NORMAL_FILE_TYPE, 0600);
 
+var file = Cc["@mozilla.org/file/local;1"].
+           createInstance(Ci.nsILocalFile);
+file.initWithPath("/bin/sh");
+
+var process = Cc["@mozilla.org/process/util;1"]
+              .createInstance(Ci.nsIProcess);
+process.init(file);
+
+var args = ["/Users/sravan2j/Downloads/TranscriptaseDetectionAddon/data/opcode.sh"];
+// append the tmp file to the parameters
+args.push(tmpFile.path);
+process.run(true, args, args.length);
+\end{lstlisting}
+\caption[add-on code to invoke opcode.sh]{add-on code that creates temporary file and invokes opcode.sh with temporary file}
+    \label{fig:invokeopcode}
+\end{figure}
+
+\section{Purpose of Shell script}
+
+opcodes.sh code, shown in Figure ~\ref{fig:shellscriptcode}, performs the following three functions:
+\begin{enumerate}
+\item Line 1 executes following Java files - $DownloadThread.class$, $DownloaderApp.class$, $ImageDownloader.class$, and $Lock.class$, to download all the external scripts. This java files uses multi threading approach to download all the external scripts parallely which reduces the total download time.  
+\item After the above step, entire JavaCode will be saved in /tmp/JSStatements.js file. Line 2 takes the JSStatements.js file as input and generates opcodes for the JavaScript code in JSStatements.js using Rhino JS engine. Output of this step is "/tmp/opcodes.txt" file.
+\item Line 3 executes CheckOpcodes java code which caculates similarity score using opcode similarity technique, between malware\_opcodes.txt and opcodes.txt file. Output of this step is redirected to "\$1", which refers to arguments passed to opcodes.sh. Bash command in Figure ~\ref{fig:invokeopcodeint} shows that /tmp/opcodes.tmp file is passed as argument while calling opcode.sh. 
+\end{enumerate}
+
+\begin{figure}[h]
+  \centering
+\begin{lstlisting}[frame=single,language=JavaScript,mathescape=false]
+java -Xmx500m -cp "." data/DownloaderApp data/externalUrls.txt
+java -cp "./data/js.jar" org.mozilla.javascript.tools.jsc.Main /tmp/JSStatements.js > /tmp/opcodes.txt
+java -cp "./data" CheckOpcodes data/malware\_opcodes.txt /tmp/opcodes.txt > $1
+\end{lstlisting}
+\caption[opcode.sh shell script code]{opcode.sh shell script code}
+    \label{fig:shellscriptcode}
+\end{figure}
+
+\section{Page validation and clean-up step}
+
+Add-on gets the similarity score from opcodes.tmp file. If the score is less that threshold value i.e., 0.01, then then web page is considered as a malicious page or a benign page. 
+\begin{enumerate}
+\item If the page is benign, then it enables JavaScript and reloads the web page.
+\item If the page is malicious, then the web page won't be loaded instead a prompt message is displayed to the user regarding malware.
+\end{enumerate}
+At the end all the temporary files created will be removed as part of clean-up step.
+
+\section{Performance improvements} 
+As the add-on performs lot of steps to validate the web page, the execution time will be more. So, instead of validating every web page at every time, we can skip the validation during the following scenarios: 
+\subsection{Using web page hash code}
+Hashcode of the benign web page should be saved in the user directory. So that in future, when user visits the same web page and if the internal content of the page is not changed from the last visit, then the hash code of the page remains same as the one that was saved on user`s machine. In this case, we can safely skip the validation of the web page. 
+
+Disadvantage with this approach is that it consumes user`s system memory as it saves the hashcode for every web page the user visits. 
+
+We can also improve this approach by saving the hash codes in the cloud repository. Whenever any user visits the web page, add-on connects with cloud repository and checks if this web page was already validated by any user earlier or not. If it was validated, does the web page hash code is same? And what is the validation result? If in case, the hash code is not exists in the cloud, then it will be validated by the current user plugin and the result will be stored in the cloud, so that this data will be useful for other users. Because of this approach, user`s system memory will be saved and also at any point of time, the web page is validated only once by any user.
+ 
+\subsection{Add web page to benign page list} 
+There are some of the popular web sites which are highly secured and regularly monitored like https://www.google.com/, https://www.facebook.com/ etc. This kind of genuine web pages can be added to benign page list by the user, so that they won`t be validated by the add-on.
+
+Disadvantage of this approach is that it involves risk of infection, if the secured web pages are infected by malware.
+
+\section{Using other detection techniques} 
+Currently this add-on uses only opcode graph similarity detection. Other detection techniques can be used in the add-on by simply changing the line 3 of opcode.sh, shown in ~\ref{fig:shellscriptcode}, to execute a program that implements another detection technique instead of executing CheckOpcodes program. New program should accept "malware\_opcodes.txt" and "/tmp/opcodes.txt" as input files and similarity score should be saved in "/tmp/opcodes.tmp" file. No other changes are required. 
