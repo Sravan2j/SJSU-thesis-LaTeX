@@ -166,7 +166,7 @@ Figure ~\ref{fig:opcodegraph} shows the opcode graph for the probability matrix 
     \label{fig:opcodegraph}
 \end{figure}
 
-\subsection{Similarity Score Calculation}
+\subsection{Similarity Score Calculation}  \label{sec:opcodescorecalculation}
 After creating probability matrices for the malware file and the test file, similarity between two files is calculated by taking the Manhattan distance between two probability matrices. Consider $A$ as the probability matrix of file 1 and each element in $A$ is denoted as $A_i,_j$ where $i$ and $j$ specifies $i^{th}$ row and $j^{th}$ column respectively. Similarly $B$ is the probability matrix of file 2 and each element in $B$ is denoted as $B_i,_j$. Similarity between matrix $A$ and $B$, is calculated as below [8],
 
 Similarity score = ${1 \over N^2}(\sum_{i,j=0}^{N-1}|a_i,_j-b_i,_j|^2)$ 
