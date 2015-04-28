@@ -28,6 +28,10 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{maroon}{RGB}{175,50,53}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
 \newcommand*{\ColorIfNotInString}[1]{\iftoggle{InString}{#1}{\color{red}#1}}%
 \newcommand*{\ProcessQuote}[1]{#1\iftoggle{InString}{\global\togglefalse{InString}}{\global\toggletrue{InString}}}%
 \newcommand{\shellcmd}[1]{\\\indent\indent\texttt{\footnotesize\# #1}\\}
@@ -94,6 +98,7 @@
     	literate= %
     	      {°}{\textdegree{}}1%
     }
+    
 \lstdefinelanguage{UbuntuSC}{
 sensitive=true
     }    
@@ -107,6 +112,24 @@ sensitive=true
   tabsize=3,
   literate={\$}{{\textcolor{blue}{\$}}}1
 }
+ 
+% Python style for highlighting
+\lstset{
+  language=Python,
+  aboveskip=1mm,
+  belowskip=1mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{maroon},
+  commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+} 
     
 \lstset{frame=tb,
   language=JavaScript,

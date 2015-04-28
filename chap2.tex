@@ -1,28 +1,28 @@
 \chapter{Background}
 
-Malware is a malicious program intended to do pernicious exercises on a client`s computer with the proposition of removing data and misusing assets without his assent. Viruses and worms are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014 [9], Citadel is the preferred banking malware among attackers for stealing individual information. And for stealing money from bank accounts, Zeus is the favorite banking malware.
+Malware is a malicious program intended to do pernicious exercises on a client`s computer with the proposition of removing data and misusing assets without his assent. Viruses and worms are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014 \cite{bib9}, Citadel is the preferred banking malware among attackers for stealing individual information. And for stealing money from bank accounts, Zeus is the favorite banking malware.
 
 Figure 1 shows how the malware is swiftly growing in volume day-by-day. In Figure 1, the x-axis specifies the year and the y-axis indicates the number of malware samples generated in the specified year on the x-axis.
 
 \begin{figure}
     \centering    
     \includegraphics[width=8.4cm, height=6cm]{malware-growth-chart.jpg}
-    \caption[Annual Malware Growth]{Annual Malware Growth [10]}
+    \caption[Annual Malware Growth]{Annual Malware Growth \cite{bib10}}
 \end{figure}
-Virus writers are aware that signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to evade signature-based detection. In January 2015, AV-TEST`s CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no longer detected and thus, AV signature updates are required" [10]. Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
+Virus writers are aware that signature-based detection with heuristic analysis can be the basis of modern malware detection techniques. So, virus developers have created numerous procedures and techniques to evade signature-based detection. In January 2015, AV-TEST`s CEO said, "Many of the new malware samples are just variants of existing viruses. They have been modified so that they are no longer detected and thus, AV signature updates are required" \cite{bib10}. Some of the noteworthy techniques used by virus writers to evade signature detection are encryption, polymorphism and metamorphism.
 
 \section{Encrypted Malware} 
 
-The Cascade virus, which initially appeared in late 1986, was the first malware that used encryption to scramble its contents [11]. The Cascade virus is comprised of two parts. The first part is a decryptor and the second part is encrypted malware code. The reason for encryption is to conceal the malware signature, so as to evade signature identification. Later, this technique was adopted by almost every encrypted malware.  For the most part, virus writers use extremely simple and weak encryption methods, for example, a repeated XOR with a fixed bit pattern. Cascade malware also used XOR operation as encryption routine because of its symmetrical and reversible feature. In the event that the encryption key of malware was changed after every infection, the encrypted body signature also gets changed. If in case the same decryptor was used, signature detection can make use of the decryptor code`s signature to detect the malware.
+The Cascade virus, which initially appeared in late 1986, was the first malware that used encryption to scramble its contents \cite{bib11}. The Cascade virus is comprised of two parts. The first part is a decryptor and the second part is encrypted malware code. The reason for encryption is to conceal the malware signature, so as to evade signature identification. Later, this technique was adopted by almost every encrypted malware.  For the most part, virus writers use extremely simple and weak encryption methods, for example, a repeated XOR with a fixed bit pattern. Cascade malware also used XOR operation as encryption routine because of its symmetrical and reversible feature. In the event that the encryption key of malware was changed after every infection, the encrypted body signature also gets changed. If in case the same decryptor was used, signature detection can make use of the decryptor code`s signature to detect the malware.
 \begin{figure}
     \centering    
     \includegraphics[width=8cm, height=6cm]{encryptedvirus.jpg}
-    \caption[Encrypted Malware Replication]{An Encrypting Malware spreads without changing decryptor but the key within decryptor varies from infection to infection. As the key value changes, the encrypted virus body also changes [14].}
+    \caption[Encrypted Malware Replication]{An Encrypting Malware spreads without changing decryptor but the key within decryptor varies from infection to infection. As the key value changes, the encrypted virus body also changes \cite{bib14}.}
 \end{figure}
 \section{Polymorphic Malware} 
 
-Similar to an encrypted malware, polymorphic malware incorporates an encrypted virus code and a decryptor. Additionally in a polymorphic virus, the decryptor is morphed. During polymorphic malware propogation, not only is the virus code encrypted, but the decryptor also varies from infection to infection. As there is no fixed signature or no fixed decryptor to scan for, no two infections look alike to be exploited by the antivirus program for detection purpose [16]. Polymorphic virus uses code obfuscation techniques, for example, including junk codes or substitution of instructions, to mutate its decryptor [18].
-Several techniques are utilized to decrypt the polymorphic virus, such as, cryptanalysis (also called x-ray), emulation and dedicated decryption routines [21].
+Similar to an encrypted malware, polymorphic malware incorporates an encrypted virus code and a decryptor. Additionally in a polymorphic virus, the decryptor is morphed. During polymorphic malware propogation, not only is the virus code encrypted, but the decryptor also varies from infection to infection. As there is no fixed signature or no fixed decryptor to scan for, no two infections look alike to be exploited by the antivirus program for detection purpose \cite{bib14}. Polymorphic virus uses code obfuscation techniques, for example, including junk codes or substitution of instructions, to mutate its decryptor \cite{bib18}.
+Several techniques are utilized to decrypt the polymorphic virus, such as, cryptanalysis (also called x-ray), emulation and dedicated decryption routines \cite{bib21}.
 
 \begin{figure}
   \centering
@@ -41,41 +41,41 @@ MOV R$1$,X         ADD C,R$1$        ADD C,R$1$         ADD C,R$1$         ADD B
 
 
 \end{lstlisting}
-    \caption[Examples of a polymorphic virus.]{Examples of a polymorphic virus utilizing code obfuscation techniques. All of the Figure~\ref{fig:polyvirus} snippets perform the same operation, i.e.,  $X = (A + B + C - 4)$. For instance, the program snippet of Figure~\ref{fig:polyvirus} (c) is functionally the same as Figure~\ref{fig:polyvirus} (a) in light of the fact that instructions like adding 0 to a register, ORing R1 with itself, shifting R1 left 0 bits, and jumping to the next instruction all do nothing [19].}
+    \caption[Examples of a polymorphic virus.]{Examples of a polymorphic virus utilizing code obfuscation techniques. All of the Figure~\ref{fig:polyvirus} snippets perform the same operation, i.e.,  $X = (A + B + C - 4)$. For instance, the program snippet of Figure~\ref{fig:polyvirus} (c) is functionally the same as Figure~\ref{fig:polyvirus} (a) in light of the fact that instructions like adding 0 to a register, ORing R1 with itself, shifting R1 left 0 bits, and jumping to the next instruction all do nothing \cite{bib19}.}
     \label{fig:polyvirus}
 \end{figure}
 
     
-The first polymorphic malware, 1260, was developed by Mark Washburn in 1990 [15]. And the first widespread polymorphic infection was caused by Tequila and Maltese Amoeba virus, in 1991 [16].
+The first polymorphic malware, 1260, was developed by Mark Washburn in 1990 \cite{bib15}. And the first widespread polymorphic infection was caused by Tequila and Maltese Amoeba virus, in 1991 \cite{bib14}.
 
 \section{Metamorphic Malware} 
 
-Virus writers took the next step and developed an advanced variant of polymorphic malware, known as Metamorphic malware. Generally, before infection, polymorphic malware encrypt the virus code and morph the decryptor, while metamorphic malware morph the whole virus code. According to Igor Muttik, "Metamorphics are bodypolymorphics", since polymorphism is applied to the entire virus body [22]. Metamorphic viruses utilizes several code morphing techniques that constitue instruction reordering, data reordering, subroutine inlining, subroutine outlining, register renaming, code permutation, instruction substitution and garbage code insertion [23]. Figure~\ref{fig:aimalware} illustrates the metamorphic malware with different signatures.
+Virus writers took the next step and developed an advanced variant of polymorphic malware, known as Metamorphic malware. Generally, before infection, polymorphic malware encrypt the virus code and morph the decryptor, while metamorphic malware morph the whole virus code. According to Igor Muttik, "Metamorphics are bodypolymorphics", since polymorphism is applied to the entire virus body \cite{bib22}. Metamorphic viruses utilizes several code morphing techniques that constitue instruction reordering, data reordering, subroutine inlining, subroutine outlining, register renaming, code permutation, instruction substitution and garbage code insertion \cite{bib23}. Figure~\ref{fig:aimalware} illustrates the metamorphic malware with different signatures.
 
 \begin{figure}
   \centering
       \includegraphics[width=9cm, height=4.5cm]{aimalwarepic.png}
-    \caption[Metamorphic malware with different signatures]{Metamorphic malware with different signatures [20].}
+    \caption[Metamorphic malware with different signatures]{Metamorphic malware with different signatures \cite{bib20}.}
     \label{fig:aimalware}
 \end{figure}
 
 \subsection{Register renaming} 
 
-In December 1998, a metamorphic malware named Win95/Regswap was developed by Vecna [22]. Regswap used register renaming technique to morph the virus code. In this technique, instructions gets modified to use different registers. As just the register operands gets altered that too in some part of the code instead of whole code, so the complexity of final modified code wouldn`t be high. Figure~\ref{fig:regswap} depicts how the register renaming technique transforms the code.
+In December 1998, a metamorphic malware named Win95/Regswap was developed by Vecna \cite{bib22}. Regswap used register renaming technique to morph the virus code. In this technique, instructions gets modified to use different registers. As just the register operands gets altered that too in some part of the code instead of whole code, so the complexity of final modified code wouldn`t be high. Figure~\ref{fig:regswap} depicts how the register renaming technique transforms the code.
 
 \begin{figure}
   \centering
       \includegraphics[width=12.9cm, height=9cm]{regswap.jpg}
-    \caption[Register Renaming Example]{code snippet extracted from two different versions of RegSwap [22].}
+    \caption[Register Renaming Example]{code snippet extracted from two different versions of RegSwap \cite{bib22}.}
     \label{fig:regswap}
 \end{figure}
 
-The bold areas in figure~\ref{fig:regswap} illustrates the similarities of the two different code versions. Thus, a wildcard string, such as $5? B?$, could be useful to detect the malware code [22]. 
+The bold areas in figure~\ref{fig:regswap} illustrates the similarities of the two different code versions. Thus, a wildcard string, such as $5? B?$, could be useful to detect the malware code \cite{bib22}. 
 
 \subsection{Dead code insertion} 
 
-Dead code can be a single instruction or a block of instructions, for example, adding NOPs [23], adding 0 to a register, moving between same registers, ORing register with itself, shifting register left 0 bits, jumping to next instruction, incrementing a register immediately followed by decrementing the same register by same value. Inserting dead code or do-nothing instructions is the easiest approach to morph the virus code without modifying its functionality [23]. 
-The Win32/Evol virus, which was found around July 2000 [24], used dead code insertion to obfuscate the signature of a code as illustrated in Figure~\ref{fig:deadcode}. 
+Dead code can be a single instruction or a block of instructions, for example, adding NOPs \cite{bib23}, adding 0 to a register, moving between same registers, ORing register with itself, shifting register left 0 bits, jumping to next instruction, incrementing a register immediately followed by decrementing the same register by same value. Inserting dead code or do-nothing instructions is the easiest approach to morph the virus code without modifying its functionality \cite{bib23}. 
+The Win32/Evol virus, which was found around July 2000 \cite{bib24}, used dead code insertion to obfuscate the signature of a code as illustrated in Figure~\ref{fig:deadcode}. 
 
 \begin{figure}
   \centering
@@ -92,26 +92,26 @@ BA$8$BEC$5151$ 				MOV edx, $5151$EC$8$Bh
 $8$BDA					MOV ebx, edx
 $895$E$04$						MOV [esi+0004], ebx  
 \end{lstlisting}
-    \caption[Example of code metamorphosis of Evol virus ]{Example of code metamorphosis of Evol virus with Dead code insertion [23].}
+    \caption[Example of code metamorphosis of Evol virus ]{Example of code metamorphosis of Evol virus with Dead code insertion \cite{bib23}.}
     \label{fig:deadcode}
 \end{figure}
 
 \subsection{Subroutine permutation} 
 
-Code may contain several subroutines (or) functions and changing the order of this subroutines may not impact the execution of code. Subroutine permutation approach makes use of this advantage i.e., altering the order of subroutines, to change its internal structure without modifying the functionality of code. A code with $n$ different subroutines can generate $n!$ different permutations of subroutines, thus large number of versions of the same code can be generated [4].
+Code may contain several subroutines (or) functions and changing the order of this subroutines may not impact the execution of code. Subroutine permutation approach makes use of this advantage i.e., altering the order of subroutines, to change its internal structure without modifying the functionality of code. A code with $n$ different subroutines can generate $n!$ different permutations of subroutines, thus large number of versions of the same code can be generated \cite{bib4}.
 
 \begin{figure}
   \centering
       \includegraphics[width=12cm, height=6cm]{subpermutation.jpg}
-    \caption[Example of subroutines permutation]{Example of subroutines permutation [23].}
+    \caption[Example of subroutines permutation]{Example of subroutines permutation \cite{bib23}.}
     \label{fig:subpermutation}
 \end{figure}
 
 \subsection{Equivalent code substitution} 
-Different variants of code can be generated by replacing instruction or block of instructions with an equivalent code. In assembly language there are numerous semantically equivalent instructions, for instance, `INC ecx' is same as `ADD ecx, 1', `XOR R1, R1' is same as `MOV R1, 0' [25].
+Different variants of code can be generated by replacing instruction or block of instructions with an equivalent code. In assembly language there are numerous semantically equivalent instructions, for instance, `INC ecx' is same as `ADD ecx, 1', `XOR R1, R1' is same as `MOV R1, 0' \cite{bib25}.
 
 \subsection{Transposition} 
-Morphed copies of virus code can also be created by changing the order of instructions in the code provided that there is no dependency among instructions, so this approach is also known as instruction permutation [23]. For instance, the code in figure~\ref{fig:beforetrans} can be transformed to figure~\ref{fig:aftertrans}, as the declaration order of variables doesn`t affect the arithmetic calculation [4]. 
+Morphed copies of virus code can also be created by changing the order of instructions in the code provided that there is no dependency among instructions, so this approach is also known as instruction permutation \cite{bib23}. For instance, the code in figure~\ref{fig:beforetrans} can be transformed to figure~\ref{fig:aftertrans}, as the declaration order of variables doesn`t affect the arithmetic calculation \cite{bib4}. 
 
 \begin{figure}
   \centering
@@ -120,7 +120,7 @@ Morphed copies of virus code can also be created by changing the order of instru
   int b=2;
   int c=a+b;
 \end{lstlisting}
-    \caption[Sample Java code]{Sample Java code [4].}
+    \caption[Sample Java code]{Sample Java code \cite{bib4}.}
     \label{fig:beforetrans}
 \end{figure}
 
@@ -131,12 +131,12 @@ Morphed copies of virus code can also be created by changing the order of instru
   int a=5;
   int c=a+b;
 \end{lstlisting}
-    \caption[Sample Java code after applying Transposition]{Sample Java code after swapping instructions  [4].}
+    \caption[Sample Java code after applying Transposition]{Sample Java code after swapping instructions  \cite{bib4}.}
     \label{fig:aftertrans}
 \end{figure}
 
 \subsection{Changing control flow} 
-The next code obfuscation method involves insertion of a conditional or unconditional branch instruction after a block of instructions. Further, instruction blocks referenced by this branching instructions can be permuted to change the control flow [23]. Zperm malware used this approach to change the internal structure of a code [25]. Figure ~\ref{fig:changecntflow} is an example of changing control flow.
+The next code obfuscation method involves insertion of a conditional or unconditional branch instruction after a block of instructions. Further, instruction blocks referenced by this branching instructions can be permuted to change the control flow \cite{bib23}. Zperm malware used this approach to change the internal structure of a code \cite{bib25}. Figure ~\ref{fig:changecntflow} is an example of changing control flow.
 
 \begin{figure}
   \centering
@@ -162,12 +162,12 @@ jump 4
 instruction 5
 \end{lstlisting}
 
-    \caption[Example of changing control flow]{Example of changing control flow [25].}
+    \caption[Example of changing control flow]{Example of changing control flow \cite{bib25}.}
     \label{fig:changecntflow}
 \end{figure}
 
 \subsection{Subroutine inlining and outlining} 
-In subroutine inlining procedure, subroutine/function call replaces its code [23]. Figure ~\ref{fig:subroutineinline} illustrates the concept of Subroutine inlining. 
+In subroutine inlining procedure, subroutine/function call replaces its code \cite{bib23}. Figure ~\ref{fig:subroutineinline} illustrates the concept of Subroutine inlining. 
 
 \begin{figure}
   \centering
@@ -189,7 +189,7 @@ In subroutine inlining procedure, subroutine/function call replaces its code [23
 \end{lstlisting}
 
 
-    \caption[Subroutine inlining example]{Subroutine inlining example [25].}
+    \caption[Subroutine inlining example]{Subroutine inlining example \cite{bib25}.}
     \label{fig:subroutineinline}
 \end{figure}
 
@@ -211,17 +211,17 @@ On the other hand, code outlining changes a block of instructions into subroutin
 \end{lstlisting}
 
 
-    \caption[Subroutine outlining example]{Subroutine outlining example [25].}
+    \caption[Subroutine outlining example]{Subroutine outlining example \cite{bib25}.}
     \label{fig:subroutineoutline}
 \end{figure}
 
 \section{Transcriptase} \label{transcriptasesection}
 
-Transcriptase is a metamorphic virus implemented in JavaScript. Whenever Transcriptase is executed, a morphed version of the malware virus gets prepended to all the JavaScript files in the folder [4]. The infected JavaScript file will become the variant of Transcriptase. By this way Transcriptase propagates and infects the benign JavaScript files.
+Transcriptase is a metamorphic virus implemented in JavaScript. Whenever Transcriptase is executed, a morphed version of the malware virus gets prepended to all the JavaScript files in the folder \cite{bib4}. The infected JavaScript file will become the variant of Transcriptase. By this way Transcriptase propagates and infects the benign JavaScript files.
   
 The metamorphic engine attached to Transcriptase is a self-hosted compiler, which contains its own meta-language source-code. Transcriptase obtains information of its code from meta-language and changes its internal structure. 
 
-The format of every line of the meta-code looks like [26]:
+The format of every line of the meta-code looks like \cite{bib26}:
 
 \begin{lstlisting}[frame=none,numbers=none]
 (Identifier|Restrictions)instruction
@@ -249,7 +249,7 @@ In this phase, the compiler parses through every meta-language instruction, scop
 
 If the restriction details are empty for all the meta-language instructions, then it specifies that all the instructions in the code do not have any dependency instructions. So, the entire code can be permuted in all the possible combinations. For instance, if there are $n$ lines of code, then the permutator can create $n!$ variations of the original code. 
 
-For instance, consider the code specified in Figure~\ref{fig:permutator} [4]. It contains restriction details for some of the meta-instructions, which means that those instructions have dependencies on other instructions. So all the combinations of the code cannot produce the correct behaviour. 
+For instance, consider the code specified in Figure~\ref{fig:permutator} \cite{bib4}. It contains restriction details for some of the meta-instructions, which means that those instructions have dependencies on other instructions. So all the combinations of the code cannot produce the correct behaviour. 
 
 
 \begin{figure}
@@ -264,12 +264,12 @@ For instance, consider the code specified in Figure~\ref{fig:permutator} [4]. It
 \end{lstlisting}
 
 
-    \caption[Meta-language instructions example]{Meta-language instructions example [4].}
+    \caption[Meta-language instructions example]{Meta-language instructions example \cite{bib4}.}
     \label{fig:permutator}
 \end{figure}
 
 
-From the code in Figure~\ref{fig:permutator}, instruction 400 depends on instruction 200, because the variable "b" has to be defined before it can be incremented; instruction 500 depends on both the instructions 400 and 100; and instruction 600 depends on instruction 300. Figure ~\ref{fig:afterpermutator} contains the code, which could be one of the possible output generated by the permutator [4]:
+From the code in Figure~\ref{fig:permutator}, instruction 400 depends on instruction 200, because the variable "b" has to be defined before it can be incremented; instruction 500 depends on both the instructions 400 and 100; and instruction 600 depends on instruction 300. Figure ~\ref{fig:afterpermutator} contains the code, which could be one of the possible output generated by the permutator \cite{bib4}:
 
 \begin{figure}
   \centering
@@ -281,11 +281,11 @@ From the code in Figure~\ref{fig:permutator}, instruction 400 depends on instruc
 	(300|)var x=8
 	(600|500)xWScript.Echo(x)
 \end{lstlisting}
-    \caption[Permutator output]{Possible output of the permutator after parsing the code in Figure~\ref{fig:permutator} [4].}
+    \caption[Permutator output]{Possible output of the permutator after parsing the code in Figure~\ref{fig:permutator} \cite{bib4}.}
     \label{fig:afterpermutator}
 \end{figure}
 
-As the growth-rate of the permutation function is very fast, even for the large number of instruction this technique works effectively [26].
+As the growth-rate of the permutation function is very fast, even for the large number of instruction this technique works effectively \cite{bib26}.
 
 \subsection{Variable/Function-Name randomization}
 
@@ -303,7 +303,7 @@ For instance, consider the code in Figure~\ref{fig:randomization}. First, the co
 	}
 	def twiceval=multiply(num)
 \end{lstlisting}
-    \caption[Before Variable/Function-Name randomization]{Before Variable/Function-Name randomization [26].}
+    \caption[Before Variable/Function-Name randomization]{Before Variable/Function-Name randomization \cite{bib26}.}
     \label{fig:randomization}
 \end{figure}
 
@@ -317,7 +317,7 @@ For instance, consider the code in Figure~\ref{fig:randomization}. First, the co
 	}
 	def bxswdqtyzyqtc=trqwsdexcv(ljkjuytbenst)
 \end{lstlisting}
-    \caption[After Variable/Function-Name randomization]{After randomly changing the Variables/Function-Names of the code in Figure~\ref{fig:randomization} [26].}
+    \caption[After Variable/Function-Name randomization]{After randomly changing the Variables/Function-Names of the code in Figure~\ref{fig:randomization} \cite{bib26}.}
     \label{fig:afterrandomization}
 \end{figure}
 
@@ -325,7 +325,7 @@ For instance, consider the code in Figure~\ref{fig:randomization}. First, the co
 
 After rearrangement of the instructions and hard-coded names replacement, the compiler generates a valid JavaScript code by parsing through every meta-instruction. These meta-instructions contain meta-level symbols and each of these symbols has specific meaning like number, element, object etc. While parsing meta-instructions, compiler processes these meta-level symbols.
 
-For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbol \#n...n\# specifies any value present in between \#n's (i.e., in place of ...) specifies Number, meta-symbol \#"..."\# specifies any value present in the place of dots (or ...) specifies string, any value in \#xN...Nx\# specifies elements, the values between \#01... \#. ...10\# specifies Objects and the symbol "\textdegree+ ... +\textdegree" specifies that the variable inside must be given as an argument for a function, if the instruction is derived into a function [26].
+For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbol \#n...n\# specifies any value present in between \#n's (i.e., in place of ...) specifies Number, meta-symbol \#"..."\# specifies any value present in the place of dots (or ...) specifies string, any value in \#xN...Nx\# specifies elements, the values between \#01... \#. ...10\# specifies Objects and the symbol "\textdegree+ ... +\textdegree" specifies that the variable inside must be given as an argument for a function, if the instruction is derived into a function \cite{bib26}.
 
 \begin{figure}
   \centering
@@ -335,7 +335,7 @@ For example, consider the code in Figure~\ref{fig:metalanguage}. Here meta-symbo
 	var exp=#x1true1x#					
 	x#O1WScript#.Echo(°+str+°)1O#
 \end{lstlisting}
-    \caption[Meta-Language Symbols Example]{Meta-Language Symbols Example [26].}
+    \caption[Meta-Language Symbols Example]{Meta-Language Symbols Example \cite{bib26}.}
     \label{fig:metalanguage}
 \end{figure}
 
@@ -351,12 +351,12 @@ could become
 function SomeFunction(SomeArg){WScript.Echo(SomeArg);}
 SomeFunction(str)
 \end{lstlisting}
-    \caption[Meta-Language Symbols processing Example]{Meta-Language Symbols processing Example [26].}
+    \caption[Meta-Language Symbols processing Example]{Meta-Language Symbols processing Example \cite{bib26}.}
     \label{fig:metalanguageprocessing}
 \end{figure}
 
 \subsection{Code Derivation}
-After processing all the meta-language symbols, the compiler generates JavaScript code by parsing the meta-language instructions. During this phase, compiler deals with some more meta-instructions that have specific properties as mentioned below [26]:
+After processing all the meta-language symbols, the compiler generates JavaScript code by parsing the meta-language instructions. During this phase, compiler deals with some more meta-instructions that have specific properties as mentioned below \cite{bib26}:
 \begin{description}
 \item[while(initial\$var1!var2?operator@action)NNN]\hfill 
 \begin{enumerate}
@@ -385,14 +385,14 @@ This specifies general way of representing number/string arithmetic instruction.
 
 Several variables and functions are defined during the compilation phase because of meta-instructions and obfuscation. These variables are saved in special arrays instead of being stored in the code. During code derivation phase, they are placed into the code .
 
-Functions can be included between instructions in the global scope. Variables can be included between instructions in the current scope, before they are used for the first time [4]. This phase takes lot of time to complete, as the whole code is checked for multiple times to find suitable positions for the variable/function insertions [26].
+Functions can be included between instructions in the global scope. Variables can be included between instructions in the current scope, before they are used for the first time \cite{bib4}. This phase takes lot of time to complete, as the whole code is checked for multiple times to find suitable positions for the variable/function insertions \cite{bib26}.
 
 
 \section{Rhino}
 
-Netscape began working on developing a Java’s variant of Netscape Navigator in 1997 [28]. In order to implement Netscape Navigator in Java, they built a JavaScript engine entirely in Java, named Rhino. Rhino is open source software and is currently maintained by Mozilla [27].
+Netscape began working on developing a Java’s variant of Netscape Navigator in 1997 \cite{bib27}. In order to implement Netscape Navigator in Java, they built a JavaScript engine entirely in Java, named Rhino. Rhino is open source software and is currently maintained by Mozilla.
 
-Most of the time, JavaScript is utilized as a part of HTML for making interactive webpages. Anyhow, Rhino is not used to create or manipulate webpages; it is an implementation of the core JavaScript. Rhino has the below aspects [27]:
+Most of the time, JavaScript is utilized as a part of HTML for making interactive webpages. Anyhow, Rhino is not used to create or manipulate webpages; it is an implementation of the core JavaScript. Rhino has the below aspects \cite{bib27}:
 
 \begin{enumerate}
 \item Supports JavaScript 1.7 features
@@ -405,16 +405,16 @@ Most of the time, JavaScript is utilized as a part of HTML for making interactiv
 In this research, we use Rhino to translate the JavaScript code into Java classes. The engine supports both compile mode and interpretive mode. During compile mode, the engine first translates each JavaScript file to separate Java class files. These .class files may be executed as Java programs using Rhino runtime support routines. During interpretive mode, JavaScript is compiled and is stored as internal representation of the compiled form instead of byte codes. During runtime this compiled form is evaluated using rhino functions.
 
 \subsection{Architecture}
-The four basic blocks in the Rhino JavaScript engine are - the parser, the byte-code generator, the interpreter and the JIT [4]. Figure~\ref{fig:architecture} depicts the block diagram of the Rhino Engine [29].
+The four basic blocks in the Rhino JavaScript engine are - the parser, the byte-code generator, the interpreter and the JIT \cite{bib4}. Figure~\ref{fig:architecture} depicts the block diagram of the Rhino Engine \cite{bib29}.
 
 \begin{figure}
   \centering
       \includegraphics[width=15cm, height=8.25cm]{rhino.jpg}
-    \caption[Block Diagram of Rhino Engine]{Block Diagram of Rhino Engine [29].}
+    \caption[Block Diagram of Rhino Engine]{Block Diagram of Rhino Engine \cite{bib29}.}
     \label{fig:architecture}
 \end{figure}
 
-\textbf{Parser}: The input for this module is JavaScript code and the output generated is the Abstract Syntax Tree (AST). The AST is a tree representation of the abstract syntactic structure of a program. For instance, Figure~\ref{fig:ASTcode} represents the AST for the GCD code in Figure~\ref{fig:AST} [30].
+\textbf{Parser}: The input for this module is JavaScript code and the output generated is the Abstract Syntax Tree (AST). The AST is a tree representation of the abstract syntactic structure of a program. For instance, Figure~\ref{fig:ASTcode} represents the AST for the GCD code in Figure~\ref{fig:AST} \cite{bib30}.
 
 \begin{figure}
   \centering
@@ -438,12 +438,12 @@ function gcd(a, b)
 \begin{figure}
   \centering
       \includegraphics[width=11cm, height=12cm]{AST.jpg}
-    \caption[Abstract Syntax Tree]{Abstract Syntax Tree for the GCD code in Figure~\ref{fig:ASTcode} [30].}
+    \caption[Abstract Syntax Tree]{Abstract Syntax Tree for the GCD code in Figure~\ref{fig:ASTcode} \cite{bib30}.}
     \label{fig:AST}
 \end{figure}
-The non-leaf nodes in the AST specify the operations to be performed, for instance, equal, comparison, arithmetic operation and so on. The leaf nodes in AST specify operands in the source code, for instance, a and b variables [4]. 
+The non-leaf nodes in the AST specify the operations to be performed, for instance, equal, comparison, arithmetic operation and so on. The leaf nodes in AST specify operands in the source code, for instance, a and b variables \cite{bib4}. 
 
-\textbf{Byte-Code Generator}: The AST output generated from the parser acts as input to the Byte-Code Generator which then converts the tree into byte code. During the conversion process, the Byte-Code generator picks each code block in the tree and translates it into bytecode. For instance, the byte code for the instruction $c = a - b$ is shown in Figure~\ref{fig:samplebytecode} [4].
+\textbf{Byte-Code Generator}: The AST output generated from the parser acts as input to the Byte-Code Generator which then converts the tree into byte code. During the conversion process, the Byte-Code generator picks each code block in the tree and translates it into bytecode. For instance, the byte code for the instruction $c = a - b$ is shown in Figure~\ref{fig:samplebytecode} \cite{bib4}.
 
 \begin{figure}
   \centering
@@ -453,7 +453,7 @@ iload_2
 isub 3
 istore_3
 \end{lstlisting}
-    \caption[Sample byte code]{Sample byte code for the instruction $c = a - b$ [4].}
+    \caption[Sample byte code]{Sample byte code for the instruction $c = a - b$ \cite{bib4}.}
     \label{fig:samplebytecode}
 \end{figure}
 
@@ -474,13 +474,13 @@ MOV EBX 0xFF24
 SUB EAX EBX
 MOV ECX EAX
 \end{lstlisting}
-    \caption[Sample Machine Code]{Sample Machine Code generated for the byte code in Figure~\ref{fig:samplebytecode} [4].}
+    \caption[Sample Machine Code]{Sample Machine Code generated for the byte code in Figure~\ref{fig:samplebytecode} \cite{bib4}.}
     \label{fig:samplemachinecode}
 \end{figure}
 \subsection{Modification}
-For this research, we need the opcodes of JavaScript code, so we used the version of Rhino that was modified by the author of [4].
+For this research, we need the opcodes of JavaScript code, so we used the version of Rhino that was modified by the author of \cite{bib4}.
  
-Below changes were made in the modified version [4]:
+Below changes were made in the modified version \cite{bib4}:
 
 \begin{enumerate}
 \item The page load time is directly proportional to compiling time of JavaScript, so Rhino was optimized to convert only small part of JavaScript files. Because of this optimization, the original statistics of the JavaScript code that will be used as part of analysis will get affected. In order to solve this problem the engine was modified to compile JavaScript of any length.

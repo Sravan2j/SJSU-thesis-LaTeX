@@ -11,13 +11,13 @@ Below are some of the applications of add-ons
 \item On many browsers, online privacy is protected using add-ons. There are many types of add-ons that help to control and secure browsing and avoid attacks like preventing the user movements tracking on the browser.
 \end{enumerate}
 
-Browser Extensions are supported by Microsoft Internet Explorer starting with version 5 released in 1999. From 2004, Mozilla Firefox supports add-ons [37]. The Opera browser supports extensions starting with the desktop version 10 which was released in 2009. Google Chrome and Safari added support for extensions in 2010. Each browser has different variations in the browser extension syntax and they are compatible to their browser alone i.e., an extension built for one browser doesn`t work on another. For using search engine tools irrespective of browsers, a project named `Mycroft' [37] has been proposed, which is a database of over 20,000 search engine add-ons supported by multiple browsers.
+Browser Extensions are supported by Microsoft Internet Explorer starting with version 5 released in 1999. From 2004, Mozilla Firefox supports add-ons. The Opera browser supports extensions starting with the desktop version 10 which was released in 2009. Google Chrome and Safari added support for extensions in 2010. Each browser has different variations in the browser extension syntax and they are compatible to their browser alone i.e., an extension built for one browser doesn`t work on another. For using search engine tools irrespective of browsers, a project named `Mycroft' \cite{bib13} has been proposed, which is a database of over 20,000 search engine add-ons supported by multiple browsers.
 
 \section{Firefox vs Chrome} 
 
 In new era, out of all the browser extensions, Firefox and Chrome are most well known because of their popularity, security, and appearance. Below are some of the notable comparisons between them regarding extensions: 
 \begin{enumerate}
-\item Firefox has an outstanding extension base, i.e., https://addons.mozilla.org/en-US/firefox/, that offers more capable add-ons compared to all other browsers [39]. 
+\item Firefox has an outstanding extension base, i.e., https://addons.mozilla.org/en-US/firefox/, that offers more capable add-ons compared to all other browsers. 
 \item Firefox add-ons are very powerful and can perform anything that a Firefox process allows. Security features can be integrated into a Firefox add-on in a much more effective manner than Chrome extensions. So, it is possible to develop more advanced add-ons in Firefox, which would not be achievable on different browsers. Unlike Firefox, Chrome does not trust extensions completely and they provide very constrained APIs. For instance, without the user`s approval, extensions in Chrome can`t access the resource present outside of Chrome`s sandbox, but a Firefox add-on can access the resource in the filesystem without the user`s permission. 
 
 For example, even though there are many Chrome extensions like ScriptSafe, NoScript Lite, which are similar to Firefox's "NoScript", till now no chrome extension is able to provide all the features of Firefox's NoScript because of the Chrome's constrained extension APIs.
@@ -27,13 +27,13 @@ For example, even though there are many Chrome extensions like ScriptSafe, NoScr
 To detect JavaScript malware, we have to generate opcodes for the JavaScript code in the webpage and to save these opcodes we may need access to the user`s filesystem and also we need to execute some other external scripts to validate the JavaScript code based on the saved opcodes. These tasks are only possible with the powerful APIs provided by Firefox, so we decided to implement a Firefox add-on to detect metamorphic malware.
 \section{SDK vs XUL} 
 
-There are two main ways to build Firefox extensions. The traditional way is using XPCOM (Cross Platform Object Model) and XUL (XML User Interface Language). Much of Mozilla`s documentation is focused on XUL add-ons, because this has been around for many years. More details about XUL add-on development can be found at [32]. The add-on SDK is the newer kind and was built under the Jetpack Project. Jetpack`s main agenda is to make it easy to build Firefox add-ons by using HTML, CSS, and JavaScript [3].
+There are two main ways to build Firefox extensions. The traditional way is using XPCOM (Cross Platform Object Model) and XUL (XML User Interface Language). Much of Mozilla`s documentation is focused on XUL add-ons, because this has been around for many years. More details about XUL add-on development can be found at \cite{bib32}. The add-on SDK is the newer kind and was built under the Jetpack Project. Jetpack`s main agenda is to make it easy to build Firefox add-ons by using HTML, CSS, and JavaScript \cite{bib3}.
 
-It is advisable to use the Add-on SDK because of the advantages it provides compared to XUL [33]:
+It is advisable to use the Add-on SDK because of the advantages it provides compared to XUL \cite{bib33}:
 
 \begin{enumerate}
 \item Simplicity: High-level JavaScript APIs provided by the SDK like basic user interface components and their functionality simplify all the common tasks in add-on development. 
-\item Compatibility : Electrolysis [34], also called e10s, is the project under which Firefox is being developed with a new multiple process architecture. The API`s provided by this SDK are designed to be forward-compatible with this new architecture. 
+\item Compatibility : Electrolysis \cite{bib31}, also called e10s, is the project under which Firefox is being developed with a new multiple process architecture. The API`s provided by this SDK are designed to be forward-compatible with this new architecture. 
 \item Security: It is not easy to build insecure add-ons using the SDK. Even the insecure Add-on that was compromised can do much less damage to the victim`s machine.
 \item No restarts required: To install extensions developed using the SDK, we do not need to restart the browser.
 \item Mobile Support: Add-ons can be developed for Firefox mobile using the experimental support provided by SDK 1.5
@@ -49,7 +49,7 @@ Chrome Authority has nothing to do with Google Chrome. The Mozilla Developer Net
 
 From the beginning of developing the SDK, it was assumed that developers may need to access the underlying browser (or) XPCOM services. So, the add-on SDK was developed to provide "chrome privileges" to the most powerful low level APIs. The "chrome privileges" grants low-level APIs to access the Components object that gives unrestricted access to the user system.  
 
-With chrome privileges, an add-on can perform any function the browser is capable of. These privileges can be obtained by the add-on using the "chrome" module as shown below [1]:
+With chrome privileges, an add-on can perform any function the browser is capable of. These privileges can be obtained by the add-on using the "chrome" module as shown below \cite{bib1}:
 \begin{lstlisting}[frame=single,language=JavaScript,numbers=none,mathescape=false]
 var {Cc, Ci} = require("chrome");
 \end{lstlisting}
@@ -80,7 +80,7 @@ To enable add-on scripts and content scripts to communicate with each other, eac
 \begin{figure}
   \centering
       \includegraphics[width=16cm, height=8.65cm]{content-scripting-overview.png}
-    \caption[Communication among add-on and content script]{Communication among add-on and content script [1].}
+    \caption[Communication among add-on and content script]{Communication among add-on and content script \cite{bib1}.}
     \label{fig:content-scripting-overview}
 \end{figure}
 
@@ -126,7 +126,7 @@ function getFirstPara() {
   }
 }
 \end{lstlisting}
-    \caption[Communication among add-on and content script using code]{Communication among add-on and content script using code [1].}
+    \caption[Communication among add-on and content script using code]{Communication among add-on and content script using code \cite{bib1}.}
     \label{fig:communication}
 \end{figure}
 

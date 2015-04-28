@@ -8,7 +8,7 @@ This chapter focus on the implementation details of two add-ons:
 
 \section{Malicious add-on}
 
-Generally browsers like Firefox, Chrome, and Opera do not allow access to the client filesystem using JavaScript. Even though creating a file is possible in IE using ActiveX objects, the client must enable ActiveX scripts on their system for the ActiveX object related code to execute properly [36]. 
+Generally browsers like Firefox, Chrome, and Opera do not allow access to the client filesystem using JavaScript. Even though creating a file is possible in IE using ActiveX objects, the client must enable ActiveX scripts on their system for the ActiveX object related code to execute properly \cite{bib17}. 
 
 Firefox add-ons are very powerful because of the high-level APIs that the SDK provides. The SDK has a file I/O module which provides access to the client`s filesystem.
 
@@ -45,13 +45,13 @@ As discussed in Section \ref{transcriptasesection}, the Transcriptase virus uses
 \subsection{Malware Detection Technique} 
 Despite the fact that metamorphic malware continuously changes its internal structure to stay undetected, still for maintaining its functionality malware places similar instructions (that implements the functionality) somewhere in the code. Thus, all the morphed copies maintain the same statistical distribution of instructions. Different malware detection strategies are designed to make use of these statistical properties like Hidden Markov Models, Opcode Graph Similarity, Simple Substitution Distance, and Singular Value Decomposition.
 
-As mentioned in [4], if the files are having highly similar opcode statistics, then Opcode Graph Similarity and Singular Value Decomposition can classify them better than the Hidden Markov Model and Simple Substitution Distance. Opcode Graph Similarity and Singular Value Decomposition are very sensitive to deadcode, but from the results mentioned in [4] these strategies won`t be able to distinguish between benign code and virus code only after adding 5000 and 9000 deadcode functions into the virus code respectively. And it is extremely uncommon for a web page to have this much dead code. Adding to this, the ROC curves in [4] shows that Opcode Graph Similarity performs better than Singular Value Decomposition with less than 1000 dead code function insertions.
+As mentioned in \cite{bib4}, if the files are having highly similar opcode statistics, then Opcode Graph Similarity and Singular Value Decomposition can classify them better than the Hidden Markov Model and Simple Substitution Distance. Opcode Graph Similarity and Singular Value Decomposition are very sensitive to deadcode, but from the results mentioned in \cite{bib4} these strategies won`t be able to distinguish between benign code and virus code only after adding 5000 and 9000 deadcode functions into the virus code respectively. And it is extremely uncommon for a web page to have this much dead code. Adding to this, the ROC curves in \cite{bib4} shows that Opcode Graph Similarity performs better than Singular Value Decomposition with less than 1000 dead code function insertions.
 
 We used Opcode Graph Similarity technique in the Transcriptase detection add-on.
 
 \subsection{Opcode Graph Similarity Technique}
 
-In [3], Anderson introduced a malware detection technique which is based on analysis of graphs that are constructed using the opcodes of the malware code and test code. In this technique, initially opcodes are extracted from the malware code and a weighted directed graph is built using the sequence of opcodes. Similarly, a graph is built for the code to be tested. The Manhattan distance between these two weighted graphs specifies the test file score [4].
+In \cite{bib2}, Anderson introduced a malware detection technique which is based on analysis of graphs that are constructed using the opcodes of the malware code and test code. In this technique, initially opcodes are extracted from the malware code and a weighted directed graph is built using the sequence of opcodes. Similarly, a graph is built for the code to be tested. The Manhattan distance between these two weighted graphs specifies the test file score \cite{bib4}.
 
 \subsection{Opcode Graph}
 
@@ -131,7 +131,7 @@ XOR& 0&0&0&0&  0&0& 1&  0& 0&0& 0&0&  0&0 \\
 
 Figure ~\ref{fig:opcodesequence} shows the sample opcode sequence. The adjacency matrix in Figure ~\ref{fig:weightcounts} specifies the weights of the edges formed between these opcodes. For instance, we can find that intersection entry between the CALL row and MOV column has a weight value of 3, which means there are three occurrences of a MOV instruction immediately followed by a CALL instruction in the opcode sequence i.e., at line numbers 15, 27, and 32 in Figure ~\ref{fig:opcodesequence}. 
 
-All the weight counts in Figure ~\ref{fig:weightcounts} are converted into probability values by dividing each row entry by the corresponding row sum. Figure ~\ref{fig:probabilitymatrix} shows the weight probabilities for the Figure~\ref{fig:weightcounts}. Each weight probability specifies the probability of occurrence of a particular opcode, immediately after the selected opcode [4]. 
+All the weight counts in Figure ~\ref{fig:weightcounts} are converted into probability values by dividing each row entry by the corresponding row sum. Figure ~\ref{fig:probabilitymatrix} shows the weight probabilities for the Figure~\ref{fig:weightcounts}. Each weight probability specifies the probability of occurrence of a particular opcode, immediately after the selected opcode \cite{bib4}. 
 
 \begin{figure}[h]
   \centering
@@ -162,18 +162,18 @@ Figure ~\ref{fig:opcodegraph} shows the opcode graph for the probability matrix 
 \begin{figure}[h]
   \centering
       \includegraphics[width=16cm, height=12cm]{opcodegraph.jpg}
-    \caption[Opcode Graph]{opcode graph for the probability matrix in Figure [8].}
+    \caption[Opcode Graph]{opcode graph for the probability matrix in Figure \cite{bib8}.}
     \label{fig:opcodegraph}
 \end{figure}
 
 \subsection{Similarity Score Calculation}  \label{sec:opcodescorecalculation}
-After creating probability matrices for the malware file and the test file, similarity between two files is calculated by taking the Manhattan distance between two probability matrices. Consider $A$ as the probability matrix of file 1 and each element in $A$ is denoted as $A_i,_j$ where $i$ and $j$ specifies $i^{th}$ row and $j^{th}$ column respectively. Similarly $B$ is the probability matrix of file 2 and each element in $B$ is denoted as $B_i,_j$. Similarity between matrix $A$ and $B$, is calculated as below [8],
+After creating probability matrices for the malware file and the test file, similarity between two files is calculated by taking the Manhattan distance between two probability matrices. Consider $A$ as the probability matrix of file 1 and each element in $A$ is denoted as $A_i,_j$ where $i$ and $j$ specifies $i^{th}$ row and $j^{th}$ column respectively. Similarly $B$ is the probability matrix of file 2 and each element in $B$ is denoted as $B_i,_j$. Similarity between matrix $A$ and $B$, is calculated as below \cite{bib8},
 
 Similarity score = ${1 \over N^2}(\sum_{i,j=0}^{N-1}|a_i,_j-b_i,_j|^2)$ 
 
 where N is total number of distinct opcodes present in the combination of both files.
 
-Before using the similarity score, we have to determine the threshold score which distinguishes between benign files and malware files. The threshold value is determined as follows [8],
+Before using the similarity score, we have to determine the threshold score which distinguishes between benign files and malware files. The threshold value is determined as follows \cite{bib8},
 \begin{enumerate}
 \item Construct opcode graphs for all the variants of metamorphic malwares.
 \item Construct opcode graphs for all the benign files.
@@ -346,7 +346,7 @@ process.run(true, args, args.length);
 The opcodes.sh code, shown in Figure ~\ref{fig:shellscriptcode}, performs the following three functions:
 \begin{enumerate}
 \item Line 1 executes following Java files - $DownloadThread.class$, $DownloaderApp.class$, $ImageDownloader.class$, and $Lock.class$, to download all the external scripts. This java files uses multi threading approach to download all the external scripts in parallel which reduces the total download time.  
-\item After the above step, the entire JavaCode will be saved in the /tmp/JSStatements.js file. Line 2 takes the JSStatements.js file as input and generates opcodes for the JavaScript code in JSStatements.js using the Rhino JS engine. The output of this step is the "/tmp/opcodes.txt" file.
+\item After the above step, the entire JavaScript content will be saved in the /tmp/JSStatements.js file. Line 2 takes the JSStatements.js file as input and generates opcodes for the JavaScript code in JSStatements.js using the Rhino JS engine. The output of this step is the "/tmp/opcodes.txt" file.
 \item Line 3 executes CheckOpcodes java code which calculates the similarity score using the opcode similarity technique, between malware\_opcodes.txt and the opcodes.txt file. The output of this step is redirected to "\$1", which refers to the arguments passed to opcodes.sh. The bash command in Figure ~\ref{fig:invokeopcodeint} shows that the /tmp/opcodes.tmp file is passed as an argument while calling opcode.sh. 
 \end{enumerate}
 

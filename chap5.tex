@@ -66,7 +66,7 @@ PAUSE
 \section{Similarity scores and add-on performance}
 Included console.log() functions in the add-on to log the following details - opcode similarity score and the add-on execution time taken to validate the web page. The below sub section deals with comparison of these details for benign and malware web pages. For testing add-on, we used 100 samples of benign web page and morphed malware web pages. Malware web pages are morphed by adding randomly generated junk code to it.
 \subsection{Addition of 550 lines of dead code}
-For this experiment, we used benign web page samples with 550 lines of junk code and also added the same amount of randomly generated junk code to malware web pages. Tables in Figures ~\ref{fig:b500table} and  ~\ref{fig:m500table} contains the details of scores and execution time for the benign and malware samples respectively. From the table values, we can see that the scores for benign web pages are in the order of $10^{-3}$ whereas the scores for malware web pages are in the order of $10^{-4}$. Graph in Figure ~\ref{fig:bvsm500} clearly shows that the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
+For this experiment, we used benign web page samples with 550 lines of junk code and also added the same amount of randomly generated junk code to malware web pages. Tables in Figures ~\ref{fig:b500table} and  ~\ref{fig:m500table} contains the details of scores and execution time for the benign and malware samples, respectively. From the table values, we can see that the scores for benign web pages are in the order of $10^{-3}$ whereas the scores for malware web pages are in the order of $10^{-4}$. Graph in Figure ~\ref{fig:bvsm500} clearly shows that the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
 
 \begin{figure}[h]
   \centering
@@ -190,15 +190,15 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 \end{figure}
 
 \begin{figure}[h]
-    \centering    
-    \includegraphics[width=16cm, height=7.2cm]{500.png}
+    \centering
+    \includegraphics[width=16cm, height=9.53cm]{500.png}
     \caption[Benign Samples vs Malware Samples]{Benign samples scores vs malware samples scores with the addition of 550 lines of dead code}
     \label{fig:bvsm500}
 \end{figure}
 
 
 \subsection{Addition of 5500 lines of dead code}
-This experiment is same as the above experiment except that here 5500 lines of dead code was included in malware and benign web pages instead of 500 lines. Tables in Figures ~\ref{fig:b5500table} and  ~\ref{fig:m5500table} contains the details of scores and execution time for this experiment. From the table values, we can see that the scores for benign web pages and malware web pages are still in the order of $10^{-3}$ and $10^{-4}$ respectively. Graph in Figure ~\ref{fig:bvsm5500} clearly shows that even after adding 5500 lines of code, the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
+This experiment is same as the above experiment except that here 5500 lines of dead code was included in malware and benign web pages instead of 500 lines. Tables in Figures ~\ref{fig:b5500table} and  ~\ref{fig:m5500table} contains the details of scores and execution time for this experiment. From the table values, we can see that the scores for benign web pages and malware web pages are still in the order of $10^{-3}$ and $10^{-4}$, respectively. Graph in Figure ~\ref{fig:bvsm5500} clearly shows that even after adding 5500 lines of code, the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
 
 \begin{figure}[h]
   \centering
@@ -454,7 +454,7 @@ Here, 15000 lines of dead code was included in malware and benign samples. From 
 
 \begin{figure}[h]
     \centering    
-    \includegraphics[width=16cm, height=9.05cm]{15000.png}
+    \includegraphics[width=16cm, height=10.30cm]{15000.png}
     \caption[Benign Samples vs Malware Samples]{Benign samples scores vs malware samples scores with the addition of 15000 lines of dead code}
     \label{fig:bvsm15000}
 \end{figure}
@@ -548,3 +548,134 @@ http://www.wikipedia.org/&0.094681033&1914&Benign page\\
     \label{fig:scoresummarytablep}
 \end{figure}
 
+\section{Splitting Transcriptase code}
+
+Transcriptase can be split into several external JS files and then the external files can be included in a web page. So, the following experiment was performed to calculate the scores of split files by dividing the Transcriptase in to various number of files.
+
+Code was split based on Functions count. The experiment was started by dividing the Transcriptase code into two files with almost equal number of functions and then continued till the split files count reaches 76. A parser code was developed in Python to detect the valid start and end point of the JavaScript functions and to properly split the Transcriptase code. Thus the resultant split files are syntactically correct. Code \ref{lst:pythonparser} shows the parser logic in Python language.
+
+
+\begin{lstlisting}[language=Python, caption={Parser code detects the valid start and end point of the JavaScript functions and properly splits the Transcriptase code.},label={lst:pythonparser}, mathescape=false]
+with open("transcriptase.js", "r") as ins:
+    total_functions = 1000 
+    line = ins.read()
+    k = sys.argv[1]        
+    required = (int)(total_functions/k)
+    cnt,braces,rbraces,sbraces,brackets_match,func_ind = 0,0,0,0,0,0
+    skip, eachfun_done = False, False
+    data, skip_char = '', ''
+    function_start = True
+    func = ['f','u','n','c','t','i','o','n']
+    for c in line:
+        if cnt == required and eachfun_done == True:
+            cnt = 0
+            eachfun_done = False
+            #write data into a file 
+            data=''
+        if (c=='\textquotedblleft' or c=="\textquoteleft") and skip==False:
+            skip = True
+            data = data+c
+            skip_char = c
+            continue
+        if skip == True:
+            data = data+c
+            if skip_char == c:
+                skip = False
+                skip_char = ''
+            continue
+        if c == '(':
+            rbraces+=1
+        elif c == ')':
+            rbraces-=1
+        if c == '[':
+            sbraces+=1
+        elif c == ']':
+            sbraces-=1
+        if c == '{':
+            if function_start==True:
+                function_start=False
+            braces+=1
+        elif c == '}':
+            braces-=1
+        if braces == 0 and sbraces ==0 and rbraces == 0:
+            if function_start==False:
+                eachfun_done = True
+        else:
+            data = data +c
+            continue 
+        if func[func_ind] == c:
+            func_ind+=1
+        else:
+            func_ind=0
+        if func_ind == 8:
+            total_functions+=1
+            cnt+=1
+            function_start=True
+            eachfun_done = False
+            func_ind=0
+        data+=c
+    if data != "":
+        cnt = 0
+        eachfun_done = False
+        #write data into a file 
+        data=''
+\end{lstlisting}
+
+Table \ref{tab:splitvalues} shows the results for various splits. "Max" and "Min" column specifies maximum and minimum similarity score among the split files, respectively. "Count" column specifies "to number of files the Transcriptase code was split into".
+
+Figure \ref{fig:splitgraph}, is a graphical representation of the Table \ref{tab:splitvalues} values. Graph clearly shows that even the code was split, \textbf{minumum score among the split files is always less than threshold which means that there always exists atleast one split file with score less than threshold score}. Thus, it is possible to detect the malware even by testing all the external files separately. So, we can validate all the external scripts parallely to increase the performance of the add-on.
+
+
+\begin {table}[h]
+\caption {Splitting Transcriptase into several files} \label{tab:splitvalues} 
+  \begin{tabular}{|c|c|c|c|c|c|}  
+  \midrule
+ Count&Min&Max&Count&Min&Max\\
+\midrule
+1&3.70E-04&3.70E-04&20&1.68E-18&0.018838914\\
+\midrule
+2&1.28E-18&1.16E-17&21&1.81E-17&0.018838914\\
+\midrule
+3&1.77E-19&1.39E-17&22&1.69E-19&0.018838914\\
+\midrule
+4&6.17E-19&1.75E-17&23&9.64E-20&0.018838914\\
+\midrule
+5&4.41E-20&3.84E-04&24&7.37E-19&0.018838914\\
+\midrule
+6&5.36E-18&0.00153787&26&1.61E-19&0.01883891\\
+\midrule
+7&4.57E-19&3.84E-04&27&2.27E-17&0.018838914\\
+\midrule
+8&2.19E-18&0.00153787&29&9.72E-19&0.018838914\\
+\midrule
+9&1.86E-17&0.00153787&31&3.85E-18&0.018838914\\
+\midrule
+10&1.69E-19&0.003460208&33&6.35E-18&0.018838914\\
+\midrule
+11&1.73E-18&0.00615148&35&4.33E-18&0.018838914\\
+\midrule
+12&3.91E-18&0.003460208&38&4.37E-18&0.018838914\\
+\midrule
+13&5.64E-20&0.00615148&42&8.12E-18&0.018838914\\
+\midrule
+14&5.47E-19&0.003460208&46&4.41E-20&0.018838914\\
+\midrule
+15&1.88E-18&0.00615148&51&5.21E-18&0.018838914\\
+\midrule
+16&8.01E-20&0.009611688&57&1.96E-17&0.018838914\\
+\midrule
+17&1.26E-18&0.013840835&65&3.84E-04&0.024605926\\
+\midrule
+18&5.07E-19&0.009611691&76&3.84E-04&0.024605926\\
+\midrule
+19&8.01E-19&0.018838914\\
+\cmidrule{1-3}
+\end{tabular}
+ \end {table}
+
+\begin{figure}[h]
+    \centering    
+    \includegraphics[width=16cm, height=13.85cm]{external.png}
+    \caption[Graph showing min and max scores of split files ]{Graph showing min and max scores of Transcriptase split files.}
+    \label{fig:splitgraph}
+\end{figure}
