@@ -166,7 +166,7 @@ Figure ~\ref{fig:opcodegraph} shows the opcode graph for the probability matrix 
     \label{fig:opcodegraph}
 \end{figure}
 
-\subsection{Similarity Score Calculation}  \label{sec:opcodescorecalculation}
+\subsection{Similarity Score Calculation}  \label{opcodescorecalculation}
 After creating probability matrices for the malware file and the test file, similarity between two files is calculated by taking the Manhattan distance between two probability matrices. Consider $A$ as the probability matrix of file 1 and each element in $A$ is denoted as $A_i,_j$ where $i$ and $j$ specifies $i^{th}$ row and $j^{th}$ column respectively. Similarly $B$ is the probability matrix of file 2 and each element in $B$ is denoted as $B_i,_j$. Similarity between matrix $A$ and $B$, is calculated as below \cite{bib8},
 
 Similarity score = ${1 \over N^2}(\sum_{i,j=0}^{N-1}|a_i,_j-b_i,_j|^2)$ 
@@ -372,7 +372,7 @@ At the end, all the temporary files created will be removed as part of the clean
 
 \section{Performance improvements} 
 As the add-on performs lot of steps to validate the web page, the execution time will be more. So, instead of validating every web page every time, we can skip the validation during the following scenarios: 
-\subsection{Fingerprinting web pages}
+\subsection{Fingerprinting web pages} \label{fingerprintingwp}
 The hashcode of the benign web page should be saved in the user directory. In the future, when user visits the same web page and if the internal content of the page is not changed from the last visit, then the hash code of the page remains the same as the one that was saved on user`s machine. In this case, we can safely skip the validation of the web page. 
 
 The disadvantage with this approach is that it consumes the user`s system memory as it saves the hashcode for every web page the user visits. 
@@ -384,5 +384,5 @@ Some popular websites are highly secured and regularly monitored, like Google, F
 
 The disadvantage of this approach is that it involves a risk of infection if the whitelisted web pages are infected by malware.
 
-\section{Using other detection techniques} 
+\section{Using other detection techniques} \label{otherdetecttech}
 Currently this add-on uses only opcode graph similarity detection. Other detection techniques can be used in the add-on by simply changing line 3 of opcode.sh, shown in ~\ref{fig:shellscriptcode}, to execute a program that implements another detection technique instead of executing the CheckOpcodes program. The new program should accept "malware\_opcodes.txt" and "/tmp/opcodes.txt" as input files and the similarity score should be saved in the "/tmp/opcodes.tmp" file. No other changes are required. 

@@ -1,20 +1,9 @@
-\chapter{Conclusion}
+\chapter{Conclusion and Future Enhancements}
 
-For this thesis
-format, you \LaTeX\ the file {\tt thesis.tex}. 
-But first, you
-need to make some modifications to {\tt thesis.tex}.
-The title of your report, committee members, etc.,
-are specified in {\tt thesis.tex}. All of the things that
-you need to modify are indicated by comments beginning with five consecutive asterisks, 
-so search for ``*****'' in {\tt thesis.tex} and make the necessary changes.
+The aim of this research was to build a Mozilla add-on to detect metamorphic JavaScript malware embedded in a web page. For this purpose, I implemented an add-on using Mozilla add-on SDK. Internally, the add-on uses Rhino JavaScript engine to generate opcodes for the JavaScript content of a web page. As Opcode graph similarity technique performs better while clssifying the files with similar opcode statistics, this technique was used in the add-on as a malware detection technique. Test results from \autoref{chap:testing} shows that add-on with the threshold score value \textbf{0.00145} is able to classify the Transcriptase malware family viruses and benign web pages properly even after adding significant amount of junk code. The similar approach can be used for all the different types of metamorphic malwares.
 
-You put the actual content of your report 
-in the following files:
-\begin{itemize}
-\item {\tt abs.tex} --- abstract
-\item {\tt ack.tex} --- acknowledgements
-\item {\tt chap1.tex}, {\tt chap2.tex}, and so on --- chapters
-\item {\tt bib.tex} --- references
-\item {\tt appA.tex}, {\tt appB.tex}, and so on --- appendices (if any)
-\end{itemize}
+Test results also shows that execution time for the add-on is around 1 to 4 seconds for benign web pages and 6 to 11 seconds for malware web pages. Even though it seems more execution time, user can be able to view the HTML and CSS content of the page properly during the add-on execution period. As discussed in Section \ref{fingerprintingwp}, future enhancements for this thesis can include extending the add-on to use cloud to increase the add-on performance. This enhancement requires efficient security measures, so that intruder can't eavesdrop/tamper the information passed to and from cloud. 
+
+Future enhancements also includes eliminating the burden of validating some external JavaScript files by storing their links as white lists, For instance, several web pages may have the JavaScript code to display the Google Ads, as Google is secured and regularly monitored, we can safely consider all the external Google Ads related JavaScript files as benign files. This approach may also involves damage risk if any of the web page in white list is attacked.
+
+Different malware detection techniques can be added to the add-on, to increase the detection rate and/or the performance. As discussed in Section \ref{otherdetecttech}, add-on provides simple way to include other detection techniques to it.

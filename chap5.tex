@@ -1,8 +1,8 @@
-\chapter{Testing}
+\chapter{Testing} \label{chap:testing}
 
 To check the accuracy and performance of the add-on, we used malware web pages and benign web pages. To create malware samples, we generated different variants of Transcriptase malware. For benign web pages, we retrieved the JavaScript dead code from http://tools.w3clubs.com/jojo/.
 
-Entire testing is performed on a system with the configuration specified in Table \ref{tab:title}:
+Entire testing is performed on a system with the configuration specified in Table~\ref{tab:title}:
 \begin {table}[h]
 \caption {System Specifications} \label{tab:title} 
   \begin{tabular}{|c|c|} 
@@ -28,17 +28,17 @@ Java version & 1.7.0\_71\\
 
 \section{Generating Transcriptase variants}
 
-Transcriptase was written in JScript, so in windows system it can be executed by simply double clicking it. Generation of each version takes around 15 minutes. 
+Transcriptase was written in JScript, so in a windows system it can be executed by simply double clicking it. From my observation, the generation of each version takes around 15 minutes. 
 
 As explained in Section \ref{transcriptasesection}, Transcriptase carries its source code as meta instructions and on each execution it creates different variant of its JS source, then prepends that JS code to all the JavaScript files in its directory. So, I followed the below steps to create 100 versions:
 \begin{enumerate}
-\item Created an empty JavaScript file in Transcriptase directory
-\item Executed Transcriptase, which infects the new empty JavaScript file and converts it to another variant of Transcriptase
+\item Created an empty JavaScript file in the Transcriptase directory.
+\item Executed Transcriptase, which infects the new empty JavaScript file and converts it to another variant of Transcriptase.
 \item Move the older version Transcriptase (or creator Transcriptase) to different folder.
 \item Then created an empty JavaScript file in the current folder where the new Transcriptase variant exists.
-\item Executed the new variant to infect the empty JavaScript file. Go to Step 3 if required number of variants aren`t generated. 
+\item Executed the new variant to infect the empty JavaScript file. Go to Step 3 if the required number of variants aren`t generated. 
 \end{enumerate}
-Code in Figure \ref{fig:batchscriptcode} automates the above mentioned steps.
+The code in Figure \ref{fig:batchscriptcode} automates the above mentioned steps.
 
 \begin{figure}[h]
   \centering
@@ -64,9 +64,9 @@ PAUSE
 \end{figure}
 
 \section{Similarity scores and add-on performance}
-Included console.log() functions in the add-on to log the following details - opcode similarity score and the add-on execution time taken to validate the web page. The below sub section deals with comparison of these details for benign and malware web pages. For testing add-on, we used 100 samples of benign web page and morphed malware web pages. Malware web pages are morphed by adding randomly generated junk code to it.
+Included console.log() functions in the add-on to log the following details - opcode similarity score and the add-on execution time taken to validate the web page. The below sub section deals with comparison of these details for benign and malware web pages. For testing the add-on, we used 100 samples of benign web page and morphed malware web pages. Malware web pages are morphed by adding randomly generated junk code to it.
 \subsection{Addition of 550 lines of dead code}
-For this experiment, we used benign web page samples with 550 lines of junk code and also added the same amount of randomly generated junk code to malware web pages. Tables in Figures ~\ref{fig:b500table} and  ~\ref{fig:m500table} contains the details of scores and execution time for the benign and malware samples, respectively. From the table values, we can see that the scores for benign web pages are in the order of $10^{-3}$ whereas the scores for malware web pages are in the order of $10^{-4}$. Graph in Figure ~\ref{fig:bvsm500} clearly shows that the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
+For this experiment, we used benign web page samples with 550 lines of junk code and also added the same amount of randomly generated junk code to malware web pages. Tables in Figures ~\ref{fig:b500table} and  ~\ref{fig:m500table} contain the details of scores and execution time for the benign and malware samples, respectively. From the table values, we can see that the scores for benign web pages are in the order of $10^{-3}$ whereas the scores for malware web pages are in the order of $10^{-4}$. The graph in Figure ~\ref{fig:bvsm500} clearly shows that the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
 
 \begin{figure}[h]
   \centering
@@ -198,7 +198,7 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 
 
 \subsection{Addition of 5500 lines of dead code}
-This experiment is same as the above experiment except that here 5500 lines of dead code was included in malware and benign web pages instead of 500 lines. Tables in Figures ~\ref{fig:b5500table} and  ~\ref{fig:m5500table} contains the details of scores and execution time for this experiment. From the table values, we can see that the scores for benign web pages and malware web pages are still in the order of $10^{-3}$ and $10^{-4}$, respectively. Graph in Figure ~\ref{fig:bvsm5500} clearly shows that even after adding 5500 lines of code, the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
+This experiment is same as the above experiment except that here 5500 lines of dead code was included in malware and benign web pages instead of 500 lines. Tables in Figures ~\ref{fig:b5500table} and  ~\ref{fig:m5500table} contains the details of scores and execution time for this experiment. From the table values, we can see that the scores for benign web pages and malware web pages are still in the order of $10^{-3}$ and $10^{-4}$, respectively. The graph in Figure ~\ref{fig:bvsm5500} clearly shows that even after adding 5500 lines of code, the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have scores similar to benign web pages.
 
 \begin{figure}[h]
   \centering
@@ -329,7 +329,7 @@ This experiment is same as the above experiment except that here 5500 lines of d
 \end{figure}
 
 \subsection{Addition of 15000 lines of dead code}
-Here, 15000 lines of dead code was included in malware and benign samples. From the tables in Figures ~\ref{fig:b15000table} and  ~\ref{fig:m15000table}, it is clear that scores of malware web pages are varied by very negligible value when compared to previous experiments. So as shown in Figure ~\ref{fig:bvsm15000}, add-on is still able to distinguish malware web pages and benign web pages correctly.
+Here, 15000 lines of dead code were included in malware and benign samples. From the tables in Figures ~\ref{fig:b15000table} and  ~\ref{fig:m15000table}, it is clear that scores of malware web pages are varied by a very negligible value when compared to previous experiments. So as shown in Figure ~\ref{fig:bvsm15000}, the add-on is still able to distinguish malware web pages and benign web pages correctly.
 
 \begin{figure}[h]
   \centering
@@ -479,13 +479,13 @@ As mentioned in Section \ref{opcodescorecalculation}, the scores of malware file
     \label{fig:scoresummarytable}
 \end{figure}
 
-Threshold value can be any value between 0.00142 and 0.00147. If the less percentage of false negative rate is acceptable, then the threshold score can be choosen between 0.00036 and 0.00147. In case of malware detection, it is always better to have less negative rate, so considered \textbf{0.00145} as threshold score value for the add-on.
+The threshold value can be any value between 0.00142 and 0.00147. If the lower percentage of false negative rate is acceptable, then the threshold score can be choosen between 0.00036 and 0.00147. In case of malware detection, it is always better to have fewer false negatives, so I use \textbf{0.00145} as the threshold score value for the add-on.
 
 \section{Test for False Positive rate of the add-on}
 
-Tested the add-on on popular web sites to detect "False Positive" rate of the add-on. Popular web site links are retrieved from http://en.wikipedia.org/wiki/List\_of\_most\_popular\_websites. 
+I tested the add-on on popular web sites to detect the "false positive" rate of the add-on. The popular web site links are retrieved from \cite{bib34}. 
 
-Table in Figure\ref{fig:scoresummarytablep}, contains the scores and execution time details. All the scores in the table are more than choosen threshold value (i.e., 0.00145), which means that the add-on validated all the web pages as benign web pages i.e., add-on has zero false positive rate.
+The table in Figure \ref{fig:scoresummarytablep} contains the scores and execution time details. All the scores in the table are more than the chosen threshold value (i.e., 0.00145), which means that the add-on validated all the web pages as benign web pages i.e., add-on has zero false positive rate.
 
 \begin{figure}[h]
   \centering
@@ -550,80 +550,13 @@ http://www.wikipedia.org/&0.094681033&1914&Benign page\\
 
 \section{Splitting Transcriptase code}
 
-Transcriptase can be split into several external JS files and then the external files can be included in a web page. So, the following experiment was performed to calculate the scores of split files by dividing the Transcriptase in to various number of files.
+Transcriptase can be split into several external JS files and then the external files can be included in a web page. So, the following experiment was performed to calculate the scores of split files by dividing Transcriptase into a various number of files.
 
-Code was split based on Functions count. The experiment was started by dividing the Transcriptase code into two files with almost equal number of functions and then continued till the split files count reaches 76. A parser code was developed in Python to detect the valid start and end point of the JavaScript functions and to properly split the Transcriptase code. Thus the resultant split files are syntactically correct. Code \ref{lst:pythonparser} shows the parser logic in Python language.
+The code was split based on functions count. The experiment was started by dividing the Transcriptase code into two files with almost equal number of functions and then continued till the split files count reaches 76. A parser was developed in Python to detect the valid start and end point of the JavaScript functions and to properly split the Transcriptase code. Thus the resultant split files are syntactically correct. Corresponding parser code is shown in Appendix \ref{app:appa}, Section \ref{lst:pythonparser}.
 
+Table \ref{tab:splitvalues} shows the results for various splits. The "Max" and "Min" column specify the maximum and minimum similarity score among the split files, respectively. The "count" column specifies the number of files the Transcriptase code was split into.
 
-\begin{lstlisting}[language=Python, caption={Parser code detects the valid start and end point of the JavaScript functions and properly splits the Transcriptase code.},label={lst:pythonparser}, mathescape=false]
-with open("transcriptase.js", "r") as ins:
-    total_functions = 1000 
-    line = ins.read()
-    k = sys.argv[1]        
-    required = (int)(total_functions/k)
-    cnt,braces,rbraces,sbraces,brackets_match,func_ind = 0,0,0,0,0,0
-    skip, eachfun_done = False, False
-    data, skip_char = '', ''
-    function_start = True
-    func = ['f','u','n','c','t','i','o','n']
-    for c in line:
-        if cnt == required and eachfun_done == True:
-            cnt = 0
-            eachfun_done = False
-            #write data into a file 
-            data=''
-        if (c=='\textquotedblleft' or c=="\textquoteleft") and skip==False:
-            skip = True
-            data = data+c
-            skip_char = c
-            continue
-        if skip == True:
-            data = data+c
-            if skip_char == c:
-                skip = False
-                skip_char = ''
-            continue
-        if c == '(':
-            rbraces+=1
-        elif c == ')':
-            rbraces-=1
-        if c == '[':
-            sbraces+=1
-        elif c == ']':
-            sbraces-=1
-        if c == '{':
-            if function_start==True:
-                function_start=False
-            braces+=1
-        elif c == '}':
-            braces-=1
-        if braces == 0 and sbraces ==0 and rbraces == 0:
-            if function_start==False:
-                eachfun_done = True
-        else:
-            data = data +c
-            continue 
-        if func[func_ind] == c:
-            func_ind+=1
-        else:
-            func_ind=0
-        if func_ind == 8:
-            total_functions+=1
-            cnt+=1
-            function_start=True
-            eachfun_done = False
-            func_ind=0
-        data+=c
-    if data != "":
-        cnt = 0
-        eachfun_done = False
-        #write data into a file 
-        data=''
-\end{lstlisting}
-
-Table \ref{tab:splitvalues} shows the results for various splits. "Max" and "Min" column specifies maximum and minimum similarity score among the split files, respectively. "Count" column specifies "to number of files the Transcriptase code was split into".
-
-Figure \ref{fig:splitgraph}, is a graphical representation of the Table \ref{tab:splitvalues} values. Graph clearly shows that even the code was split, \textbf{minumum score among the split files is always less than threshold which means that there always exists atleast one split file with score less than threshold score}. Thus, it is possible to detect the malware even by testing all the external files separately. So, we can validate all the external scripts parallely to increase the performance of the add-on.
+Figure \ref{fig:splitgraph} is a graphical representation of the Table \ref{tab:splitvalues} values. The graph clearly shows that even when the code was split, \textbf{the minimum score among the split files is always less than threshold which means that there always exists at least one split file with score a less than threshold score}. Thus, it is possible to detect the malware even by testing all the external files separately. So, we can validate all the external scripts parallely to increase the performance of the add-on.
 
 
 \begin {table}[h]

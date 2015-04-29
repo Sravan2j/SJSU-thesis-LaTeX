@@ -1,9 +1,70 @@
-\chapter{Zorak Likes Beans\label{app:a}}
+\chapter{Code snippets\label{app:appa}}
 
-\section{Oh Yes He Does}
+\section{Python parser}
+\label{sec:pythonparsersec}
 
-Appendices can have sections  and subsections and so on.
-
-\section{Really}
-
-Sections, subsections, or whatever should come in pairs.
+\begin{lstlisting}[language=Python, caption={The parser code detects the valid start and end point of the JavaScript functions and properly splits the Transcriptase code.},label={lst:pythonparser}, mathescape=false]
+with open("transcriptase.js", "r") as ins:
+    total_functions = 1000 
+    line = ins.read()
+    k = sys.argv[1]        
+    required = (int)(total_functions/k)
+    cnt,braces,rbraces,sbraces,brackets_match,func_ind = 0,0,0,0,0,0
+    skip, eachfun_done = False, False
+    data, skip_char = '', ''
+    function_start = True
+    func = ['f','u','n','c','t','i','o','n']
+    for c in line:
+        if cnt == required and eachfun_done == True:
+            cnt = 0
+            eachfun_done = False
+            #write data into a file 
+            data=''
+        if (c=='\textquotedblleft' or c=="\textquoteleft") and skip==False:
+            skip = True
+            data = data+c
+            skip_char = c
+            continue
+        if skip == True:
+            data = data+c
+            if skip_char == c:
+                skip = False
+                skip_char = ''
+            continue
+        if c == '(':
+            rbraces+=1
+        elif c == ')':
+            rbraces-=1
+        if c == '[':
+            sbraces+=1
+        elif c == ']':
+            sbraces-=1
+        if c == '{':
+            if function_start==True:
+                function_start=False
+            braces+=1
+        elif c == '}':
+            braces-=1
+        if braces == 0 and sbraces ==0 and rbraces == 0:
+            if function_start==False:
+                eachfun_done = True
+        else:
+            data = data +c
+            continue 
+        if func[func_ind] == c:
+            func_ind+=1
+        else:
+            func_ind=0
+        if func_ind == 8:
+            total_functions+=1
+            cnt+=1
+            function_start=True
+            eachfun_done = False
+            func_ind=0
+        data+=c
+    if data != "":
+        cnt = 0
+        eachfun_done = False
+        #write data into a file 
+        data=''
+\end{lstlisting}
