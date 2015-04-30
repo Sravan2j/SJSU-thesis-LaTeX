@@ -66,10 +66,11 @@ PAUSE
 \section{Similarity scores and add-on performance}
 Included console.log() functions in the add-on to log the following details - opcode similarity score and the add-on execution time taken to validate the web page. The below sub section deals with comparison of these details for benign and malware web pages. For testing the add-on, we used 100 samples of benign web page and morphed malware web pages. Malware web pages are morphed by adding randomly generated junk code to it.
 \subsection{Addition of 550 lines of dead code}
-For this experiment, we used benign web page samples with 550 lines of junk code and also added the same amount of randomly generated junk code to malware web pages. Tables in Figures ~\ref{fig:b500table} and  ~\ref{fig:m500table} contain the details of scores and execution time for the benign and malware samples, respectively. From the table values, we can see that the scores for benign web pages are in the order of $10^{-3}$ whereas the scores for malware web pages are in the order of $10^{-4}$. The graph in Figure ~\ref{fig:bvsm500} clearly shows that the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
-
-\begin{figure}[h]
-  \centering
+For this experiment, we used benign web page samples with 550 lines of junk code and also added the same amount of randomly generated junk code to malware web pages. Tables ~\ref{tab:b500table} and  ~\ref{tab:m500table} contain the details of scores and execution time for the benign and malware samples, respectively. From the table values, we can see that the scores for benign web pages are in the order of $10^{-3}$ whereas the scores for malware web pages are in the order of $10^{-4}$. The graph in Figure ~\ref{fig:bvsm500} clearly shows that the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
+    
+  \begin {table}[h]
+  \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 550 lines of dead code.}
+      \label{tab:b500table} 
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
  \begin{sideways}Score\end{sideways}& \begin{sideways}Time\end{sideways} \begin{sideways} (milliseconds)\end{sideways}& \begin{sideways}Score\end{sideways}& \begin{sideways}Time\end{sideways}  \begin{sideways}(milliseconds)\end{sideways}& \begin{sideways}Score\end{sideways}& \begin{sideways}Time\end{sideways}  \begin{sideways}(milliseconds)\end{sideways}& \begin{sideways}Score\end{sideways}& \begin{sideways}Time\end{sideways}  \begin{sideways} (milliseconds)\end{sideways}\\
@@ -125,10 +126,11 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 0.0014792903&1119&0.00147929&1215&0.00147929&1149&0.00147929&1119\\
 \midrule
 \end{tabular}
-    \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 550 lines of dead code.}
-    \label{fig:b500table}
-\end{figure}
-\begin{figure}[h]
+ \end {table}
+
+\begin {table}[h]
+\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 550 lines of dead code. }
+    \label{tab:m500table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
@@ -185,9 +187,8 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 0.00036982243&7267&0.00036982258&7992&0.00036982258&6757&0.00036982243&8357\\
 \midrule
 \end{tabular}
-    \caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 550 lines of dead code. }
-    \label{fig:m500table}
-\end{figure}
+    
+\end{table}
 
 \begin{figure}[h]
     \centering
@@ -198,9 +199,11 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 
 
 \subsection{Addition of 5500 lines of dead code}
-This experiment is same as the above experiment except that here 5500 lines of dead code was included in malware and benign web pages instead of 500 lines. Tables in Figures ~\ref{fig:b5500table} and  ~\ref{fig:m5500table} contains the details of scores and execution time for this experiment. From the table values, we can see that the scores for benign web pages and malware web pages are still in the order of $10^{-3}$ and $10^{-4}$, respectively. The graph in Figure ~\ref{fig:bvsm5500} clearly shows that even after adding 5500 lines of code, the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have scores similar to benign web pages.
+This experiment is same as the above experiment except that here 5500 lines of dead code was included in malware and benign web pages instead of 500 lines. Tables ~\ref{tab:b5500table} and  ~\ref{tab:m5500table} contains the details of scores and execution time for this experiment. From the table values, we can see that the scores for benign web pages and malware web pages are still in the order of $10^{-3}$ and $10^{-4}$, respectively. The graph in Figure ~\ref{fig:bvsm5500} clearly shows that even after adding 5500 lines of code, the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have scores similar to benign web pages.
 
-\begin{figure}[h]
+\begin{table}[h]
+     \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 5500 lines of dead code.}
+     \label{tab:b5500table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
@@ -257,10 +260,11 @@ This experiment is same as the above experiment except that here 5500 lines of d
 0.0014792896&2324&0.0014792903&2103&0.0014792907&2497&0.0014792903&1985\\
 \midrule
 \end{tabular}
-    \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 5500 lines of dead code.}
-    \label{fig:b5500table}
-\end{figure}
-\begin{figure}[h]
+
+\end{table}
+\begin{table}[h]
+\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 5500 lines of dead code. }
+    \label{tab:m5500table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
@@ -317,9 +321,8 @@ This experiment is same as the above experiment except that here 5500 lines of d
 0.0003698225&8370&0.00036982258&8248&0.00036982258&7644&0.00036982266&8933\\
 \midrule
 \end{tabular}
-    \caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 5500 lines of dead code. }
-    \label{fig:m5500table}
-\end{figure}
+    
+\end{table}
 
 \begin{figure}[h]
     \centering    
@@ -329,9 +332,11 @@ This experiment is same as the above experiment except that here 5500 lines of d
 \end{figure}
 
 \subsection{Addition of 15000 lines of dead code}
-Here, 15000 lines of dead code were included in malware and benign samples. From the tables in Figures ~\ref{fig:b15000table} and  ~\ref{fig:m15000table}, it is clear that scores of malware web pages are varied by a very negligible value when compared to previous experiments. So as shown in Figure ~\ref{fig:bvsm15000}, the add-on is still able to distinguish malware web pages and benign web pages correctly.
+Here, 15000 lines of dead code were included in malware and benign samples. From the tables ~\ref{tab:b15000table} and  ~\ref{tab:m15000table}, it is clear that scores of malware web pages are varied by a very negligible value when compared to previous experiments. So as shown in Figure ~\ref{fig:bvsm15000}, the add-on is still able to distinguish malware web pages and benign web pages correctly.
 
-\begin{figure}[h]
+\begin{table}[h]
+\caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 15000 lines of dead code.}
+    \label{tab:b15000table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
@@ -388,10 +393,12 @@ Here, 15000 lines of dead code were included in malware and benign samples. From
 0.0014792903&3412&0.00147929&3400&0.001479291&3289&0.0014792903&3450\\
 \midrule
 \end{tabular}
-    \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 15000 lines of dead code.}
-    \label{fig:b15000table}
-\end{figure}
-\begin{figure}[h]
+    
+\end{table}
+
+\begin{table}[h]
+\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware web pages are morphed with 15000 lines of dead code. }
+    \label{tab:m15000table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
@@ -448,9 +455,8 @@ Here, 15000 lines of dead code were included in malware and benign samples. From
 0.00036982243&9367&0.0003698224&8687&0.00036982258&8830&0.00036982243&8510\\
 \midrule
 \end{tabular}
-    \caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware web pages are morphed with 15000 lines of dead code. }
-    \label{fig:m15000table}
-\end{figure}
+    
+\end{table}
 
 \begin{figure}[h]
     \centering    
@@ -459,10 +465,12 @@ Here, 15000 lines of dead code were included in malware and benign samples. From
     \label{fig:bvsm15000}
 \end{figure}
 
-As mentioned in Section \ref{opcodescorecalculation}, the scores of malware files and benign files can be compared to calculate the threshold score value of the opcode similarity technique. From the tables in Figures ~\ref{fig:b500table}, ~\ref{fig:b5500table}, ~\ref{fig:b15000table}, ~\ref{fig:m500table}, ~\ref{fig:m5500table}, and ~\ref{fig:m15000table}, except 9 malwares all other malware scores are in between $0.000369822260$ and $0.000369822750$. The 9 exception malware scores are between $0.001423994000$ and $0.001423994700$. And the benign web page scores are between $0.001479288900$ and $0.001479291400$. The same information is represented with table in Figure ~\ref{fig:scoresummarytable}
+As mentioned in Section \ref{opcodescorecalculation}, the scores of malware files and benign files can be compared to calculate the threshold score value of the opcode similarity technique. From the tables ~\ref{tab:b500table}, ~\ref{tab:m500table}, ~\ref{tab:b5500table}, ~\ref{tab:m5500table}, ~\ref{tab:b15000table},  and ~\ref{tab:m15000table}, except 9 malwares all other malware scores are in between $0.000369822260$ and $0.000369822750$. The 9 exception malware scores are between $0.001423994000$ and $0.001423994700$. And the benign web page scores are between $0.001479288900$ and $0.001479291400$. The same information is represented with table ~\ref{tab:scoresummarytable}
 
 
-\begin{figure}[h]
+\begin{table}[h]
+\caption[Summary of max and min Scores]{Table illustrating the max and min scores for all the sample files, after comparing the scores from the tables ~\ref{tab:b500table}, ~\ref{tab:m500table}, ~\ref{tab:b5500table}, ~\ref{tab:m5500table}, ~\ref{tab:b15000table}, and ~\ref{tab:m15000table}. }
+    \label{tab:scoresummarytable}
   \centering
   \begin{tabular}{|c|c|c|} 
   \midrule
@@ -475,19 +483,20 @@ As mentioned in Section \ref{opcodescorecalculation}, the scores of malware file
 300 Benign samples &0.001479288900 & 0.001479291400 \\
  \midrule 
 \end{tabular}
-    \caption[Summary of max and min Scores]{Table illustrating the max and min scores for all the sample files, after comparing the scores from the tables in Figures ~\ref{fig:b500table}, ~\ref{fig:b5500table}, ~\ref{fig:b15000table}, ~\ref{fig:m500table}, ~\ref{fig:m5500table}, and ~\ref{fig:m15000table}. }
-    \label{fig:scoresummarytable}
-\end{figure}
+    
+\end{table}
 
-The threshold value can be any value between 0.00142 and 0.00147. If the lower percentage of false negative rate is acceptable, then the threshold score can be choosen between 0.00036 and 0.00147. In case of malware detection, it is always better to have fewer false negatives, so I use \textbf{0.00145} as the threshold score value for the add-on.
+The threshold value can be any value between 0.00142 and 0.00147. If the lower percentage of false negative rate is acceptable, then the threshold score can be chosen between 0.00036 and 0.00147. In case of malware detection, it is always better to have fewer false negatives, so I use \textbf{0.00145} as the threshold score value for the add-on.
 
 \section{Test for False Positive rate of the add-on}
 
 I tested the add-on on popular web sites to detect the "false positive" rate of the add-on. The popular web site links are retrieved from \cite{bib34}. 
 
-The table in Figure \ref{fig:scoresummarytablep} contains the scores and execution time details. All the scores in the table are more than the chosen threshold value (i.e., 0.00145), which means that the add-on validated all the web pages as benign web pages i.e., add-on has zero false positive rate.
+The table \ref{tab:scoresummarytablep} contains the scores and execution time details. All the scores in the table are more than the chosen threshold value (i.e., 0.00145), which means that the add-on validated all the web pages as benign web pages i.e., add-on has zero false positive rate.
 
-\begin{figure}[h]
+\begin{table}[h]
+\caption[Scores table for popular web pages]{Table contains scores and add-on execution time details for popular web pages. }
+    \label{tab:scoresummarytablep}
   \centering
   \begin{tabular}{|c|c|c|c|} 
   \midrule
@@ -544,9 +553,8 @@ https://www.amazon.com/&0.100754&2839&Benign page\\
 http://www.wikipedia.org/&0.094681033&1914&Benign page\\
 \midrule
 \end{tabular}
-    \caption[Scores table for popular web pages]{Table contains scores and add-on exection time details for popular web pages. }
-    \label{fig:scoresummarytablep}
-\end{figure}
+    
+\end{table}
 
 \section{Splitting Transcriptase code}
 
