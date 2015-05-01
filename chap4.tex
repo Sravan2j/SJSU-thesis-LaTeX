@@ -26,7 +26,7 @@ The user expects this functionality and installs the malicious add-on, but this 
 \begin{figure}
     \centering    
     \includegraphics[width=17cm, height=11.95cm]{beforeinf.png}
-    \caption[Size of sample JavaScript files before infection, ]{Size of sample JavaScript files before infection}
+    \caption[Size of sample JavaScript files before infection]{Size of sample JavaScript files before infection}
     \label{fig:beforeinf}
 \end{figure}
 \begin{figure}
@@ -320,7 +320,7 @@ $ /bin/sh /Users/sravan2j/Downloads/TranscriptaseDetectionAddon/data/opcode.sh /
 \begin{lstlisting}[frame=single,language=JavaScript,mathescape=false]
 Cu.import("resource://gre/modules/FileUtils.jsm");
 
-// create a new tmp file
+// create a temporary file
 var file = FileUtils.getFile("TmpD", ["opcodes.tmp"]);
 file.createUnique(Ci.nsIFile.NORMAL_FILE_TYPE, 0600);
 
@@ -333,7 +333,7 @@ var process = Cc["@mozilla.org/process/util;1"]
 process.init(file);
 
 var args = ["/Users/sravan2j/Downloads/TranscriptaseDetectionAddon/data/opcode.sh"];
-// append the tmp file to the parameters
+// append temporary file path to parameters
 args.push(tmpFile.path);
 process.run(true, args, args.length);
 \end{lstlisting}

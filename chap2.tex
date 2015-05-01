@@ -50,7 +50,7 @@ The first polymorphic malware, 1260, was developed by Mark Washburn in 1990 \cit
 
 \section{Metamorphic Malware} 
 
-Virus writers took the next step and developed an advanced variant of polymorphic malware, known as Metamorphic malware. Generally, before infection, polymorphic malware encrypt the virus code and morph the decryptor, while metamorphic malware morph the whole virus code. According to Igor Muttik, "Metamorphics are bodypolymorphics", since polymorphism is applied to the entire virus body \cite{bib22}. Metamorphic viruses utilizes several code morphing techniques that constitue instruction reordering, data reordering, subroutine inlining, subroutine outlining, register renaming, code permutation, instruction substitution and garbage code insertion \cite{bib23}. Figure~\ref{fig:aimalware} illustrates the metamorphic malware with different signatures.
+Virus writers took the next step and developed an advanced variant of polymorphic malware, known as Metamorphic malware. Generally, before infection, polymorphic malware encrypt the virus code and morph the decryptor, while metamorphic malware morph the whole virus code. According to Igor Muttik, "Metamorphics are bodypolymorphics", since polymorphism is applied to the entire virus body \cite{bib22}. Metamorphic viruses utilizes several code morphing techniques that constitute instruction reordering, data reordering, subroutine inlining, subroutine outlining, register renaming, instruction substitution and dead code insertion \cite{bib23}. Figure~\ref{fig:aimalware} illustrates the metamorphic malware with different signatures.
 
 \begin{figure}
   \centering
@@ -258,11 +258,10 @@ For instance, consider the code specified in Figure~\ref{fig:permutator} \cite{b
 	(100|)var a=5
 	(200|)var b=-1
 	(300|)var x=8
-	(400|200)c+1(b)	// instruction c+1(b) means increasing b by 1: i.e. b++
-	(500|400,100)c+n(b,a) // instruction c+n(b,a) means increasing b by a: i.e. b+=a
+	(400|200)c+1(b)	// instruction c+1(b) means increment b by 1: i.e. b++
+	(500|400,100)c+n(b,a) // instruction c+n(b,a) means increment b by a: i.e. b+=a
 	(600|500)xWScript.Echo(x)
 \end{lstlisting}
-
 
     \caption[Meta-language instructions example]{Meta-language instructions example \cite{bib4}.}
     \label{fig:permutator}
@@ -277,7 +276,7 @@ From the code in Figure~\ref{fig:permutator}, instruction 400 depends on instruc
 	(200|)var b=-1
 	(400|200)c+1(b)
 	(100|)var a=5	
-	(500|400,100)c+n(b,a) // instruction c+n(b,a) means increasing b by a: i.e. b+=a
+	(500|400,100)c+n(b,a) // instruction c+n(b,a) means increment b by a: i.e. b+=a
 	(300|)var x=8
 	(600|500)xWScript.Echo(x)
 \end{lstlisting}
