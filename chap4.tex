@@ -355,7 +355,7 @@ The opcodes.sh code, shown in Figure ~\ref{fig:shellscriptcode}, performs the fo
 \begin{lstlisting}[frame=single,language=JavaScript,mathescape=false]
 java -Xmx500m -cp "." data/DownloaderApp data/externalUrls.txt
 java -cp "./data/js.jar" org.mozilla.javascript.tools.jsc.Main /tmp/JSStatements.js > /tmp/opcodes.txt
-java -cp "./data" CheckOpcodes data/malware\_opcodes.txt /tmp/opcodes.txt > $1
+java -cp "./data" CheckOpcodes data/malware_opcodes.txt /tmp/opcodes.txt > $1
 \end{lstlisting}
 \caption[opcode.sh shell script code]{opcode.sh shell script code}
     \label{fig:shellscriptcode}

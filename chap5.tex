@@ -69,7 +69,7 @@ Included console.log() functions in the add-on to log the following details - op
 For this experiment, we used benign web page samples with 550 lines of junk code and also added the same amount of randomly generated junk code to malware web pages. Tables ~\ref{tab:b500table} and  ~\ref{tab:m500table} contain the details of scores and execution time for the benign and malware samples, respectively. From the table values, we can see that the scores for benign web pages are in the order of $10^{-3}$ whereas the scores for malware web pages are in the order of $10^{-4}$. The graph in Figure ~\ref{fig:bvsm500} clearly shows that the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have score similar to benign web pages.
     
   \begin {table}[h]
-  \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 550 lines of dead code.}
+
       \label{tab:b500table} 
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
@@ -126,10 +126,11 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 0.0014792903&1119&0.00147929&1215&0.00147929&1149&0.00147929&1119\\
 \midrule
 \end{tabular}
+  \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 550 lines of dead code.}
  \end {table}
 
 \begin {table}[h]
-\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 550 lines of dead code. }
+
     \label{tab:m500table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
@@ -187,7 +188,7 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 0.00036982243&7267&0.00036982258&7992&0.00036982258&6757&0.00036982243&8357\\
 \midrule
 \end{tabular}
-    
+\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 550 lines of dead code. }    
 \end{table}
 
 \begin{figure}[h]
@@ -202,8 +203,7 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 This experiment is same as the above experiment except that here 5500 lines of dead code was included in malware and benign web pages instead of 500 lines. Tables ~\ref{tab:b5500table} and  ~\ref{tab:m5500table} contains the details of scores and execution time for this experiment. From the table values, we can see that the scores for benign web pages and malware web pages are still in the order of $10^{-3}$ and $10^{-4}$, respectively. The graph in Figure ~\ref{fig:bvsm5500} clearly shows that even after adding 5500 lines of code, the add-on is able to distinguish malware web pages and benign web pages correctly. Only 3 out of 100 malware samples have scores similar to benign web pages.
 
 \begin{table}[h]
-     \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 5500 lines of dead code.}
-     \label{tab:b5500table}
+\label{tab:b5500table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
   \midrule
@@ -260,10 +260,11 @@ This experiment is same as the above experiment except that here 5500 lines of d
 0.0014792896&2324&0.0014792903&2103&0.0014792907&2497&0.0014792903&1985\\
 \midrule
 \end{tabular}
-
+     \caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 5500 lines of dead code.}
+     
 \end{table}
 \begin{table}[h]
-\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 5500 lines of dead code. }
+
     \label{tab:m5500table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
@@ -321,7 +322,7 @@ This experiment is same as the above experiment except that here 5500 lines of d
 0.0003698225&8370&0.00036982258&8248&0.00036982258&7644&0.00036982266&8933\\
 \midrule
 \end{tabular}
-    
+\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware webpages are morphed with 5500 lines of dead code. }    
 \end{table}
 
 \begin{figure}[h]
@@ -335,7 +336,7 @@ This experiment is same as the above experiment except that here 5500 lines of d
 Here, 15000 lines of dead code were included in malware and benign samples. From the tables ~\ref{tab:b15000table} and  ~\ref{tab:m15000table}, it is clear that scores of malware web pages are varied by a very negligible value when compared to previous experiments. So as shown in Figure ~\ref{fig:bvsm15000}, the add-on is still able to distinguish malware web pages and benign web pages correctly.
 
 \begin{table}[h]
-\caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 15000 lines of dead code.}
+
     \label{tab:b15000table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
@@ -393,11 +394,11 @@ Here, 15000 lines of dead code were included in malware and benign samples. From
 0.0014792903&3412&0.00147929&3400&0.001479291&3289&0.0014792903&3450\\
 \midrule
 \end{tabular}
-    
+\caption[Scores table of benign web pages]{Table illustrating the scores and add-on execution time for 100 benign web pages, in four columns (i.e., 25 samples per column). Benign webpages are generated with 15000 lines of dead code.}    
 \end{table}
 
 \begin{table}[h]
-\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware web pages are morphed with 15000 lines of dead code. }
+
     \label{tab:m15000table}
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} 
@@ -455,7 +456,7 @@ Here, 15000 lines of dead code were included in malware and benign samples. From
 0.00036982243&9367&0.0003698224&8687&0.00036982258&8830&0.00036982243&8510\\
 \midrule
 \end{tabular}
-    
+\caption[Scores table of malware web pages]{Table illustrating the scores and add-on execution time for 100 malware web pages, in four columns (i.e., 25 samples per column). Malware web pages are morphed with 15000 lines of dead code. }    
 \end{table}
 
 \begin{figure}[h]
