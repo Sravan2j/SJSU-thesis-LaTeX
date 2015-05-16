@@ -191,7 +191,7 @@ For this experiment, we used benign web page samples with 550 lines of junk code
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=16cm, height=9.53cm]{500.png}
+    \fbox{\includegraphics[width=16cm, height=8.577cm, trim=3 3 3 3,clip]{500.png}}
     \caption[Benign Samples vs Malware Samples]{Benign samples scores vs malware samples scores with the addition of 550 lines of dead code}
     \label{fig:bvsm500}
 \end{figure}
@@ -321,8 +321,8 @@ This experiment is same as the above experiment except that here 5500 lines of d
 \end{table}
 
 \begin{figure}[h]
-    \centering    
-    \includegraphics[width=16cm, height=10cm]{5000.png}
+    \centering            
+    \fbox{\includegraphics[width=16cm, height=9.1514cm, trim=3 3 3 3,clip]{5000.png}}
     \caption[Benign Samples vs Malware Samples]{Benign samples scores vs malware samples scores with the addition of 5500 lines of dead code}
     \label{fig:bvsm5500}
 \end{figure}
@@ -451,8 +451,8 @@ Here, 15000 lines of dead code were included in malware and benign samples. From
 \end{table}
 
 \begin{figure}[h]
-    \centering    
-    \includegraphics[width=16cm, height=10.30cm]{15000.png}
+    \centering        
+    \fbox{\includegraphics[width=16cm, height=9.1987cm, trim=3 3 3 3,clip]{15000.png}}
     \caption[Benign Samples vs Malware Samples]{Benign samples scores vs malware samples scores with the addition of 15000 lines of dead code}
     \label{fig:bvsm15000}
 \end{figure}
@@ -472,7 +472,7 @@ As mentioned in Section \ref{opcodescorecalculation}, the scores of malware file
  \midrule 
 9 exceptional malware samples & 0.001423994000 & 0.001423994700\\ 
  \midrule 
-300 Benign samples &0.001479288900 & 0.001479291400 \\
+300 benign samples &0.001479288900 & 0.001479291400 \\
  \midrule 
 \end{tabular}
     
@@ -608,7 +608,7 @@ Figure \ref{fig:splitgraph} is a graphical representation of the Table \ref{tab:
 
 \begin{figure}[h]
     \centering    
-    \includegraphics[width=16cm, height=13.85cm]{external.png}
+    \fbox{\includegraphics[width=16cm, height=11.3746cm, trim=3 3 3 3,clip]{external.png}}
     \caption[Graph showing min and max scores of split files ]{Graph showing min and max scores of Transcriptase split files.}
     \label{fig:splitgraph}
 \end{figure}

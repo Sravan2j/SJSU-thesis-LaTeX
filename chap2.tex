@@ -1,6 +1,6 @@
 \chapter{Background}
 
-Malware is a malicious program intended to do pernicious exercises on a client`s computer with the proposition of removing data and misusing assets without his assent. Viruses and worms are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014 \cite{bib9}, Citadel is the preferred banking malware among attackers for stealing individual information. And for stealing money from bank accounts, Zeus is the favorite banking malware.
+Malware is a software program intended to do pernicious activities on a client`s computer with the proposition of removing data and misusing assets without his assent. Viruses and worms are the best known types of malware on account of the way in which they spread, instead of their behavior. Malware is now and then utilized widely against government or corporate websites to gather protected data or to disturb their operations by large. Also, malware is regularly utilized against people to steal data, for example, personal identification numbers or bank or credit card details and passwords. As per a survey on data breaches led by Verizon in 2014 \cite{bib9}, Citadel is the preferred banking malware among attackers for stealing individual information. And for stealing money from bank accounts, Zeus is the favorite banking malware.
 
 Figure 1 shows how the malware is swiftly growing in volume day-by-day. In Figure 1, the x-axis specifies the year and the y-axis indicates the number of malware samples generated in the specified year on the x-axis.
 
@@ -17,7 +17,7 @@ The Cascade virus, which initially appeared in late 1986, was the first malware 
 \begin{figure}
     \centering    
     \includegraphics[width=8cm, height=6cm]{encryptedvirus.jpg}
-    \caption[Encrypted Malware Replication]{An Encrypting Malware spreads without changing decryptor but the key within decryptor varies from infection to infection. As the key value changes, the encrypted virus body also changes \cite{bib14}.}
+    \caption[Encrypted Malware Replication]{An Encrypting malware spreads without changing decryptor but the key within decryptor varies from infection to infection. As the key value changes, the encrypted virus body also changes \cite{bib14}.}
 \end{figure}
 \section{Polymorphic Malware} 
 
@@ -50,7 +50,7 @@ The first polymorphic malware, 1260, was developed by Mark Washburn in 1990 \cit
 
 \section{Metamorphic Malware} 
 
-Virus writers took the next step and developed an advanced variant of polymorphic malware, known as Metamorphic malware. Generally, before infection, polymorphic malware encrypt the virus code and morph the decryptor, while metamorphic malware morph the whole virus code. According to Igor Muttik, "Metamorphics are bodypolymorphics", since polymorphism is applied to the entire virus body \cite{bib22}. Metamorphic viruses utilizes several code morphing techniques that constitute instruction reordering, data reordering, subroutine inlining, subroutine outlining, register renaming, instruction substitution and dead code insertion \cite{bib23}. Figure~\ref{fig:aimalware} illustrates the metamorphic malware with different signatures.
+Virus writers took the next step and developed an advanced variant of polymorphic malware, known as metamorphic malware. Generally, before infection, polymorphic malware encrypt the virus code and morph the decryptor, while metamorphic malware morph the whole virus code. According to Igor Muttik, "Metamorphics are bodypolymorphics", since polymorphism is applied to the entire virus body \cite{bib22}. Metamorphic viruses utilizes several code morphing techniques that constitute instruction reordering, data reordering, subroutine inlining, subroutine outlining, register renaming, instruction substitution and dead code insertion \cite{bib23}. Figure~\ref{fig:aimalware} illustrates the metamorphic malware with different signatures.
 
 \begin{figure}
   \centering
@@ -370,7 +370,7 @@ This specifies general way of representing number/string arithmetic instruction.
 \begin{enumerate}
 \item c+1(var1): increment var1 by 1
 \item c+n(var1,var2): increment var1 by the number var2
-\item c+s(var1,var2): concatenate var1 by the string var2
+\item c+s(var1,var2): concatenate var1 with the string var2
 \item c-1(var1): decrement var1 by 1
 \item c-n(var1,var2): decrement var1 by the number var2
 \item c*1(var1): multiply var1 by 1
@@ -382,14 +382,14 @@ This specifies general way of representing number/string arithmetic instruction.
 
 \subsection{Variable/Function insertion}
 
-Several variables and functions are defined during the compilation phase because of meta-instructions and obfuscation. These variables are saved in special arrays instead of being stored in the code. During code derivation phase, they are placed into the code .
+Several variables and functions are defined during the compilation phase because of meta-instructions and obfuscation. These variables are saved in special arrays instead of being stored in the code. At the end of code derivation phase, they are placed into the code .
 
 Functions can be included between instructions in the global scope. Variables can be included between instructions in the current scope, before they are used for the first time \cite{bib4}. This phase takes lot of time to complete, as the whole code is checked for multiple times to find suitable positions for the variable/function insertions \cite{bib26}.
 
 
 \section{Rhino}
 
-Netscape began working on developing a Java’s variant of Netscape Navigator in 1997 \cite{bib27}. In order to implement Netscape Navigator in Java, they built a JavaScript engine entirely in Java, named Rhino. Rhino is open source software and is currently maintained by Mozilla.
+During 1997, Netscape began working on developing a variant of Netscape Navigator written in Java \cite{bib27}. In order to implement the navigator in Java, they built a JavaScript engine entirely in Java, named Rhino. Rhino is open source software and is currently maintained by Mozilla.
 
 Most of the time, JavaScript is utilized as a part of HTML for making interactive webpages. Anyhow, Rhino is not used to create or manipulate webpages; it is an implementation of the core JavaScript. Rhino has the below aspects \cite{bib27}:
 

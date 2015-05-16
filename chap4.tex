@@ -182,7 +182,14 @@ Before using the similarity score, we have to determine the threshold score whic
 \item Determine a threshold value using the scores calculated in steps 3 and 4.
 \end{enumerate}
 
-\section{Transcriptase detection add-on structure}
+\section{Transcriptase detection add-on architecture}
+
+\begin{figure}[h]
+    \centering        
+    \fbox{\includegraphics[width=16cm, height=9.9124cm]{Architecture.jpg}}
+    \caption[Detection add-on architecture]{Detection add-on architecture}
+    \label{fig:addonarchitecture}
+\end{figure}
 
 \begin{figure}[h]
   \centering
@@ -218,15 +225,15 @@ Sravans-MacBook-Pro:TranscriptaseDetectionAddon sravan2j$ tree
     \caption[Transcriptase detection add-on directory structure]{Transcriptase detection add-on directory structure}
     \label{fig:transdetectaddon}
 \end{figure}
-Figure~\ref{fig:transdetectaddon} shows the directory structure of Transcriptase detection add-on. 
+Figure~\ref{fig:addonarchitecture} shows the detection add-on architecture. Each component in the architecture is made up of one or more files. Figure ~\ref{fig:transdetectaddon} depicts the directory structure of detection add-on. 
 \begin{enumerate}
-\item "content-script.js" uses jQuery code to find the JavaScipt content in web page, so included "jquery-1.10.0.min.js" file in the "/data" directory to enable this functionality. 
+\item "content-script.js" uses jQuery code to find the JavaScipt content in web page, so included "jquery-1.10.0.min.js" file in the "/data" directory to enable this functionality. content-script.js represents "Content Script" component.
+\item The Java files in the add-on are used to download the files, and to calculate the similarity score. All these files are placed in the "/data/java" directory. "Java Downloader" is a combination of DownloadThread, DownloaderApp, ImageDownloader, and Lock class files. CheckOpcodes and GetScore class files represents "opcode graph similarity detector".
 \item "js.jar" helps the add-on to use the Rhino JS engine.
-\item The Java files in the add-on are used to download the files, and to calculate the similarity score. All these files are placed in the "/data/java" directory.
 \item "opcode.sh" is a shell script to invoke Java files. As shell scripts won`t work on Windows, the "opcode.bat" file is included to invoke Java files on Windows. 
-\item The "malware\_opcodes.txt" file contains the opcodes of Transcriptase family malware. This file is used while validating web page JS content using the opcode graph similarity technique. 
+\item The "malware\_opcodes.txt" file specifies "Malware opcodes" component. This file contains the opcodes of Transcriptase family malware which is required to validate web page JS content using the opcode graph similarity technique. 
 \end{enumerate}
-More details about these files are covered in subsequent sections.
+More details about these files and the architecture components are covered in subsequent sections.
 
 \section{JavaScript extraction from web page}
 
