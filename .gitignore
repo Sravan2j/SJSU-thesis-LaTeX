@@ -6,3 +6,4 @@
 *.pdf
 *.toc
 *.gz
+.DS_Store
