@@ -1,4 +1,4 @@
-SJSU Thesis Template
+<h2>SJSU Thesis Template</h2>
 
 I am not the original author of this template.  It is modified from a template created by the University of Rhode Island (URI).  A link to their original template is: http://egr.uri.edu/ele/thesisguide/step2/
 
