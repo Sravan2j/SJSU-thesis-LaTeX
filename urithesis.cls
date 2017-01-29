@@ -306,6 +306,10 @@ San Jose State University thesis format]
 }
 
 \def\newchapter#1{%
+  % ZSH - Needed to comply with thesis guidelines
+  \setlength{\parskip}{0em}
+  \setlength{\abovedisplayshortskip}{-2ex} % Ensure equations are double spaced.
+  %%%%%%
   \if@gotfirstchapter\else
     \@gotfirstchaptertrue
     \initialstuff
@@ -746,11 +750,12 @@ San Jose State University thesis format]
 \def\@makechapterhead#1{{%
    \renewcommand{\baselinestretch}{1.0}\bfseries%
    \begin{center}
-   \rule{0in}{0.5in}%
+   %\rule{0in}{0.5in}%
+   \doublespace
    \MakeUppercase{\@chapapp}
-   \@ifundefined{@usesingappend}{\space\thechapter}{}\vspace{2.0ex}\\%
+   \@ifundefined{@usesingappend}{\space\thechapter}{}\vspace{0ex}\\%
    #1
-   \vskip 2.0ex
+   %\vskip 2.0ex
    \end{center}
 }}
 
@@ -758,6 +763,11 @@ San Jose State University thesis format]
 \renewcommand*\l@chapter[2]{%
     \vskip 1.0ex \@plus\p@
   {\@dottedtocline{0}{1.5em}{1.5em}{\bfseries\noindent#1}{#2}}%
+}
+% Make table of contents entries for numbered chapter headers.
+\newcommand*\l@chapterapp[2]{%
+    \vskip 1.0ex \@plus\p@
+  {\@dottedtocline{0}{1.5em}{1.5em}{\noindent#1}{#2}}%
 }
 
 % Make table of contents entries for unnumbered chapter headers.
@@ -857,13 +867,13 @@ San Jose State University thesis format]
 % These commands define the format of the headers for section,
 % subsection, and subsubsection commands.
 \renewcommand\section{%
-  \@startsection {section}{1}{\z@}{4.0ex}{0.01ex}%
+  \@startsection {section}{1}{\z@}{2.0ex}{0.01ex}%
     {\renewcommand{\baselinestretch}{1.0}\normalfont\normalsize\bfseries}}
 \renewcommand\subsection{%
-  \@startsection {subsection}{2}{\z@}{4.0ex}{0.01ex}%
+  \@startsection {subsection}{2}{\z@}{2.0ex}{0.01ex}%
     {\renewcommand{\baselinestretch}{1.0}\normalfont\normalsize\bfseries}}
 \renewcommand\subsubsection{%
-  \@startsection {subsubsection}{3}{\z@}{4.0ex}{0.01ex}%
+  \@startsection {subsubsection}{3}{\z@}{2.0ex}{0.01ex}%
     {\renewcommand{\baselinestretch}{1.0}\normalfont\normalsize\bfseries}}
 
 % These commands generate the figure/table/equation name, and records
@@ -943,10 +953,10 @@ San Jose State University thesis format]
                        \typeout{\@chapapp\space\thechapter.}%
                        \if@gotfirstappendix
                          \@ifundefined{@usesingappend}{
-                             \addcontentsline{toc}{chapter}%
+                             \addcontentsline{toc}{chapterapp}%
                                   {\protect\numberline{\thechapter}#1}%
                          }{%
-                   \addcontentsline{toc}{chapter}{#1}}%
+                   \addcontentsline{toc}{chapterapp}{#1}}%
                \else
                          \addcontentsline{toc}{chapter}%
                                    {\protect\numberline{\thechapter}#1}%
@@ -962,7 +972,8 @@ San Jose State University thesis format]
                     \else
                       \@makechapterhead{#2}%
                       \@afterheading
-                    \fi}
+                    \fi
+               \vspace{-2ex}} % ZSH - Needed to ensure double space throughout
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Create pages of the thesis.
@@ -1005,22 +1016,24 @@ my {\@worktype} for scholarly purposes.
 \begin{center}{
 \ifthenelse{\equal{\projectType}{Project}}% uppercase for thesis, not uppercase for report
            {{\@title} \\ }
-           { \MakeUppercase{\@title} \\ }
+           { \singlespace \MakeUppercase{\@title} \\ } % ZSH per thesis guidelines
 }
 \end{center}
 
 
 \vfill
 \begin{center}{
+\doublespace % ZSH per thesis guidelines
 \noindent A \projectType\\ %\MakeUppercase{\@worktype}
 Presented to\\
 The Faculty of the Department of Computer Science\\
-San Jose State University\\
+San Jos\'{e} State University\\
 }
 \end{center}
 
 \vfill
 \begin{center}
+\doublespace % ZSH per thesis guidelines
   In Partial Fulfillment\\
   of the Requirements for the Degree\\
   Master of Science \\
@@ -1028,6 +1041,7 @@ San Jose State University\\
 
 \vfill
 \begin{center}
+\doublespace % ZSH per thesis guidelines
 by\\
   {\@author}\\
  \graduationMonth\ {\@copyrightyear}\\
@@ -1038,6 +1052,7 @@ by\\
 \null
 \vfill
 \begin{center}
+\doublespace % ZSH per thesis guidelines
 \copyright~{\@copyrightyear}\\
 {\@author}\\
 ALL RIGHTS RESERVED\\
@@ -1061,16 +1076,17 @@ The Designated \projectType\ Committee Approves the \projectType\ Titled\\
 %\begin{center}{
 \ifthenelse{\equal{\projectType}{Project}}% uppercase for thesis, not uppercase for report
            {{\@title} \\ }
-           { \MakeUppercase{\@title} \\ }
+           { \singlespace \MakeUppercase{\@title} \\ } % ZSH per thesis guidelines
 %}
 %\end{center}
 \vspace{24pt}
+\doublespace
 by\\
 {\@author}\\
 \vspace{24pt}
-APPROVED FOR THE DEPARTMENTS OF COMPUTER SCIENCE\\ %\vspace{-1.0em}\\
+APPROVED FOR THE DEPARTMENT OF COMPUTER SCIENCE\\ %\vspace{-1.0em}\\
 \vspace{24pt}
-SAN JOSE STATE UNIVERSITY\\
+SAN JOS\'{E} STATE UNIVERSITY\\
 \vspace{24pt}
 \graduationMonth\ {\@copyrightyear}\\
 \end{center}
@@ -1105,7 +1121,7 @@ SAN JOSE STATE UNIVERSITY\\
 \def\abstractpages{\@ifundefined{@abstract}{}{
   \newpage
   \sloppy
-  \chapter*{ABSTRACT\\ \vspace{12pt} \@title\\ \vspace{12pt} by \@author}
+  \chapter*{ABSTRACT\\ {\normalfont \vspace{12pt} \@title\\ \vspace{12pt} by \@author}}
 %  \addcontentsline{toc}{chapterx}{ABSTRACT}
   \thispagestyle{empty}
   \pagestyle{empty}
